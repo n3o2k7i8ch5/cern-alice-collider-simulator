@@ -1,12 +1,8 @@
 import torch
 from torch import nn
 
-from common.consts import *
+from common.sample_norm import sample_norm
 
-CONV_SIZE = 32
-
-
-# AUTOENCODER
 
 def conv_out_size(in_size, padd, dial, kernel, stride):
     return int((in_size + 2 * padd - dial * (kernel - 1) - 1) / stride + 1)
@@ -16,117 +12,78 @@ def trans_conv_out_size(in_size, padd, dial, kernel, stride, out_padding):
     return (in_size - 1) + stride - 2 * padd + dial * (kernel - 1) + out_padding + 1
 
 
-class AutoencoderIn(nn.Module):
+'''
+Takes in a batch of particles, each of size:
+1 x FEATURES
 
-    def __init__(self, emb_features: int, latent_size: int, device):
-        self.device = device
-        super(AutoencoderIn, self).__init__()
+Returns:
+a) a batch of embedded input particles, each of size:
+   1 x EMB_FEATURES
 
-        self.pdg_emb = nn.Sequential(
-            nn.Embedding(num_embeddings=PDG_EMB_CNT, embedding_dim=PDG_EMB_DIM)
+b) a batch of embedded output particles, each of size;
+   1 x EMB_FEATURES
+
+c) a batch of var and mu (for VAE KLD calculation), each of size:
+   1 x PRTCL_LATENT_SPACE_SIZE
+'''
+
+
+class AutoencPrtcl(nn.Module):
+    def __init__(self, emb_features, latent_size, device):
+        super(AutoencPrtcl, self).__init__()
+
+        self.emb_features = emb_features
+        self.latent_size = latent_size
+
+        self.mean = nn.Sequential(
+            nn.Linear(emb_features, 512),
+            nn.Tanh(),
+            nn.Linear(512, 512),
+            nn.Tanh(),
+            nn.Linear(512, 256),
+            nn.Tanh(),
+            nn.Linear(256, 128),
+            nn.Tanh(),
+            nn.Linear(128, latent_size),
         ).to(device=device)
 
-        self.net = nn.Sequential(
-            nn.Linear(emb_features, 64),
-            nn.LeakyReLU(0.2),
-            nn.Linear(64, 64),
-            nn.LeakyReLU(0.2),
-            nn.Linear(64, CONV_SIZE),
-            #nn.LeakyReLU(0.2),
+        self.logvar = nn.Sequential(
+            nn.Linear(emb_features, 512),
+            nn.Tanh(),
+            nn.Linear(512, 512),
+            nn.Tanh(),
+            nn.Linear(512, 256),
+            nn.Tanh(),
+            nn.Linear(256, 128),
+            nn.Tanh(),
+            nn.Linear(128, latent_size),
         ).to(device=device)
 
-        self.mu = nn.Sequential(
-            nn.Linear(CONV_SIZE, latent_size),
-            #nn.Tanh()
-        ).to(device=device)
-
-        self.var = nn.Sequential(
-            nn.Linear(CONV_SIZE, latent_size),
-            #nn.Sigmoid()
+        self.deembeder = nn.Sequential(
+            nn.Linear(latent_size, 128, bias=True),
+            nn.Tanh(),
+            nn.Linear(128, 256, bias=True),
+            nn.Tanh(),
+            nn.Linear(256, 512, bias=True),
+            nn.Tanh(),
+            nn.Linear(512, 512, bias=True),
+            nn.Tanh(),
+            nn.Linear(512, emb_features, bias=True),
         ).to(device=device)
 
     def embed(self, x: torch.Tensor):
+        lat_mean = self.mean(x)
+        lat_logvar = self.logvar(x)
 
-        pdg = x[:, 0]
-        prtc_pdg = self.pdg_emb(pdg)
-        prtc_stat_code = x[:, 1].unsqueeze(dim=1).float()
+        return lat_mean, lat_logvar
 
-        return torch.cat([prtc_pdg, prtc_stat_code], dim=1)
-
-    def forward(self, x: torch.Tensor):
-
-        cat_data = x[:, :2].long()
-        cont_data = x[:, 2:]
-
-        emb_cat = self.embed(cat_data)
-
-        in_emb = torch.cat([emb_cat, cont_data], dim=1)
-
-        x = self.net(in_emb)
-
-        lat_mu = self.mu(x)
-        lat_var = self.var(x)
-
-        return in_emb, lat_mu, lat_var
-
-
-class AutoencoderOut(nn.Module):
-
-    def __init__(self, latent_size: int, emb_features: int, device):
-        self.device = device
-        super(AutoencoderOut, self).__init__()
-
-        self.emb_features = emb_features
-
-        self.net = nn.Sequential(
-            nn.Linear(latent_size, 64, bias=True),
-            nn.LeakyReLU(0.2),
-            nn.Linear(64, 128, bias=True),
-            nn.LeakyReLU(0.2),
-            nn.Linear(128, emb_features, bias=True),
-            nn.LeakyReLU(0.2),
-        ).to(device=device)
-
-        self.conv = nn.Sequential(
-            nn.ConvTranspose2d(in_channels=1, out_channels=128, kernel_size=(1, 3)),#, padding=(0, 1)),
-            nn.LeakyReLU(0.2),
-            nn.ConvTranspose2d(in_channels=128, out_channels=512, kernel_size=(1, 3)),# padding=(0, 2)),
-            nn.LeakyReLU(0.2),
-            nn.ConvTranspose2d(in_channels=512, out_channels=128, kernel_size=(1, 2)),# padding=(0, 3)),
-            nn.LeakyReLU(0.2),
-            nn.ConvTranspose2d(in_channels=128, out_channels=64, kernel_size=(1, 1)),
-            nn.LeakyReLU(0.2),
-            nn.ConvTranspose2d(in_channels=64, out_channels=1, kernel_size=(1, 1)),
-        ).to(device=device)
+    def deembed(self, x: torch.Tensor):
+        return self.deembeder(x)
 
     def forward(self, x: torch.Tensor):
+        # VAE
+        lat_mean, lat_logvar = self.embed(x)
+        lat_vec = sample_norm(mean=lat_mean, logvar=lat_logvar)
 
-        x = self.net(x)
-
-        return x.squeeze()
-
-
-class Autoencoder(nn.Module):
-    def __init__(self, auto_in: AutoencoderIn, auto_out: AutoencoderOut):
-        super(Autoencoder, self).__init__()
-
-        self.auto_in = auto_in
-        self.auto_out = auto_out
-
-    def forward(self, x: torch.Tensor):
-
-        in_emb, lat_mu, lat_var = self.auto_in(x)
-
-        std = torch.exp(lat_var / 2)
-        eps = torch.randn_like(std)
-        lat_vec = eps.mul(std).add_(lat_mu)
-
-        out = self.auto_out(lat_vec)
-        return in_emb, out, lat_mu, lat_var
-
-    @staticmethod
-    def create(emb_features: int, latent: int, device):
-        auto_in = AutoencoderIn(emb_features=emb_features, latent_size=latent, device=device)
-        auto_out = AutoencoderOut(latent_size=latent, emb_features=emb_features, device=device)
-
-        return [auto_in, auto_out]
+        out_prtcl_emb = self.deembed(lat_vec)
+        return out_prtcl_emb, lat_mean, lat_vec, lat_vec

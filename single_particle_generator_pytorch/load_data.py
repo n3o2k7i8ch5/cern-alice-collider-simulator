@@ -4,8 +4,6 @@ from typing import List, Tuple
 import torch
 import numpy as np
 
-import pickle
-
 from torch import Tensor
 
 from common.consts import *
@@ -16,9 +14,7 @@ _RAW_DATA = os.path.join(parent_path(), 'data/raw_data')
 
 def load_data() -> Tensor:
     if exists(_DATA_FILE_NAME):
-        with open(_DATA_FILE_NAME, 'rb') as input_file:
-            data = pickle.load(input_file)
-        return data
+        return torch.load(_DATA_FILE_NAME)
 
     file = open(_RAW_DATA, 'r')
     lines = file.readlines()
@@ -80,19 +76,19 @@ def load_data() -> Tensor:
             elif param_idx == 8:  # PY
                 particle_params_cont.append(sgnlog(float(param)))
             elif param_idx == 9:  # PZ
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 10:  # Energy
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 11:  # Vx
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 12:  # Vy
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 13:  # Vz
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 14:  # Polar Theta
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
             elif param_idx == 15:  # Polar Phi
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param))/10)
 
         event_cont.append(particle_params_cont)
         event_cat.append(particle_params_cat)
@@ -111,8 +107,7 @@ def load_data() -> Tensor:
 
     data = torch.cat(data)
 
-    with open(_DATA_FILE_NAME, 'wb') as handle:
-        pickle.dump(data, handle, protocol=4)
+    torch.save(data, _DATA_FILE_NAME)
 
     return data
 

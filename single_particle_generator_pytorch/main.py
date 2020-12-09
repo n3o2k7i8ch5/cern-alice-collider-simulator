@@ -2,18 +2,21 @@ import torch
 from torch import optim
 from torch.autograd import Variable
 from torch.nn.modules.loss import MSELoss
-from torch.utils.data import DataLoader, TensorDataset
+from torch.utils.data import DataLoader
 import numpy as np
-
-import matplotlib.pyplot as plt
+import torch.nn.functional as func
 
 from common.consts import *
-from common.models_prtc_embed_autoenc import Autoencoder
+from common.model_pdg_emb_deemb import PDGDeembeder, PDGEmbedder
+from common.models_prtc_embed_autoenc import AutoencPrtcl
+from common.show_plots import show_plots
+from common.show_quality import show_quality
 from single_particle_generator_pytorch.load_data import load_data
 
 # device = get_device()
 
-# torch.cuda.set_device(0)
+from single_particle_generator_pytorch.train_deembeder import train_deembeder
+
 device = torch.device("cuda")
 
 data = load_data()
@@ -24,153 +27,169 @@ data_train = DataLoader(
     shuffle=True
 )
 
+data_deemb_train = DataLoader(
+    torch.tensor(particle_idxs()),
+    batch_size=len(particle_idxs()),
+    shuffle=True
+)
+
 
 def noise(size, device) -> torch.Tensor:
     return torch.randn(size, INP_RAND_SIZE).to(device=device)
 
 
-def _loss(input_x, output_x, lat_mu: torch.Tensor, lat_var: torch.Tensor) -> Variable:
+def prtcl_loss(input_x, output_x, lat_mean: torch.Tensor, lat_logvar: torch.Tensor) -> Variable:
     mse_loss = MSELoss()(input_x, output_x)
 
-    # kl_loss = 0.5 * torch.sum(lat_var.exp() + lat_mu.pow(2) - 1.0 - lat_var) / len(lat_var.flatten())
+    kld_loss = torch.mean(-0.5 * torch.sum(1 + lat_logvar - lat_mean.pow(2) - lat_logvar.exp(), dim=1), dim=0)
 
-    kl_loss = MSELoss()(lat_mu, torch.zeros(size=lat_mu.size()).to(device)) + MSELoss()(lat_var, torch.ones(
-        size=lat_var.size()).to(device))
-
-    # print('mse_loss ' + str(mse_loss.item()))
-    # print('kl_loss ' + str(kl_loss.item()))
-
-    return mse_loss + kl_loss / 500
+    return mse_loss + kld_loss * 0.05
 
 
 ### TRAINING
+def show_deemb_quality():
+    prtcl_idxs = torch.tensor(particle_idxs(), device=device)
 
+    pdg_onehot = func.one_hot(
+        prtcl_idxs,
+        num_classes=PDG_EMB_CNT
+    ).float()
 
-def show_quality(real_data, fake_data):
-    img_smpls_to_shw = 80
+    emb = embedder(pdg_onehot)
+    one_hot_val = deembeder(emb)
+    gen_idxs = torch.argmax(one_hot_val, dim=0)  # .item()  # .unsqueeze(dim=2)
 
-    real_data = real_data.cpu()
-    fake_data = fake_data.cpu()
+    acc = torch.eq(prtcl_idxs, gen_idxs).sum(dim=0).item()
 
-    print('REAL DATA')
-    for i in range(0, real_data.shape[0], 10000):
-        plt.figure('Real img:' + str(i))
-        plt.imshow(real_data.detach().split(split_size=img_smpls_to_shw, dim=0)[0])
-        # plt.colorbar()
-        plt.ion()
-        plt.figure('Real hist:' + str(i))
-        plt.hist(real_data.detach().flatten(), 100)
-        plt.show()
-    plt.pause(0.001)
-
-    print('FAKE DATA')
-    for i in range(0, fake_data.shape[0], 10000):
-        plt.figure('Fake img:' + str(i))
-        plt.imshow(fake_data.detach().split(split_size=img_smpls_to_shw, dim=0)[0])
-        # plt.colorbar()
-        plt.ion()
-        plt.figure('Fake hist:' + str(i))
-        plt.hist(fake_data.detach().flatten(), 100)
-        plt.show()
-
-    plt.pause(0.001)
-
-    real_data.to(device)
-    fake_data.to(device)
+    print('Deembeder acc: ' + str(acc) + '/' + str(len(prtcl_idxs)))
 
 
 print('AUTOENCODER')
-LATENT_SPACE_SIZE = 6
-_autoenc_in, _autoenc_out = Autoencoder.create(emb_features=EMB_FEATURES, latent=LATENT_SPACE_SIZE, device=device)
-autoenc = Autoencoder(_autoenc_in, _autoenc_out)
-# summary(autoenc, input_size=(PADDING, FEATURES))
 
-autoenc_optimizer = optim.Adam(autoenc.parameters(), lr=0.001)
+autoenc = AutoencPrtcl(emb_features=EMB_FEATURES, latent_size=PRTCL_LATENT_SPACE_SIZE, device=device)
+embedder = PDGEmbedder(PDG_EMB_DIM, PDG_EMB_CNT, device)
+deembeder: PDGDeembeder = PDGDeembeder(PDG_EMB_DIM, PDG_EMB_CNT, device)
+
+print(autoenc)
+print(deembeder)
+
+autoenc_optimizer = optim.Adam(autoenc.parameters(), lr=0.00002)
+
+EPOCHS = 1
+
+
+def embed_data(embedder: PDGEmbedder, data):
+    cat_data = data[:, :2].long()
+    cont_data = data[:, 2:]
+
+    pdg = cat_data[:, 0]
+    pdg_onehot = func.one_hot(pdg, num_classes=PDG_EMB_CNT).float()
+    prtc_pdg = embedder(pdg_onehot)
+    prtc_stat_code = cat_data[:, 1].unsqueeze(dim=1).float()
+
+    emb_cat = torch.cat([prtc_pdg, prtc_stat_code], dim=1)
+
+    return torch.cat([emb_cat, cont_data], dim=1)
 
 
 def train_autoenc():
-    for epoch in range(1):
+    print('TRAINING MODEL:'
+          ' BATCH_SIZE = ' + str(BATCH_SIZE) +
+          ', PARTICLE_DIM: ' + str(PARTICLE_DIM) +
+          ', EPOCHS: ' + str(EPOCHS) +
+          ', PRTCL_LATENT_SPACE_SIZE: ' + str(PRTCL_LATENT_SPACE_SIZE)
+          )
 
-        err: torch.Tensor = torch.Tensor()
-        emb_data: torch.Tensor = torch.Tensor()
-        gen_data: torch.Tensor = torch.Tensor()
+    err: torch.Tensor = torch.Tensor()
+    emb_data: torch.Tensor = torch.Tensor()
+    gen_data: torch.Tensor = torch.Tensor()
+
+    for epoch in range(EPOCHS):
 
         for n_batch, batch in enumerate(data_train):
             autoenc_optimizer.zero_grad()
-            real_data: torch.Tensor = batch.to(device=device)
 
-            real_data = real_data.detach()
+            real_data: torch.Tensor = batch.to(device=device).detach()
+            emb_data = embed_data(embedder, real_data)
 
-            emb_data, gen_data, lat_mu, lat_var = autoenc(real_data)
+            gen_data, lat_mean, lat_logvar, lat_vec = autoenc(emb_data)
 
-            err = _loss(emb_data, gen_data, lat_mu, lat_var)
+            err = prtcl_loss(
+                input_x=emb_data,
+                output_x=gen_data,
+                lat_mean=lat_mean,
+                lat_logvar=lat_logvar)
+
             err.backward()
             autoenc_optimizer.step()
 
-            if n_batch % 5000 == 0:
-                print('' + str(n_batch) + '/' + str(len(data_train)))
-                show_quality(emb_data, gen_data)
-
-                plt.figure('Lattent mu')
-                plt.hist(lat_mu.cpu().detach().flatten(), 100)
-
-                plt.figure('Lattent var')
-                plt.hist(lat_var.cpu().detach().flatten(), 100)
-                plt.show()
-
-                plt.pause(0.001)
+            if n_batch % 4_000 == 0:
+                show_deemb_quality()
+                print('Batch: ' + str(n_batch) + '/' + str(len(data_train)))
+                show_quality(emb_data, gen_data, feature_range=(-10, -5))
+                print('Error: ' + str(err.item()))
 
         print(err.item())
-        show_quality(emb_data, gen_data)
+        show_quality(emb_data, gen_data, feature_range=(-10, -5))
+        show_deemb_quality()
 
+    print('Training deembeder')
+    train_deembeder(
+        deembeder=deembeder,
+        embedder=embedder,
+        epochs=100,
+        device=device
+    )
+
+    torch.save(deembeder.state_dict(), parent_path() + 'data/pdg_deembed_model')
     torch.save(autoenc.state_dict(), parent_path() + 'data/single_prtc_autoenc_model')
+    show_real_gen_data_comparison()
 
 
-def gen_autoenc_data(autoenc_out):
-    np_input = np.random.normal(loc=0, scale=1, size=(BATCH_SIZE, LATENT_SPACE_SIZE))
+def gen_autoenc_data(autoenc):
+    np_input = np.random.normal(loc=0, scale=1, size=(BATCH_SIZE, PRTCL_LATENT_SPACE_SIZE))
     rand_input = torch.from_numpy(np_input).float().to(device=device)
-    generated_data = autoenc_out.forward(rand_input).detach()
+    generated_data = autoenc.deembed(rand_input).detach()
     return generated_data
 
 
-# GENERATE DATA
-# GENERATE DATA
-# '''
-autoenc.load_state_dict(torch.load(parent_path() + 'data/single_prtc_autoenc_model'))
+def show_real_gen_data_comparison():
+    SIZE = 100
 
-emb_data: torch.Tensor = torch.Tensor()
-gen_data: torch.Tensor = torch.Tensor()
+    print('GENERATING DATA'
+          ' BATCH_SIZE = ' + str(BATCH_SIZE))
 
-for n_batch, batch in enumerate(data_train):
-    real_data = batch.to(device=device)
+    autoenc.load_state_dict(torch.load(parent_path() + 'data/single_prtc_autoenc_model'))
 
-    real_data = real_data.detach()
+    for param in autoenc.parameters():
+        param.requires_grad = False
 
-    _emb_data, gen_data, lat_mu, lat_var = autoenc(real_data)
+    all_emb_data: torch.Tensor = torch.Tensor()
+    gen_data: torch.Tensor = torch.Tensor()
 
-    if n_batch == 0:
-        emb_data = _emb_data.cpu()
-    else:
-        emb_data = torch.cat([_emb_data.cpu(), emb_data], dim=0)
+    for n_batch, batch in enumerate(data_train):
+        real_data = batch.to(device)
 
-    if n_batch == 500:
-        break
+        emb_data = embed_data(embedder, real_data)
 
-gen_data_out: torch.Tensor = torch.Tensor().cpu()
-for i in range(500):
-    if i == 0:
-        gen_data_out = gen_autoenc_data(autoenc.auto_out).cpu()
-    else:
-        gen_data_out = torch.cat([gen_autoenc_data(autoenc.auto_out).cpu(), gen_data_out], dim=0)
+        if n_batch == 0:
+            all_emb_data = emb_data.cpu()
+        else:
+            all_emb_data = torch.cat([emb_data.cpu(), all_emb_data], dim=0)
 
-show_quality(emb_data, gen_data_out)
+        if n_batch == SIZE:
+            break
 
-import time
+    for i in range(SIZE):
+        if i == 0:
+            gen_data = gen_autoenc_data(autoenc).cpu()
+        else:
+            gen_data = torch.cat([gen_autoenc_data(autoenc).cpu(), gen_data], dim=0)
 
-time.sleep(1000)
-# '''
+    for param in autoenc.parameters():
+        param.requires_grad = True
 
-# /GENERATE DATA
-# /GENERATE DATA
+    show_quality(all_emb_data, gen_data, feature_range=(-10, -5))
 
 train_autoenc()
+# show_real_gen_data_comparison()

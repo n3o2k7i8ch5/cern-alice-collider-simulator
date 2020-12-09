@@ -171,5 +171,3 @@ class ToOneHot:
         daugh2 = torch.argmax(daugh2_part, dim=2).unsqueeze(dim=2) - 1
 
         return torch.cat([pdg, stat_code, moth1, moth2, daugh1, daugh2], dim=2)
-
-

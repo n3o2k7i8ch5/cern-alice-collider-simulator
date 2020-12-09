@@ -16,9 +16,7 @@ _RAW_DATA = os.path.join(parent_path(), 'data/raw_data')
 
 def load_data() -> Tuple[List[Tensor], List[Tensor], int]:
     if exists(_DATA_FILE_NAME):
-        with open(_DATA_FILE_NAME, 'rb') as input_file:
-            (data_cat, data_cont, max_length) = pickle.load(input_file)
-        return data_cat, data_cont, max_length
+        return torch.load(_DATA_FILE_NAME)
 
     file = open(_RAW_DATA, 'r')
     lines = file.readlines()
@@ -80,25 +78,24 @@ def load_data() -> Tuple[List[Tensor], List[Tensor], int]:
             elif param_idx == 8:  # PY
                 particle_params_cont.append(sgnlog(float(param)))
             elif param_idx == 9:  # PZ
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 10:  # Energy
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 11:  # Vx
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 12:  # Vy
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 13:  # Vz
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 14:  # Polar Theta
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
             elif param_idx == 15:  # Polar Phi
-                particle_params_cont.append(sgnlog(float(param)))
+                particle_params_cont.append(sgnlog(float(param)) / 10)
 
         event_cont.append(particle_params_cont)
         event_cat.append(particle_params_cat)
 
-    with open(_DATA_FILE_NAME, 'wb') as handle:
-        pickle.dump((event_list_cat, event_list_cont, max_length), handle, protocol=4)
+    torch.save((event_list_cat, event_list_cont, max_length), _DATA_FILE_NAME)
 
     return event_list_cat, event_list_cont, max_length
 
