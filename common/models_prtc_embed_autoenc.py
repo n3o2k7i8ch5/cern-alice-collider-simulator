@@ -38,8 +38,6 @@ class AutoencPrtcl(nn.Module):
         self.mean = nn.Sequential(
             nn.Linear(emb_features, 512),
             nn.Tanh(),
-            nn.Linear(512, 512),
-            nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
             nn.Linear(256, 128),
@@ -49,8 +47,6 @@ class AutoencPrtcl(nn.Module):
 
         self.logvar = nn.Sequential(
             nn.Linear(emb_features, 512),
-            nn.Tanh(),
-            nn.Linear(512, 512),
             nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
@@ -66,24 +62,22 @@ class AutoencPrtcl(nn.Module):
             nn.Tanh(),
             nn.Linear(256, 512, bias=True),
             nn.Tanh(),
-            nn.Linear(512, 512, bias=True),
-            nn.Tanh(),
             nn.Linear(512, emb_features, bias=True),
         ).to(device=device)
 
-    def embed(self, x: torch.Tensor):
+    def encode(self, x: torch.Tensor):
         lat_mean = self.mean(x)
         lat_logvar = self.logvar(x)
 
         return lat_mean, lat_logvar
 
-    def deembed(self, x: torch.Tensor):
+    def decode(self, x: torch.Tensor):
         return self.deembeder(x)
 
     def forward(self, x: torch.Tensor):
         # VAE
-        lat_mean, lat_logvar = self.embed(x)
+        lat_mean, lat_logvar = self.encode(x)
         lat_vec = sample_norm(mean=lat_mean, logvar=lat_logvar)
 
-        out_prtcl_emb = self.deembed(lat_vec)
-        return out_prtcl_emb, lat_mean, lat_vec, lat_vec
+        out_prtcl_emb = self.decode(lat_vec)
+        return out_prtcl_emb, lat_mean, lat_logvar, lat_vec

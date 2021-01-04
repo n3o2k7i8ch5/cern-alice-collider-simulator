@@ -52,9 +52,9 @@ class PDGDeembeder(nn.Module):
             return torch.cat([vals, other], dim=2)
 
 
-class PDGEmbedder(nn.Module):
+class PDGEmbeder(nn.Module):
     def __init__(self, pdg_embed_dim: int, pdg_count: int, device):
-        super(PDGEmbedder, self).__init__()
+        super(PDGEmbeder, self).__init__()
 
         self.net = nn.Sequential(
             nn.Linear(in_features=pdg_count, out_features=1024, bias=True),
@@ -73,7 +73,7 @@ class PDGEmbedder(nn.Module):
         return self.net(x)
 
 
-def show_deemb_quality(embeder: PDGEmbedder, deembeder: PDGDeembeder, device):
+def show_deemb_quality(embeder: PDGEmbeder, deembeder: PDGDeembeder, device):
     prtcl_idxs = torch.tensor(particle_idxs(), device=device)
 
     pdg_onehot = func.one_hot(

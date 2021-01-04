@@ -10,7 +10,7 @@ from common.model_pdg_emb_deemb import PDGDeembeder
 
 def train_deembeder(deembeder: PDGDeembeder, epochs: int, embedder, device):
 
-    deembed_optimizer = optim.Adam(deembeder.parameters(), lr=0.0001)
+    deembed_optimizer = optim.Adam(deembeder.parameters(), lr=0.001)
     deemb_loss = MSELoss()
 
     real_one_hot = one_hot(torch.tensor(particle_idxs(), device=device), num_classes=PDG_EMB_CNT).float()
