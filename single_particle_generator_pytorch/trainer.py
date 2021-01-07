@@ -11,23 +11,24 @@ from common.device import get_device
 from common.model_pdg_emb_deemb import PDG_EMB_CNT, BATCH_SIZE, PARTICLE_DIM, PDGDeembeder, PDGEmbeder
 from common.models_prtc_embed_autoenc import AutoencPrtcl
 from common.show_quality import show_lat_histograms, show_quality
-from single_particle_generator_pytorch.load_data_synthetic import load_data_synthetic
-from single_particle_generator_pytorch.train_deembeder import train_deembeder
+from single_particle_generator_pytorch.load_data import load_data
+
+import pandas as pd
 
 
 class Trainer:
     AUTOENC_SAVE_PATH = parent_path() + 'data/single_prtc_autoenc.model'
     PDG_DEEMBED_SAVE_PATH = parent_path() + 'data/pdg_deembed.model'
 
-    SHOW_FEAT_RANGE = (-1, 0)#(-6, -5)
+    SHOW_FEAT_RANGE = (-7, -4)
 
     def __init__(self):
         self.device = get_device()
 
     def load_data(self) -> torch.Tensor:
-        data = load_data_synthetic(size=100_000)
-        tensor = torch.tensor(data, device=self.device)
-        return tensor
+        data = load_data()
+        #tensor = torch.tensor(data, device=self.device)
+        return data
 
     def prep_data(self, data: torch.Tensor, batch_size: int, valid=0.1, shuffle=True) -> (DataLoader, DataLoader):
 
@@ -46,7 +47,7 @@ class Trainer:
 
         kld_loss = torch.mean(-0.5 * torch.sum(1 + lat_logvar - lat_mean.pow(2) - lat_logvar.exp(), dim=1), dim=0)
 
-        return mse_loss + kld_loss * 0.1, mse_loss, kld_loss
+        return mse_loss + kld_loss * 1e-6, mse_loss, kld_loss
 
     def embed_data(self, embeder: PDGEmbeder, data):
         cat_data = data[:, :2].long()
@@ -63,13 +64,14 @@ class Trainer:
         return torch.cat([prtc_pdg, prtc_stat_code, cont_data], dim=1)
 
     def create_autoenc(self) -> AutoencPrtcl:
-        # DAN
-        # return AutoencPrtcl(emb_features=EMB_FEATURES, latent_size=PRTCL_LATENT_SPACE_SIZE, device=self.device)
         return AutoencPrtcl(
-            emb_features=CONT_FEATURES + CAT_FEATURES,
+            emb_features=EMB_FEATURES,
             latent_size=PRTCL_LATENT_SPACE_SIZE,
             device=self.device
         )
+
+    def create_embeder(self) -> PDGEmbeder:
+        return PDGEmbeder(PDG_EMB_DIM, PDG_EMB_CNT, self.device)
 
     def train(self, epochs):
         print('TRAINING MODEL:'
@@ -84,9 +86,9 @@ class Trainer:
         gen_data: torch.Tensor = torch.Tensor()
 
         autoenc = self.create_autoenc()
-        autoenc_optimizer = torch.optim.Adam(autoenc.parameters(), lr=0.0002)
+        autoenc_optimizer = torch.optim.Adam(autoenc.parameters(), lr=0.00002)
 
-        embeder = PDGEmbeder(PDG_EMB_DIM, PDG_EMB_CNT, self.device)
+        embeder = self.create_embeder()
         deembeder: PDGDeembeder = PDGDeembeder(PDG_EMB_DIM, PDG_EMB_CNT, self.device)
 
         print('AUTOENCODER')
@@ -104,21 +106,14 @@ class Trainer:
             for n_batch, batch in enumerate(data_train):
                 autoenc_optimizer.zero_grad()
 
-                # DAN
-                # real_data: torch.Tensor = batch.to(device=device).detach()
-                real_data: torch.Tensor = batch.to(self.device)
+                real_data: torch.Tensor = batch.to(self.device).detach()
 
-                # DAN
-                # emb_data = self.embed_data(embeder, real_data)
+                emb_data = self.embed_data(embeder, real_data)
 
-                # DAN
-                # gen_data, lat_mean, lat_logvar, lat_vec = autoenc(emb_data)
-                gen_data, lat_mean, lat_logvar, lat_vec = autoenc(real_data)
+                gen_data, lat_mean, lat_logvar, lat_vec = autoenc(emb_data)
 
                 loss, mse_loss, kld_loss = self.loss(
-                    # DAN
-                    # input_x=emb_data,
-                    input_x=real_data,
+                    input_x=emb_data,
                     output_x=gen_data,
                     lat_mean=lat_mean,
                     lat_logvar=lat_logvar)
@@ -129,26 +124,20 @@ class Trainer:
                 if n_batch % 500 == 0:
                     show_lat_histograms(lat_mean=lat_mean, lat_logvar=lat_logvar)
                     #self.show_deemb_quality(embeder, deembeder)
-                    #valid_loss = self._valid_loss(autoenc, embeder, data_valid)
+                    valid_loss = self._valid_loss(autoenc, embeder, data_valid)
 
-                    # DAN
-                    # show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=True)
-                    show_quality(real_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=True)
-                    self.show_real_gen_data_comparison(autoenc, embeder)
+                    show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=True)
+                    self.show_real_gen_data_comparison(autoenc, embeder, save=True)
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '
-                        f'train loss: {str(loss.item())} :: '
-                        f'kld loss: {str(kld_loss.item())} :: '
-                        f'mse loss: {str(mse_loss.item())} :: '
+                        f'train loss: {"{:.6f}".format(round(loss.item(), 6))} :: '
+                        f'kld loss: {"{:.6f}".format(round(kld_loss.item(), 6))} :: '
+                        f'mse loss: {"{:.6f}".format(round(mse_loss.item(), 6))} :: '
+                        f'valid loss: {"{:.6f}".format(round(valid_loss, 6))}'
                     )
 
-            # DAN
-            # show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE)
-            if real_data is not None:
-                show_quality(real_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE)
-
-            self.show_deemb_quality(embeder, deembeder)
+            torch.save(autoenc.state_dict(), Trainer.AUTOENC_SAVE_PATH)
 
         '''
         print('Training deembeder')
@@ -172,15 +161,10 @@ class Trainer:
         criterion = MSELoss()
 
         for batch_data in valid_data_loader:
-            # DAN
-            # emb_data = self.embed_data(embeder, batch_data.to(self.device))
+            emb_data = self.embed_data(embeder, batch_data.to(self.device))
             batch_data = batch_data.to(self.device)
-            # DAN
-            # out_prtcl_emb, lat_mean, lat_vec, lat_vec = autoenc(emb_data)
-            out_prtcl_emb, lat_mean, lat_vec, lat_vec = autoenc(batch_data)
-            # DAN
-            # train_loss = criterion(out_prtcl_emb, emb_data)
-            train_loss = criterion(out_prtcl_emb, batch_data)
+            out_prtcl_emb, lat_mean, lat_vec, lat_vec = autoenc(emb_data)
+            train_loss = criterion(out_prtcl_emb, emb_data)
 
             loss += train_loss.item()
 
@@ -216,11 +200,8 @@ class Trainer:
         if load_model:
             autoenc.load_state_dict(torch.load(Trainer.AUTOENC_SAVE_PATH))
 
-        gen_data = self.gen_autoenc_data(1000, autoenc)
-        real_data = self.load_data()[:1000]
-        # DAN
-        # emb_data = self.embed_data(embeder, real_data)
-        # DAN
-        # show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=save, title='Generation comparison')
-        show_quality(real_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=save, title='Generation comparison')
+        gen_data = self.gen_autoenc_data(10_000, autoenc)
+        real_data = self.load_data()[:10_000]
+        emb_data = self.embed_data(embeder, real_data)
+        show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=save, title='Generation comparison')
 

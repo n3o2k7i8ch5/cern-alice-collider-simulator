@@ -57,15 +57,15 @@ class PDGEmbeder(nn.Module):
         super(PDGEmbeder, self).__init__()
 
         self.net = nn.Sequential(
-            nn.Linear(in_features=pdg_count, out_features=1024, bias=True),
+            nn.Linear(pdg_count, 1024),
             nn.Tanh(),
-            nn.Linear(in_features=1024, out_features=1024, bias=True),
+            nn.Linear(1024, 512),
             nn.Tanh(),
-            nn.Linear(in_features=1024, out_features=512, bias=True),
+            nn.Linear(512, 256),
             nn.Tanh(),
-            nn.Linear(in_features=512, out_features=256, bias=True),
+            nn.Linear(256, 256),
             nn.Tanh(),
-            nn.Linear(in_features=256, out_features=pdg_embed_dim, bias=True),
+            nn.Linear(256, pdg_embed_dim),
             nn.Tanh(),
         ).to(device=device)
 

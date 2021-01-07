@@ -36,7 +36,11 @@ class AutoencPrtcl(nn.Module):
         self.latent_size = latent_size
 
         self.mean = nn.Sequential(
-            nn.Linear(emb_features, 512),
+            nn.Linear(emb_features, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, 512),
+            nn.Tanh(),
+            nn.Linear(512, 512),
             nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
@@ -46,7 +50,11 @@ class AutoencPrtcl(nn.Module):
         ).to(device=device)
 
         self.logvar = nn.Sequential(
-            nn.Linear(emb_features, 512),
+            nn.Linear(emb_features, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, 512),
+            nn.Tanh(),
+            nn.Linear(512, 512),
             nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
@@ -56,13 +64,17 @@ class AutoencPrtcl(nn.Module):
         ).to(device=device)
 
         self.deembeder = nn.Sequential(
-            nn.Linear(latent_size, 128, bias=True),
+            nn.Linear(latent_size, 128),
             nn.Tanh(),
-            nn.Linear(128, 256, bias=True),
+            nn.Linear(128, 256),
             nn.Tanh(),
-            nn.Linear(256, 512, bias=True),
+            nn.Linear(256, 512),
             nn.Tanh(),
-            nn.Linear(512, emb_features, bias=True),
+            nn.Linear(512, 512),
+            nn.Tanh(),
+            nn.Linear(512, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, emb_features),
         ).to(device=device)
 
     def encode(self, x: torch.Tensor):
