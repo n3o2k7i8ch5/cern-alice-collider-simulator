@@ -36,11 +36,11 @@ class AutoencPrtcl(nn.Module):
         self.latent_size = latent_size
 
         self.mean = nn.Sequential(
-            nn.Linear(emb_features, 1024),
+            nn.Linear(emb_features, 2048),
+            nn.Tanh(),
+            nn.Linear(2048, 1024),
             nn.Tanh(),
             nn.Linear(1024, 512),
-            nn.Tanh(),
-            nn.Linear(512, 512),
             nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
@@ -50,11 +50,11 @@ class AutoencPrtcl(nn.Module):
         ).to(device=device)
 
         self.logvar = nn.Sequential(
-            nn.Linear(emb_features, 1024),
+            nn.Linear(emb_features, 2048),
+            nn.Tanh(),
+            nn.Linear(2048, 1024),
             nn.Tanh(),
             nn.Linear(1024, 512),
-            nn.Tanh(),
-            nn.Linear(512, 512),
             nn.Tanh(),
             nn.Linear(512, 256),
             nn.Tanh(),
@@ -70,11 +70,11 @@ class AutoencPrtcl(nn.Module):
             nn.Tanh(),
             nn.Linear(256, 512),
             nn.Tanh(),
-            nn.Linear(512, 512),
-            nn.Tanh(),
             nn.Linear(512, 1024),
             nn.Tanh(),
-            nn.Linear(1024, emb_features),
+            nn.Linear(1024, 2048),
+            nn.Tanh(),
+            nn.Linear(2048, emb_features),
         ).to(device=device)
 
     def encode(self, x: torch.Tensor):

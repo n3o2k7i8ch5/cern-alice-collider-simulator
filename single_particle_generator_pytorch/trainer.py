@@ -47,7 +47,7 @@ class Trainer:
 
         kld_loss = torch.mean(-0.5 * torch.sum(1 + lat_logvar - lat_mean.pow(2) - lat_logvar.exp(), dim=1), dim=0)
 
-        return mse_loss + kld_loss * 1e-6, mse_loss, kld_loss
+        return mse_loss + kld_loss * 1e-4, mse_loss, kld_loss
 
     def embed_data(self, embeder: PDGEmbeder, data):
         cat_data = data[:, :2].long()
