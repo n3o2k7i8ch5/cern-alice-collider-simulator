@@ -9,7 +9,7 @@ from torchsummary import summary
 
 from common.consts import *
 from common.load_event_data import load_data
-from common.model_pdg_emb_deemb import PDGDeembeder, show_deemb_quality
+from common.model_pdg_emb_deemb import PDGDeembedder, show_deemb_quality
 from common.models_prtc_embed_autoenc import AutoencPrtcl
 
 import torch.nn.functional as func
@@ -87,7 +87,7 @@ ae_main_in, ae_main_out = AutoencPrtclBasedEvnt.create(
     device=device)
 ae_main = AutoencPrtclBasedEvnt(ae_main_in, ae_main_out)
 
-deembeder: PDGDeembeder = PDGDeembeder(PDG_EMB_DIM, PDG_EMB_CNT, device)
+deembeder: PDGDeembedder = PDGDeembedder(PDG_EMB_DIM, PDG_EMB_CNT, device)
 
 print('AE_MAIN_IN')
 summary(ae_main_in, input_size=(PRTCL_LATENT_SPACE_SIZE * PADDING,))
@@ -211,7 +211,7 @@ def train_autoenc():
     show_real_gen_data_comparison()
 
 
-def generate_data(ae_main_out, ae_prtcl_out, deembeder: PDGDeembeder):
+def generate_data(ae_main_out, ae_prtcl_out, deembeder: PDGDeembedder):
     np_input = np.random.normal(loc=0, scale=1, size=(BATCH_SIZE, EVNT_LTNT_SPACE_SIZE))
     rand_input = torch.from_numpy(np_input).float().to(device=device)
     gen_ltnt_data = ae_main_out.forward(rand_input).detach()

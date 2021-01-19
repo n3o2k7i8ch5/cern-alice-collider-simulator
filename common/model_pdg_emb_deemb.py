@@ -5,10 +5,10 @@ from common.consts import *
 import torch.nn.functional as func
 
 
-class PDGDeembeder(nn.Module):
+class PDGDeembedder(nn.Module):
 
     def __init__(self, pdg_embed_dim: int, pdg_count: int, device):
-        super(PDGDeembeder, self).__init__()
+        super(PDGDeembedder, self).__init__()
 
         self.pdg_embed_dim = pdg_embed_dim
         self.pdg_count = pdg_count
@@ -20,9 +20,12 @@ class PDGDeembeder(nn.Module):
             nn.Tanh(),
             nn.Linear(512, 1024),
             nn.Tanh(),
-            nn.Linear(1024, 1024),
+            nn.Linear(1024, 2048),
+            nn.Tanh(),
+            nn.Linear(2048, 1024),
             nn.Tanh(),
             nn.Linear(1024, pdg_count),
+            nn.Tanh()
         ).to(device)
 
     def forward(self, x: torch.Tensor):
@@ -52,9 +55,9 @@ class PDGDeembeder(nn.Module):
             return torch.cat([vals, other], dim=2)
 
 
-class PDGEmbeder(nn.Module):
+class PDGEmbedder(nn.Module):
     def __init__(self, pdg_embed_dim: int, pdg_count: int, device):
-        super(PDGEmbeder, self).__init__()
+        super(PDGEmbedder, self).__init__()
 
         self.net = nn.Sequential(
             nn.Linear(pdg_count, 1024),
@@ -73,15 +76,15 @@ class PDGEmbeder(nn.Module):
         return self.net(x)
 
 
-def show_deemb_quality(embeder: PDGEmbeder, deembeder: PDGDeembeder, device):
+def show_deemb_quality(embedder: PDGEmbedder, deembedder: PDGDeembedder, device):
     prtcl_idxs = torch.tensor(particle_idxs(), device=device)
 
     pdg_onehot = func.one_hot(
         prtcl_idxs,
         num_classes=PDG_EMB_CNT
     ).float()
-    emb = embeder(pdg_onehot)
-    one_hot_val = deembeder(emb)
+    emb = embedder(pdg_onehot)
+    one_hot_val = deembedder(emb)
     gen_idxs = torch.argmax(one_hot_val, dim=0)  # .item()  # .unsqueeze(dim=2)
 
     acc = (torch.eq(prtcl_idxs, gen_idxs) == True).sum(dim=0).item()

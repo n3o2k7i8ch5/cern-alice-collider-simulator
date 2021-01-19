@@ -12,7 +12,7 @@ from torchsummary import summary
 
 from common.consts import *
 from common.load_event_data import load_data
-from common.model_pdg_emb_deemb import PDGDeembeder, show_deemb_quality
+from common.model_pdg_emb_deemb import PDGDeembedder, show_deemb_quality
 from common.show_plots import show_plots
 from event_generator_pytorch.models_embedding_autoencoder import Autoencoder
 
@@ -72,7 +72,7 @@ autoenc_in, autoenc_out = Autoencoder.create(
     samples=PADDING, emb_features=EMB_FEATURES, latent=LATENT_SPACE_SIZE, device=device)
 
 autoenc = Autoencoder(autoenc_in, autoenc_out)
-deembeder: PDGDeembeder = PDGDeembeder(PDG_EMB_DIM, PDG_EMB_CNT, device)
+deembeder: PDGDeembedder = PDGDeembedder(PDG_EMB_DIM, PDG_EMB_CNT, device)
 
 summary(autoenc_in, input_size=(PADDING, FEATURES))  # (PADDING, FEATURES))
 summary(autoenc_out, input_size=(LATENT_SPACE_SIZE,))
@@ -136,7 +136,7 @@ def train_autoenc():
     show_real_gen_data_comparison()
 
 
-def generate_data(autoenc_out, deembeder: PDGDeembeder):
+def generate_data(autoenc_out, deembeder: PDGDeembedder):
     np_input = np.random.normal(loc=0, scale=1, size=(BATCH_SIZE, LATENT_SPACE_SIZE))
     rand_input = torch.from_numpy(np_input).float().to(device=device)
     gen_emb_data = autoenc_out.forward(rand_input).detach()
