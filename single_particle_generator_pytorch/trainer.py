@@ -144,6 +144,8 @@ class Trainer:
                     valid_loss = self._valid_loss(autoenc, embedder, data_valid)
 
                     show_quality(emb_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=True)
+                    self.show_img_comparison(emb_data[:30, :], gen_data[:30, :])
+
                     self.show_real_gen_data_comparison(autoenc, embedder, emb=False, deembedder=deembedder, save=True)
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
@@ -204,15 +206,20 @@ class Trainer:
         generated_data = autoenc.decode(rand_input).detach()
         return generated_data
 
-    def show_img_comparison(self, data, title='Some data...'):
+    def show_img_comparison(self, real_data, gen_data):
         import matplotlib.pyplot as plt
-        plt.figure()
-        plt.title(title)
-        plt.imshow(data.detach().cpu().log(), cmap='hot', interpolation='nearest', vmin=-10, vmax=10)
-        plt.legend()
+
+        fig = plt.figure()
+        fig.add_subplot(1, 2, 1)
+        plt.imshow(real_data.detach().cpu().log(), cmap='hot', interpolation='nearest', vmin=-10, vmax=10)
+        plt.title('Real data')
+
+        fig.add_subplot(1, 2, 2)
+        plt.imshow(gen_data.detach().cpu().log(), cmap='hot', interpolation='nearest', vmin=-10, vmax=10)
+        plt.title('Fake data')
+
+        plt.colorbar()
         plt.show()
-        plt.ion()
-        plt.pause(0.001)
 
     def show_real_gen_data_comparison(
             self,
@@ -221,8 +228,7 @@ class Trainer:
             emb: True,
             deembedder: PDGDeembedder = None,
             load_model: bool = False,
-            save: bool = False
-    ):
+            save: bool = False):
 
         if load_model:
             autoenc.load_state_dict(torch.load(Trainer.AUTOENC_SAVE_PATH))
@@ -237,6 +243,5 @@ class Trainer:
             gen_data = deembedder.deemb(gen_data)
             show_quality(real_data, gen_data, feature_range=Trainer.SHOW_FEAT_RANGE, save=save,
                          title='Generation comparison')
-            self.show_img_comparison(real_data[:30, :], 'Real data')
-            self.show_img_comparison(gen_data[:30, :], 'Gen data')
+            self.show_img_comparison(real_data[:30, :], gen_data[:30, :])
 
