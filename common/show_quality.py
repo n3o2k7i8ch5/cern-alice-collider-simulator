@@ -1,6 +1,8 @@
 import os
+from typing import Tuple
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 last_saved_cnt = 0
 
@@ -10,7 +12,10 @@ def show_quality(real, gen, save=False, loss=None, mse_loss=None, kld_loss=None,
 
     if feature_range is None:
         start_point = 0
-        end_point = real.shape[1]
+        if len(real.shape) == 1:
+            end_point = 1
+        else:
+            end_point = real.shape[1]
     else:
         feature_count = real.size()[-1]
         start_point = feature_range[0] if feature_range[0] > 0 else feature_count + feature_range[0]
@@ -39,7 +44,7 @@ def show_quality(real, gen, save=False, loss=None, mse_loss=None, kld_loss=None,
                  )
         plt.legend()
         if save:
-            folder = 'vae_plots'
+            folder = 'plots'
             if not os.path.isdir(folder):
                 os.mkdir(folder)
             loss_str = ''
@@ -73,6 +78,26 @@ def show_lat_histograms(lat_mean, lat_logvar):
              histtype='stepfilled',
              label=['mean', 'logvar'],
              color=['green', 'orange'],
+             alpha=0.5
+             )
+    plt.legend()
+    plt.show()
+    plt.ion()
+
+
+def show_comp_hists(real_data: np.ndarray, fake_data: np.ndarray, title: str = '', range: Tuple = None):
+    plt.title(title)
+
+    real_data = real_data.flatten()
+    fake_data = fake_data.flatten()
+
+    plt.hist([real_data, fake_data],
+             range=range,
+             stacked=False,
+             bins=100,
+             histtype='stepfilled',
+             label=['real', 'gen'],
+             color=['blue', 'red'],
              alpha=0.5
              )
     plt.legend()

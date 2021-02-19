@@ -10,7 +10,7 @@ from torchsummary import summary
 from common.consts import *
 from common.load_event_data import load_data
 from common.model_pdg_emb_deemb import PDGDeembedder, show_deemb_quality
-from common.models_prtc_embed_autoenc import AutoencPrtcl
+from common.models_prtc_embed_autoenc import PrtclVAE
 
 import torch.nn.functional as func
 
@@ -74,8 +74,8 @@ def dembed_loss(real_one_hot, gen_one_hot, show_partial=False):
     return deemb_loss
 
 
-ae_prtcl_in, ae_prtcl_out = AutoencPrtcl.create(emb_features=EMB_FEATURES, latent=PRTCL_LATENT_SPACE_SIZE, device=device)
-ae_prtcl = AutoencPrtcl(ae_prtcl_in, ae_prtcl_out)
+ae_prtcl_in, ae_prtcl_out = PrtclVAE.create(emb_features=EMB_FEATURES, latent=PRTCL_LATENT_SPACE_SIZE, device=device)
+ae_prtcl = PrtclVAE(ae_prtcl_in, ae_prtcl_out)
 
 ae_prtcl.load_state_dict(torch.load(parent_path() + 'data/single_prtc_autoenc_model'))
 
