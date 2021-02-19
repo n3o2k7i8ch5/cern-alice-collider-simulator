@@ -19,7 +19,7 @@ from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
 
 class Trainer(ITrainer):
     BATCH_SIZE = 256
-    LATENT_SIZE = 16
+    LATENT_SIZE = 24
 
     NAN_VAL_TRAIN_STR = '__NAN_VAL__'
 
@@ -272,6 +272,8 @@ class Trainer(ITrainer):
 
                     valid_loss = self._valid_loss(vae, embedder_cred, embedder_debt, data_valid)
 
+
+
                     # show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
                     self.show_img_comparison(emb_data, torch.cat(gen_data, dim=1), title='Training')
 
@@ -378,6 +380,6 @@ class Trainer(ITrainer):
             bank_code_debtor
         )))
 
-        df.replace(Trainer.NAN_VAL_TRAIN_STR, np.nan, inplace=True)
+        #df.replace(Trainer.NAN_VAL_TRAIN_STR, None, inplace=True)
 
         return df

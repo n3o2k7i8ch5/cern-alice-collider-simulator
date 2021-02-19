@@ -28,11 +28,9 @@ class VAE(nn.Module):
         return nn.Sequential(
             nn.Linear(in_features, 64),
             nn.Tanh(),
-            nn.Linear(64, 64),
+            nn.Linear(64, 128),
             nn.Tanh(),
-            nn.Linear(64, 64),
-            nn.Tanh(),
-            nn.Linear(64, 64),
+            nn.Linear(128, 64),
             nn.Tanh(),
             nn.Linear(64, out_features),
             nn.Softmax(),
@@ -56,25 +54,27 @@ class VAE(nn.Module):
         self.latent_size = latent_size
 
         self.mean = nn.Sequential(
-            nn.Linear(emb_features, 256),
+            nn.Linear(emb_features, 512),
             nn.Tanh(),
-            nn.Linear(256, 256),
+            nn.Linear(512, 256),
             nn.Tanh(),
             nn.Linear(256, 128),
             nn.Tanh(),
-            nn.Linear(128, 32),
+            nn.Linear(128, 64),
             nn.Tanh(),
-            nn.Linear(32, latent_size),
+            nn.Linear(64, latent_size),
         ).to(device=device)
 
         self.logvar = nn.Sequential(
-            nn.Linear(emb_features, 256),
+            nn.Linear(emb_features, 512),
+            nn.Tanh(),
+            nn.Linear(512, 256),
             nn.Tanh(),
             nn.Linear(256, 128),
             nn.Tanh(),
-            nn.Linear(128, 32),
+            nn.Linear(128, 64),
             nn.Tanh(),
-            nn.Linear(32, latent_size),
+            nn.Linear(64, latent_size),
         ).to(device=device)
 
         self.decoder_trans_types = self.one_hot_generator(latent_size, cat_trans_types_cnt, device)

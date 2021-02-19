@@ -11,12 +11,12 @@ class PDGEmbedder(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(num_embeddings, 1024),
             nn.Tanh(),
-            nn.Linear(1024, 512),
-            nn.Tanh(),
-            nn.Linear(512, 256),
-            nn.Tanh(),
-            nn.Linear(256, 256),
-            nn.Tanh(),
+            nn.Linear(1024, 256),
+            #nn.Tanh(),
+            #nn.Linear(512, 256),
+            #nn.Tanh(),
+            #nn.Linear(256, 256),
+            #nn.Tanh(),
             nn.Linear(256, embedding_dim),
             nn.Tanh(),
         ).to(device=device)
