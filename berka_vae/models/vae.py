@@ -28,9 +28,9 @@ class VAE(nn.Module):
         return nn.Sequential(
             nn.Linear(in_features, 64),
             nn.Tanh(),
-            nn.Linear(64, 128),
+            nn.Linear(64, 64),
             nn.Tanh(),
-            nn.Linear(128, 64),
+            nn.Linear(64, 64),
             nn.Tanh(),
             nn.Linear(64, out_features),
             nn.Softmax(),
@@ -115,9 +115,7 @@ class VAE(nn.Module):
             nn.Tanh(),
             nn.Linear(256, 256),
             nn.Tanh(),
-            nn.Linear(256, 512),
-            nn.Tanh(),
-            nn.Linear(512, remain_features),
+            nn.Linear(256, remain_features),
             nn.Sigmoid(),
         ).to(device=device)
 

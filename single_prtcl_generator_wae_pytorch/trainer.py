@@ -10,7 +10,7 @@ from common.prtcl_vae import PrtclVAE
 from common.show_quality import show_lat_histograms, show_quality
 from i_trainer.i_trainer import ITrainer
 from i_trainer.load_data import load_data
-from single_prtcl_generator_vae_pytorch.models import PDGDeembedder
+from single_prtcl_generator_vae_pytorch.models.pdg_deembedder import PDGDeembedder
 
 
 class Trainer(ITrainer):
@@ -71,6 +71,8 @@ class Trainer(ITrainer):
         _data = load_data()
         data_train, data_valid = self.prep_data(_data, batch_size=BATCH_SIZE, valid=0.1)
 
+        uniq_cred_idxs = torch.tensor(self.par, device=self.device)
+
         for epoch in range(epochs):
 
             for n_batch, batch in enumerate(data_train):
@@ -78,7 +80,7 @@ class Trainer(ITrainer):
 
                 real_data: torch.Tensor = batch.to(self.device).detach()
 
-                emb_data = self.embed_data(embedder, real_data)
+                emb_data = self.embed_data(real_data, [embedder])
 
                 gen_data, lat_mean, lat_logvar, lat_vec = autoenc(emb_data)
 
@@ -101,7 +103,7 @@ class Trainer(ITrainer):
                     show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
                     self.show_img_comparison(emb_data[:30, :], gen_data[:30, :])
 
-                    self.show_real_gen_data_comparison(autoenc, embedder, emb=False, deembedder=deembedder, save=True)
+                    self.show_real_gen_data_comparison(autoenc, real_data, [embedder], emb=False, deembedder=deembedder, save=True)
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '

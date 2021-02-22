@@ -9,6 +9,7 @@ import numpy as np
 from berka_vae.consts import CRED_EMBED_DIM, DEBT_EMBED_DIM
 from berka_vae.models.vae import VAE
 from common.consts import parent_path
+from common.show_quality import show_quality
 from i_trainer.i_trainer import ITrainer
 
 import pandas as pd
@@ -18,12 +19,12 @@ from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
 
 
 class Trainer(ITrainer):
-    BATCH_SIZE = 256
-    LATENT_SIZE = 24
+    BATCH_SIZE = 512
+    LATENT_SIZE = 20
 
     NAN_VAL_TRAIN_STR = '__NAN_VAL__'
 
-    show_feat_rng = -7, -4
+    show_feat_rng = (40, 43)
 
     MODEL_SAVE_PATH = parent_path() + 'data/berka_vae.model'
     EMB_CRED_SAVE_PATH = parent_path() + 'data/embed_cred.model'
@@ -90,9 +91,11 @@ class Trainer(ITrainer):
         df_trans_amount = data['trans_amount']
         df_acc_balance = data['acc_balance']
 
-        df_acc_log_balance = df_acc_balance.abs().apply(func=lambda x: math.log(1 + x, 5))
+        # df_acc_log_balance = df_acc_balance.abs().apply(func=lambda x: math.log(1 + x, 1.4)/10)
+        df_acc_log_balance = .01 * (df_acc_balance.abs() ** (1 / 2))
 
         df_perc_withdrawed = df_trans_amount / df_acc_balance
+        df_perc_withdrawed[df_perc_withdrawed > 1] = 1
 
         _trans_desc = data['trans_description'].fillna(Trainer.NAN_VAL_TRAIN_STR)
         df_trans_descs = pd.get_dummies(_trans_desc, prefix_sep='$')
@@ -157,9 +160,9 @@ class Trainer(ITrainer):
         loss_trans_descs = BCELoss()(gen_trans_descs, real_trans_descs.detach())
         loss_bank_code_debtor = BCELoss()(gen_bank_code_debtor, real_bank_code_debtor.detach())
 
-        recon_loss = loss_cred_id + \
-                     loss_debt_id + \
-                     5*loss_log_balance + \
+        recon_loss = 0*loss_cred_id + \
+                     0*loss_debt_id + \
+                     loss_log_balance + \
                      loss_perc_withdrawed + \
                      loss_trans_types + \
                      loss_trans_ops + \
@@ -168,7 +171,7 @@ class Trainer(ITrainer):
 
         kld_loss = torch.mean(-0.5 * torch.sum(1 + lat_logvar - lat_mean.pow(2) - lat_logvar.exp(), dim=1), dim=0)
 
-        return recon_loss + kld_loss * 1e-4, recon_loss, kld_loss
+        return recon_loss + kld_loss * 5e-3, recon_loss, kld_loss
 
     def create_vae(self, load) -> VAE:
         vae = VAE(
@@ -205,7 +208,7 @@ class Trainer(ITrainer):
     def train(self, epochs, load=False):
 
         _data = self.load_trans_data()
-        data_train, data_valid = self.prep_data(_data, batch_size=Trainer.BATCH_SIZE, valid=0.1)
+        data_train, data_valid = self.prep_data(_data, batch_size=Trainer.BATCH_SIZE, valid=0.02)
 
         embedder_cred = PDGEmbedder(num_embeddings=len(self.uniq_cred), embedding_dim=CRED_EMBED_DIM,
                                     device=self.device)
@@ -216,7 +219,7 @@ class Trainer(ITrainer):
         deembedder_debt = PDGDeembedder(DEBT_EMBED_DIM, len(self.uniq_debt), self.device)
 
         vae = self.create_vae(load=load)
-        autoenc_optimizer = torch.optim.Adam(vae.parameters(), lr=0.00005)
+        autoenc_optimizer = torch.optim.AdamW(vae.parameters(), lr=1e-5)
 
         uniq_cred_idxs = torch.tensor(self.uniq_cred_idxs, device=self.device)
         uniq_debt_idxs = torch.tensor(self.uniq_debt_idxs, device=self.device)
@@ -259,34 +262,36 @@ class Trainer(ITrainer):
                 loss.backward()
                 autoenc_optimizer.step()
 
-                if n_batch % 50 == 0:
-                    deemb_accs = self.train_deembeders([
-                        (uniq_cred_idxs, embedder_cred, deembedder_cred),
-                        (uniq_debt_idxs, embedder_debt, deembedder_debt)],
-                        epochs=2)
+                '''
+                deemb_accs = self.train_deembeders([
+                    (uniq_cred_idxs, embedder_cred, deembedder_cred),
+                    (uniq_debt_idxs, embedder_debt, deembedder_debt)
+                ], epochs=2)
+                '''
 
-                if n_batch % 500 == 0:
+                if n_batch % 1000 == 0:
                     # show_lat_histograms(lat_mean=lat_mean, lat_logvar=lat_logvar)
                     self.show_deemb_quality(uniq_cred_idxs, embedder_cred, deembedder_cred)
                     self.show_deemb_quality(uniq_debt_idxs, embedder_debt, deembedder_debt)
 
                     valid_loss = self._valid_loss(vae, embedder_cred, embedder_debt, data_valid)
 
-
-
-                    # show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
-                    self.show_img_comparison(emb_data, torch.cat(gen_data, dim=1), title='Training')
-
+                    '''
+                    gen_data_merged = torch.cat(gen_data, dim=1)
+                    #show_quality(emb_data, gen_data_merged, feature_range=self.show_feat_rng, title='Training', save=False)
+                    self.show_img_comparison(emb_data, gen_data_merged, title='Training')
+                    
                     self.show_real_gen_data_comparison(
                         vae,
                         real_data,
                         [embedder_cred, embedder_debt],
                         emb=True,
                         show_histograms=False,
-                        sample_cnt=30,
+                        sample_cnt=512,
                         deembedder=deembedder_cred,
                         save=True
                     )
+                    '''
 
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
@@ -295,28 +300,31 @@ class Trainer(ITrainer):
                         f'kld loss: {"{:.6f}".format(round(kld_loss.item(), 6))} :: '
                         f'mse loss: {"{:.6f}".format(round(mse_loss.item(), 6))} :: '
                         f'valid loss: {"{:.6f}".format(round(valid_loss, 6))} :: '
-                        f'deemb accs: {[acc.item() for acc in deemb_accs]}'
+                        #f'deemb accs: {[acc.item() for acc in deemb_accs]}'
                     )
 
                     self._save_models(vae, embedder_cred, embedder_debt, deembedder_cred, deembedder_debt)
 
         return vae, embedder_cred, embedder_debt, deembedder_cred, deembedder_debt
 
-    def _save_models(self, autoenc, emb_cred, emb_debt, deemb_cred, deemb_debt):
-        print('Saving autoencoder model')
-        torch.save(autoenc.state_dict(), Trainer.MODEL_SAVE_PATH)
+    def _save_models(self, vae, emb_cred, emb_debt, deemb_cred, deemb_debt):
+        print('Saved:', end=' ')
+        if vae is not None:
+            print('vae', end=', ')
+            torch.save(vae.state_dict(), Trainer.MODEL_SAVE_PATH)
 
-        print('Saving embed cred model')
-        torch.save(emb_cred.state_dict(), Trainer.EMB_CRED_SAVE_PATH)
+        # print('Saving embed cred model')
+        # torch.save(emb_cred.state_dict(), Trainer.EMB_CRED_SAVE_PATH)
 
-        print('Saving embed debt model')
-        torch.save(emb_debt.state_dict(), Trainer.EMB_DEBT_SAVE_PATH)
+        # print('Saving embed debt model')
+        # torch.save(emb_debt.state_dict(), Trainer.EMB_DEBT_SAVE_PATH)
 
-        print('Saving deembed cred model')
-        torch.save(deemb_cred.state_dict(), Trainer.DEEMB_CRED_SAVE_PATH)
+        # print('Saving deembed cred model')
+        # torch.save(deemb_cred.state_dict(), Trainer.DEEMB_CRED_SAVE_PATH)
 
-        print('Saving deembed debt model')
-        torch.save(deemb_debt.state_dict(), Trainer.DEEMB_DEBT_SAVE_PATH)
+        # print('Saving deembed debt model')
+        # torch.save(deemb_debt.state_dict(), Trainer.DEEMB_DEBT_SAVE_PATH)
+        print()
 
     def _valid_loss(self, model, embedder_cred: PDGEmbedder, embedder_debt, valid_data_loader) -> (float, float):
         loss = 0
@@ -356,8 +364,9 @@ class Trainer(ITrainer):
         debt_idxs = deemb_debt(gen_debt_id).argmax(dim=1).tolist()
         debt_id = [self.uniq_debt[i] for i in debt_idxs]
 
-        acc_balance = pow(5, gen_log_balance) - 1
-        trans_amount = acc_balance*gen_perc_withdrawed
+        # acc_balance = pow(1.4, gen_log_balance) - 1
+        acc_balance = pow(100 * gen_log_balance, 2)
+        trans_amount = acc_balance * gen_perc_withdrawed
 
         acc_balance = acc_balance.squeeze().tolist()
         trans_amount = trans_amount.squeeze().tolist()
@@ -371,8 +380,8 @@ class Trainer(ITrainer):
             cred_id,
             debt_id,
 
-            acc_balance,
             trans_amount,
+            acc_balance,
 
             trans_types,
             trans_ops,
@@ -380,6 +389,6 @@ class Trainer(ITrainer):
             bank_code_debtor
         )))
 
-        #df.replace(Trainer.NAN_VAL_TRAIN_STR, None, inplace=True)
+        # df.replace(Trainer.NAN_VAL_TRAIN_STR, None, inplace=True)
 
         return df

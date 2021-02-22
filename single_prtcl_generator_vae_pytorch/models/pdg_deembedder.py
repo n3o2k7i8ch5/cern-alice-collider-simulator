@@ -13,15 +13,13 @@ class PDGDeembedder(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(pdg_embed_dim, 256),
             nn.Tanh(),
-            nn.Linear(256, 1024),
+            nn.Linear(256, 512),
             nn.Tanh(),
-            #nn.Linear(512, 1024),
-            #nn.Tanh(),
-            #nn.Linear(1024, 1024),
-            #nn.Tanh(),
-            #nn.Linear(1024, 1024),
-            #nn.Tanh(),
-            nn.Linear(1024, pdg_count),
+            nn.Linear(512, 1024),
+            nn.Tanh(),
+            nn.Linear(1024, 2048),
+            nn.Tanh(),
+            nn.Linear(2048, pdg_count),
             nn.Tanh()
         ).to(device)
 

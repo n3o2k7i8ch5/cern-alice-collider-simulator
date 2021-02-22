@@ -4,7 +4,7 @@ from typing import List, Tuple
 
 import torch
 from torch.nn import MSELoss, Module
-from torch.optim import Adam
+from torch.optim import Adam, AdamW
 
 import numpy as np
 from torch.utils.data import DataLoader
@@ -67,7 +67,7 @@ class ITrainer(ABC):
         for tuple in tuples:
             lab_data, embedder, deembedder = tuple
 
-            deembed_optimizer = Adam(deembedder.parameters(), lr=1e-5)
+            deembed_optimizer = AdamW(deembedder.parameters(), lr=1e-4)
             deemb_loss = MSELoss()
 
             num_classes = len(lab_data)
@@ -117,8 +117,8 @@ class ITrainer(ABC):
     def show_img_comparison(self, real_data, gen_data, log: bool = False, title: str = None):
         import matplotlib.pyplot as plt
 
-        real_data = real_data.detach().cpu()[:30, :]
-        gen_data = gen_data.detach().cpu()[:30, :]
+        real_data = real_data.detach().cpu()[:50, :]
+        gen_data = gen_data.detach().cpu()[:50, :]
         if log:
             real_data = real_data.log()
             gen_data = gen_data.log()
@@ -126,7 +126,7 @@ class ITrainer(ABC):
         data = torch.cat([real_data, -2*torch.ones((5, gen_data.size()[1])), gen_data], dim=0)
 
         plt.title(f'{title}\nup - real data :: down - fake data')
-        plt.imshow(data, cmap='hot', interpolation='nearest', vmin=-1, vmax=5)
+        plt.imshow(data, cmap='hot', interpolation='nearest', vmin=-1, vmax=10)
         plt.colorbar()
         plt.show()
 
