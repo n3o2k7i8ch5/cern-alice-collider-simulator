@@ -57,7 +57,8 @@ def show_lat_histograms(lat_mean, lat_logvar):
     plt.ion()
 
 
-def show_comp_hists(real_data: np.ndarray, fake_data: np.ndarray, title: str = '', xlabel = '', ylabel = '', range: Tuple = None, save_file_name: str = None):
+def show_comp_hists(real_data: np.ndarray, fake_data: np.ndarray, title: str = '', xlabel='', ylabel='', range: Tuple = None, save_file_name: str = None):
+    plt.style.use('ggplot')
     plt.title(title)
 
     real_data = real_data.flatten()
@@ -68,7 +69,7 @@ def show_comp_hists(real_data: np.ndarray, fake_data: np.ndarray, title: str = '
              stacked=False,
              bins=100,
              histtype='stepfilled',
-             label=['real', 'gen'],
+             label=['real data', 'synthetic data'],
              color=['blue', 'red'],
              alpha=0.5
              )

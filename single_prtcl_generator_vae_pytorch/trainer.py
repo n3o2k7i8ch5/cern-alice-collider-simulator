@@ -7,6 +7,7 @@ import numpy as np
 
 from common.consts import PRTCL_LATENT_SPACE_SIZE, EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, BATCH_SIZE, \
     PARTICLE_DIM, particle_idxs
+from common.models.pdg_embedder import PDGEmbedder
 from common.prtcl_vae import PrtclVAE
 from common.show_quality import show_lat_histograms, show_quality
 from i_trainer.i_trainer import ITrainer
@@ -43,7 +44,7 @@ class Trainer(ITrainer):
         )
 
     def create_embedder(self):
-        return Embedding(num_embeddings=self.pdg_emb_cnt, embedding_dim=self.pdg_emb_dim).to(self.device)
+        return PDGEmbedder(num_embeddings=self.pdg_emb_cnt, embedding_dim=self.pdg_emb_dim, device=self.device)
 
     def create_deembedder(self) -> PDGDeembedder:
         return PDGDeembedder(self.pdg_emb_dim, self.pdg_emb_cnt, self.device)
@@ -56,7 +57,7 @@ class Trainer(ITrainer):
         )
         return deembedder
 
-    def embed_data(self, data, embedders: List[Embedding]):
+    def embed_data(self, data, embedders: List):
         cat_data = data[:, :2].long()
         cont_data = data[:, 2:]
 
@@ -126,7 +127,6 @@ class Trainer(ITrainer):
                         deembedder
                     )],
                     epochs=1,
-                    device=self.device
                 )
 
                 if n_batch % 500 == 0:
@@ -141,7 +141,7 @@ class Trainer(ITrainer):
                     show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
                     self.show_img_comparison(emb_data[:30, :], gen_data[:30, :])
 
-                    self.show_real_gen_data_comparison(autoenc, embedder, emb=False, deembedder=deembedder, save=True)
+                    self.show_real_gen_data_comparison(autoenc, real_data, [embedder], emb=False, deembedder=deembedder, save=True)
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '

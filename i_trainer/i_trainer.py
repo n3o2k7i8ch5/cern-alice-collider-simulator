@@ -114,7 +114,7 @@ class ITrainer(ABC):
     def gen_autoenc_data(self, sample_cnt: int, model: Module) -> np.array:
         pass
 
-    def show_img_comparison(self, real_data, gen_data, log: bool = False, title: str = None):
+    def show_img_comparison(self, real_data, gen_data, log: bool = False, title: str = None, save: bool = False):
         import matplotlib.pyplot as plt
 
         real_data = real_data.detach().cpu()[:50, :]
@@ -134,7 +134,7 @@ class ITrainer(ABC):
             self,
             model,
             real_data,
-            embedders,
+            embedders: List,
             emb: True,
             show_histograms: bool = True,
             sample_cnt = 10_000,

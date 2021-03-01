@@ -1,8 +1,8 @@
-from single_prtcl_generator_wae_pytorch.trainer import Trainer
+from single_prtcl_generator_gan_pytorch.trainer import Trainer
 
 ### TRAINING
 trainer = Trainer()
-autoenc, embedder, deembedder = trainer.train(epochs=101, load=False)
+generator, discriminator, embedder, deembedder = trainer.train(epochs=101, load=True)
 #autoenc = trainer.create_autoenc()
 #embedder = trainer.create_embedder()
 #deembedder = trainer.create_train_deembedder(embedder=embedder, epochs=500)
