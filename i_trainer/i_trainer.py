@@ -1,10 +1,12 @@
+import os
 from abc import ABC, abstractmethod
-import random
+from math import ceil, floor
 from typing import List, Tuple
 
 import torch
 from torch.nn import MSELoss, Module
-from torch.optim import Adam, AdamW
+from torch.optim import AdamW
+import matplotlib.pyplot as plt
 
 import numpy as np
 from torch.utils.data import DataLoader
@@ -15,13 +17,17 @@ from common.show_quality import show_quality
 from single_prtcl_generator_vae_pytorch.models.pdg_deembedder import PDGDeembedder
 from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
 
+import config
+
 
 class ITrainer(ABC):
 
+    '''
     @property
     @abstractmethod
     def show_feat_rng(self) -> (int, int):
         pass
+    '''
 
     @property
     def model_save_path(self) -> str:
@@ -100,22 +106,31 @@ class ITrainer(ABC):
 
         return acc_list
 
-    def show_deemb_quality(self, lab_data: torch.Tensor, embedder: PDGEmbedder, deembedder: PDGDeembedder):
+    def print_deemb_quality(self, lab_data: torch.Tensor, embedder: PDGEmbedder, deembedder: PDGDeembedder):
 
         emb = embedder(lab_data)
         one_hot_val = deembedder(emb)
-        gen_labs = torch.argmax(one_hot_val, dim=0)  # .item()  # .unsqueeze(dim=2)
+        gen_labs = torch.argmax(one_hot_val, dim=0)
 
         acc = torch.eq(lab_data, gen_labs).sum(dim=0).item()
 
         print('Deembeder acc: ' + str(acc) + '/' + str(len(lab_data)))
 
     @abstractmethod
-    def gen_autoenc_data(self, sample_cnt: int, model: Module) -> np.array:
+    def gen_autoenc_data(self, sample_cnt: int, model: Module) -> torch.Tensor or List[torch.Tensor]:
         pass
 
-    def show_img_comparison(self, real_data, gen_data, log: bool = False, title: str = None, save: bool = False):
-        import matplotlib.pyplot as plt
+    @staticmethod
+    def show_heatmaps(
+            real_data,
+            gen_data,
+            reprod: bool, 
+            log: bool = False,
+
+            save: bool = False,
+            epoch: int = None,
+            batch: int = None,
+    ):
 
         real_data = real_data.detach().cpu()[:50, :]
         gen_data = gen_data.detach().cpu()[:50, :]
@@ -125,35 +140,115 @@ class ITrainer(ABC):
 
         data = torch.cat([real_data, -2*torch.ones((5, gen_data.size()[1])), gen_data], dim=0)
 
-        plt.title(f'{title}\nup - real data :: down - fake data')
-        plt.imshow(data, cmap='hot', interpolation='nearest', vmin=-1, vmax=10)
+        plt.title(f'{"reprod" if reprod else "gener"}\nup - real data :: down - fake data')
+        plt.imshow(data, cmap='hot', interpolation='nearest', vmin=-1, vmax=5)
         plt.colorbar()
+
+        if save:
+            if not os.path.isdir(config.plot_folder):
+                os.mkdir(config.plot_folder)
+
+            title = 'reprod' if reprod else 'gener'
+            plt.savefig(f'{config.plot_folder}/_heatmap_{epoch}_{batch}_{title}.png')
+
         plt.show()
 
-    def show_real_gen_data_comparison(
+    def gen_show_comp_hists(
             self,
             model,
-            real_data,
+            all_real_data,
+            attr_idxs: list,
             embedders: List,
             emb: True,
-            show_histograms: bool = True,
             sample_cnt = 10_000,
+            range: Tuple = (-2, 2),
             deembedder: PDGDeembedder = None,
             load_model: bool = False,
-            save: bool = False):
+
+            save: bool = False,
+            epoch: int = None,
+            batch: int = None,
+    ):
 
         if load_model:
             model.load_state_dict(torch.load(self.model_save_path))
 
-        gen_data = torch.cat(self.gen_autoenc_data(sample_cnt, model), dim=1).detach()
-        real_data = real_data[:sample_cnt, :]
+        gen_data = self.gen_autoenc_data(sample_cnt, model)
+        if gen_data is Tuple:
+            gen_data = torch.cat(gen_data, dim=1).detach()
+
+        real_data = all_real_data[:sample_cnt, :]
         if emb:
-            emb_data = self.embed_data(real_data, embedders)
-            if show_histograms:
-                show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=save, title='Generation comparison')
-            self.show_img_comparison(emb_data, gen_data, title='Generation comparison')
+            real_data = self.embed_data(real_data, embedders)
         else:
             gen_data = deembedder.deemb(gen_data)
-            if show_histograms:
-                show_quality(real_data, gen_data, feature_range=self.show_feat_rng, save=save, title='Generation')
-            self.show_img_comparison(real_data, gen_data, title='Generation')
+
+        fig, subplots = plt.subplots(nrows=ceil(len(attr_idxs)/2), ncols=2)
+
+        for i, attr_idx in enumerate(attr_idxs):
+            _real_data = real_data[:, attr_idx].flatten().cpu()
+            _gen_data = gen_data[:, attr_idx].flatten().cpu()
+
+            subplots[floor(i/2)][i%2].set_title(f'attr: {attr_idx}')
+            subplots[floor(i/2)][i%2].hist([_real_data, _gen_data],
+                     range=range,
+                     stacked=False,
+                     bins=100,
+                     histtype='stepfilled',
+                     label=['real data', 'synthetic data'],
+                     color=['blue', 'red'],
+                     alpha=0.5
+                    )
+
+        if save:
+            if not os.path.isdir(config.plot_folder):
+                os.mkdir(config.plot_folder)
+
+            title = 'reprod'
+            fig.savefig(f'{config.plot_folder}/hists_{epoch}_{batch}_{title}.png')
+
+        fig.show()
+
+    @staticmethod
+    def show_comp_hists(
+            real_data: np.ndarray,
+            fake_data: np.ndarray,
+            attr_idx: int,
+            reprod: bool,
+            xlabel='',
+            ylabel='',
+            range: Tuple = None,
+            save: bool = None,
+            epoch: int = None,
+            batch: int = None,
+
+    ):
+        plt.style.use('ggplot')
+        plt.title(f'Reproduction hists attr {attr_idx}' if reprod else f'Generated data hists attr {attr_idx}')
+
+        real_data = real_data.flatten()
+        fake_data = fake_data.flatten()
+
+        plt.hist([real_data, fake_data],
+                 range=range,
+                 stacked=False,
+                 bins=100,
+                 histtype='stepfilled',
+                 label=['real data', 'synthetic data'],
+                 color=['blue', 'red'],
+                 alpha=0.5
+                 )
+
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+
+        plt.legend()
+
+        if save:
+            if not os.path.isdir(config.plot_folder):
+                os.mkdir(config.plot_folder)
+
+            title = 'reprod' if reprod else 'gener'
+            plt.savefig(f'{config.plot_folder}/hists_{attr_idx}_{epoch}_{batch}_{title}.png')
+
+        plt.show()

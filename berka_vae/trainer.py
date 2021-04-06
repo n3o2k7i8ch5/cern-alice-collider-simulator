@@ -271,8 +271,8 @@ class Trainer(ITrainer):
 
                 if n_batch % 1000 == 0:
                     # show_lat_histograms(lat_mean=lat_mean, lat_logvar=lat_logvar)
-                    self.show_deemb_quality(uniq_cred_idxs, embedder_cred, deembedder_cred)
-                    self.show_deemb_quality(uniq_debt_idxs, embedder_debt, deembedder_debt)
+                    self.print_deemb_quality(uniq_cred_idxs, embedder_cred, deembedder_cred)
+                    self.print_deemb_quality(uniq_debt_idxs, embedder_debt, deembedder_debt)
 
                     valid_loss = self._valid_loss(vae, embedder_cred, embedder_debt, data_valid)
 

@@ -26,4 +26,4 @@ class PrtclWAEDiscriminator(nn.Module):
             param.requires_grad = not value
 
     def forward(self, x: torch.Tensor):
-        return self.discriminator(x)
+        return self.discriminator(x).squeeze()

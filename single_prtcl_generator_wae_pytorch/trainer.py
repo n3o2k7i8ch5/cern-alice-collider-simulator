@@ -41,7 +41,9 @@ class Trainer(ITrainer):
 
         return torch.cat([prtc_pdg, prtc_stat_code, cont_data], dim=1)
 
-    AUTOENC_SAVE_PATH = parent_path() + 'data/single_prtc_autoenc.model'
+    ENCODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_encoder.model'
+    DECODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_decoder.model'
+    DISCRIMINATOR_SAVE_PATH = parent_path() + 'data/single_prtc_wae_discriminator.model'
     PDG_DEEMBED_SAVE_PATH = parent_path() + 'data/pdg_deembed.model'
     PDG_EMBED_SAVE_PATH = parent_path() + 'data/pdg_embed.model'
 
@@ -86,9 +88,11 @@ class Trainer(ITrainer):
 
         if load:
             print('LOADING MODEL STATES...')
-            autoenc.load_state_dict(torch.load(Trainer.AUTOENC_SAVE_PATH))
-            # embedder.load_state_dict(torch.load(Trainer.PDG_EMBED_SAVE_PATH))
-            # deembedder.load_state_dict(torch.load(Trainer.PDG_DEEMBED_SAVE_PATH))
+            encoder.load_state_dict(torch.load(Trainer.ENCODER_SAVE_PATH))
+            decoder.load_state_dict(torch.load(Trainer.DECODER_SAVE_PATH))
+            discriminator.load_state_dict(torch.load(Trainer.DISCRIMINATOR_SAVE_PATH))
+            embedder.load_state_dict(torch.load(Trainer.PDG_EMBED_SAVE_PATH))
+            deembedder.load_state_dict(torch.load(Trainer.PDG_DEEMBED_SAVE_PATH))
 
         print('AUTOENCODER')
         print(encoder)
@@ -143,7 +147,7 @@ class Trainer(ITrainer):
 
                 lat_real = encoder(emb_data)
                 recon_data = decoder(lat_real)
-                d_real = discriminator(lat_real)
+                d_real = discriminator(encoder(emb_data))
 
                 recon_loss = MSELoss()(emb_data, recon_data)
                 d_loss = MSELoss()(d_real, zeros)
@@ -157,14 +161,22 @@ class Trainer(ITrainer):
                 # self.train_deembeder(deembedder=deembedder, embedder=embedder, epochs=1, device=self.device)
 
                 if n_batch % 500 == 0:
-                    self.show_deemb_quality(torch.tensor(particle_idxs()), embedder, deembedder)
+                    self.print_deemb_quality(torch.tensor(particle_idxs(), device=self.device), embedder, deembedder)
                     valid_loss = self._valid_loss(encoder, decoder, embedder, data_valid)
 
-                    show_quality(emb_data, recon_data, feature_range=self.show_feat_rng, save=True)
-                    self.show_img_comparison(emb_data[:30, :], recon_data[:30, :])
+                    show_quality(real_data, recon_data, feature_range=self.show_feat_rng, save=True)
+                    self.show_heatmaps(emb_data[:30, :], recon_data[:30, :])
 
-                    self.show_real_gen_data_comparison(decoder, real_data, [embedder], emb=False, deembedder=deembedder,
-                                                       save=True)
+                    '''
+                    self.show_real_gen_data_comparison(
+                        decoder, 
+                        real_data, 
+                        [embedder], 
+                        emb=False, 
+                        deembedder=deembedder,
+                        save=True)
+                    '''
+
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '
@@ -172,13 +184,17 @@ class Trainer(ITrainer):
                         f'valid loss: {"{:.6f}".format(round(valid_loss, 6))}'
                     )
 
-            self._save_models(encoder, embedder, deembedder)
+            self._save_models(encoder, decoder, discriminator, embedder, deembedder)
 
         return encoder, decoder, discriminator, embedder, deembedder
 
-    def _save_models(self, autoenc, embedder, deembedder):
-        print('Saving autoencoder model')
-        torch.save(autoenc.state_dict(), Trainer.AUTOENC_SAVE_PATH)
+    def _save_models(self, encoder, decoder, discriminator, embedder, deembedder):
+        print('Saving encoder model')
+        torch.save(encoder.state_dict(), Trainer.ENCODER_SAVE_PATH)
+        print('Saving decoder model')
+        torch.save(decoder.state_dict(), Trainer.DECODER_SAVE_PATH)
+        print('Saving discriminator model')
+        torch.save(discriminator.state_dict(), Trainer.DISCRIMINATOR_SAVE_PATH)
         print('Saving embed model')
         torch.save(embedder.state_dict(), Trainer.PDG_EMBED_SAVE_PATH)
         print('Saving deembedder model')
@@ -189,7 +205,7 @@ class Trainer(ITrainer):
         criterion = MSELoss()
 
         for batch_data in valid_data_loader:
-            emb_data = self.embed_data(embedder, batch_data.to(self.device))
+            emb_data = self.embed_data(batch_data.to(self.device), [embedder])
             recon_data = decoder(encoder(emb_data))
             train_loss = criterion(recon_data, emb_data)
 
@@ -199,9 +215,9 @@ class Trainer(ITrainer):
 
         return loss
 
-    def gen_autoenc_data(self, sample_cnt, autoenc):
+    def gen_autoenc_data(self, sample_cnt, decoder):
 
         np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, PRTCL_LATENT_SPACE_SIZE))
         rand_input = torch.from_numpy(np_input).float().to(device=self.device)
-        generated_data = autoenc.decode(rand_input).detach()
+        generated_data = decoder(rand_input).detach()
         return generated_data

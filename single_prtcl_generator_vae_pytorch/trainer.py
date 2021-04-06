@@ -2,11 +2,11 @@ from typing import List
 
 import torch
 from torch.autograd import Variable
-from torch.nn import MSELoss, Embedding
+from torch.nn import MSELoss
 import numpy as np
 
-from common.consts import PRTCL_LATENT_SPACE_SIZE, EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, BATCH_SIZE, \
-    PARTICLE_DIM, particle_idxs
+from common.consts import PRTCL_LATENT_SPACE_SIZE, EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, PARTICLE_DIM, \
+    particle_idxs, FEATURES
 from common.models.pdg_embedder import PDGEmbedder
 from common.prtcl_vae import PrtclVAE
 from common.show_quality import show_lat_histograms, show_quality
@@ -16,6 +16,8 @@ from single_prtcl_generator_vae_pytorch.models.pdg_deembedder import PDGDeembedd
 
 
 class Trainer(ITrainer):
+
+    BATCH_SIZE = 512
 
     pdg_emb_cnt = PDG_EMB_CNT
     pdg_emb_dim = PDG_EMB_DIM
@@ -34,7 +36,7 @@ class Trainer(ITrainer):
 
         kld_loss = torch.mean(-0.5 * torch.sum(1 + lat_logvar - lat_mean.pow(2) - lat_logvar.exp(), dim=1), dim=0)
 
-        return mse_loss + kld_loss * 1e-4, mse_loss, kld_loss
+        return mse_loss + kld_loss * 1e-3, mse_loss, kld_loss
 
     def create_autoenc(self) -> PrtclVAE:
         return PrtclVAE(
@@ -72,7 +74,7 @@ class Trainer(ITrainer):
 
     def train(self, epochs, load=False):
         print('TRAINING MODEL:'
-              ' BATCH_SIZE = ' + str(BATCH_SIZE) +
+              ' BATCH_SIZE = ' + str(self.BATCH_SIZE) +
               ', PARTICLE_DIM: ' + str(PARTICLE_DIM) +
               ', EPOCHS: ' + str(epochs) +
               ', PRTCL_LATENT_SPACE_SIZE: ' + str(PRTCL_LATENT_SPACE_SIZE)
@@ -97,8 +99,8 @@ class Trainer(ITrainer):
         print('DEEMBEDDER')
         print(deembedder)
 
-        _data = self.load_trans_data()
-        data_train, data_valid = self.prep_data(_data, batch_size=BATCH_SIZE, valid=0.1)
+        _all_data = self.load_trans_data()
+        data_train, data_valid = self.prep_data(_all_data, batch_size=self.BATCH_SIZE, valid=0.1)
 
         for epoch in range(epochs):
 
@@ -130,18 +132,42 @@ class Trainer(ITrainer):
                 )
 
                 if n_batch % 500 == 0:
+                    self.show_heatmaps(
+                        emb_data[:30, :],
+                        gen_data[:30, :],
+                        reprod=False,
+                        save=True,
+                        epoch=epoch,
+                        batch=n_batch
+                    )
+
+                    self.gen_show_comp_hists(
+                        autoenc,
+                        _all_data,
+                        attr_idxs=[FEATURES - 8, FEATURES - 7, FEATURES - 6, FEATURES - 5],
+                        embedders=[embedder],
+                        emb=False,
+                        deembedder=deembedder,
+
+                        save=True,
+                        epoch=epoch,
+                        batch=n_batch
+                    )
+
+                    '''
                     show_lat_histograms(lat_mean=lat_mean, lat_logvar=lat_logvar)
-                    self.show_deemb_quality(
+                    self.print_deemb_quality(
                         torch.tensor(particle_idxs(), device=self.device),
                         embedder,
                         deembedder
                     )
+                    '''
                     valid_loss = self._valid_loss(autoenc, embedder, data_valid)
 
-                    show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
-                    self.show_img_comparison(emb_data[:30, :], gen_data[:30, :])
+                    #show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
+                    #self.show_heatmaps(emb_data[:30, :], gen_data[:30, :])
 
-                    self.show_real_gen_data_comparison(autoenc, real_data, [embedder], emb=False, deembedder=deembedder, save=True)
+                    #self.gen_show_comp_hists(autoenc, _all_data, [embedder], emb=False, deembedder=deembedder, save=True)
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '

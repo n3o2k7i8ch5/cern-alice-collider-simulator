@@ -4,6 +4,8 @@ from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 
+import config
+
 last_saved_cnt = 0
 
 
@@ -37,8 +39,7 @@ def show_quality(real, gen, save=False, loss=None, mse_loss=None, kld_loss=None,
     plt.pause(0.001)
 
 
-def show_lat_histograms(lat_mean, lat_logvar):
-    plt.figure('Latent space quality')
+def show_lat_histograms(lat_mean, lat_logvar, reprod: bool, save: bool = False, epoch: int = None, batch: int = None):
 
     lat_mean = lat_mean.detach().cpu().flatten()
     lat_logvar = lat_logvar.detach().cpu().flatten()
@@ -52,38 +53,11 @@ def show_lat_histograms(lat_mean, lat_logvar):
              color=['green', 'orange'],
              alpha=0.5
              )
+    plt.title('Reproduction histograms' if reprod else 'Generated data histograms')
     plt.legend()
     plt.show()
     plt.ion()
+    if save:
+        title = 'reprod' if reprod else 'gener'
+        plt.savefig(f'{config.plot_folder}/lat_hists_{epoch}_{batch}_{title}.png')
 
-
-def show_comp_hists(real_data: np.ndarray, fake_data: np.ndarray, title: str = '', xlabel='', ylabel='', range: Tuple = None, save_file_name: str = None):
-    plt.style.use('ggplot')
-    plt.title(title)
-
-    real_data = real_data.flatten()
-    fake_data = fake_data.flatten()
-
-    plt.hist([real_data, fake_data],
-             range=range,
-             stacked=False,
-             bins=100,
-             histtype='stepfilled',
-             label=['real data', 'synthetic data'],
-             color=['blue', 'red'],
-             alpha=0.5
-             )
-
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-
-    plt.legend()
-    plt.show()
-    plt.ion()
-
-    if save_file_name is not None:
-        folder = 'plots'
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
-
-        plt.savefig(f'{folder}/{save_file_name}.png')

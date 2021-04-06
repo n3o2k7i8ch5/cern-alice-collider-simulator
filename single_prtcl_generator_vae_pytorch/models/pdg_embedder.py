@@ -7,6 +7,7 @@ class PDGEmbedder(nn.Module):
     def __init__(self, num_embeddings: int, embedding_dim: int, device):
         super(PDGEmbedder, self).__init__()
 
+        self.device = device
         self.num_embeddings = num_embeddings
         self.net = nn.Sequential(
             nn.Linear(num_embeddings, 1024),
@@ -22,5 +23,5 @@ class PDGEmbedder(nn.Module):
         ).to(device=device)
 
     def forward(self, x: torch.Tensor):
-        onehot = one_hot(x, self.num_embeddings).float()
+        onehot = one_hot(x, self.num_embeddings).to(self.device).float()
         return self.net(onehot)

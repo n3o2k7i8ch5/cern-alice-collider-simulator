@@ -1,9 +1,11 @@
 import numpy as np
 import torch
+from torch.autograd import Variable
 from torch.nn import MSELoss
 
-from common.consts import PRTCL_LATENT_SPACE_SIZE, EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, PARTICLE_DIM
-from common.show_quality import show_quality
+from common.consts import EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, PARTICLE_DIM, \
+    FEATURES
+
 from i_trainer.i_trainer import ITrainer
 from i_trainer.load_data import load_data, particle_idxs
 from single_prtcl_generator_gan_pytorch.models.prtcl_gan_discriminator import PrtclGANDiscriminator
@@ -13,11 +15,11 @@ from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
 
 
 class Trainer(ITrainer):
-    BATCH_SIZE = 128*8
+    BATCH_SIZE = 128
+    PRTCL_LATENT_SPACE_SIZE = 20
 
     pdg_emb_cnt = PDG_EMB_CNT
     pdg_emb_dim = PDG_EMB_DIM
-    show_feat_rng = -7, -4
 
     def load_trans_data(self):
         return load_data()
@@ -43,7 +45,7 @@ class Trainer(ITrainer):
     def create_model(self) -> (PrtclGANGenerator, PrtclGANDiscriminator):
         generator = PrtclGANGenerator(
             emb_features=EMB_FEATURES,
-            latent_size=PRTCL_LATENT_SPACE_SIZE,
+            latent_size=self.PRTCL_LATENT_SPACE_SIZE,
             device=self.device
         )
 
@@ -59,12 +61,12 @@ class Trainer(ITrainer):
               ' BATCH_SIZE = ' + str(self.BATCH_SIZE) +
               ', PARTICLE_DIM: ' + str(PARTICLE_DIM) +
               ', EPOCHS: ' + str(epochs) +
-              ', PRTCL_LATENT_SPACE_SIZE: ' + str(PRTCL_LATENT_SPACE_SIZE)
+              ', PRTCL_LATENT_SPACE_SIZE: ' + str(self.PRTCL_LATENT_SPACE_SIZE)
               )
 
         generator, discriminator = self.create_model()
-        gen_optim = torch.optim.AdamW(generator.parameters(), lr=0.00001)
-        dis_optim = torch.optim.AdamW(discriminator.parameters(), lr=0.00001)
+        gen_optim = torch.optim.Adam(generator.parameters(), lr=4e-5, betas=(0, .9))
+        dis_optim = torch.optim.Adam(discriminator.parameters(), lr=4e-5, betas=(0, .9))
 
         embedder = PDGEmbedder(num_embeddings=self.pdg_emb_cnt, embedding_dim=self.pdg_emb_dim, device=self.device)
         deembedder: PDGDeembedder = PDGDeembedder(PDG_EMB_DIM, PDG_EMB_CNT, self.device)
@@ -91,8 +93,6 @@ class Trainer(ITrainer):
         for epoch in range(epochs):
 
             for n_batch, batch in enumerate(data_train):
-                generator.zero_grad()
-                discriminator.zero_grad()
 
                 real_data: torch.Tensor = batch.to(self.device)
                 emb_data = self.embed_data(real_data, [embedder]).detach()
@@ -103,10 +103,16 @@ class Trainer(ITrainer):
                 fake = torch.zeros(batch_size, device=self.device, requires_grad=False)
 
                 # ======== Train Generator ======== #
+                gen_optim.zero_grad()
 
                 # Sample noise as generator input
-                lat_fake = torch.randn(batch_size, PRTCL_LATENT_SPACE_SIZE, device=self.device)
-
+                lat_fake = torch.randn(batch_size, self.PRTCL_LATENT_SPACE_SIZE, device=self.device)
+                lat_fake = Variable(
+                    torch.tensor(
+                        np.random.normal(0, 1, (batch_size, self.PRTCL_LATENT_SPACE_SIZE)),
+                        device=self.device
+                    ).float()
+                )
                 # Generate a batch of images
                 gen_data = generator(lat_fake)
 
@@ -117,6 +123,8 @@ class Trainer(ITrainer):
                 gen_optim.step()
 
                 # ======== Train Discriminator ======== #
+                dis_optim.zero_grad()
+
                 real_loss = MSELoss()(discriminator(emb_data), valid)
                 fake_loss = MSELoss()(discriminator(gen_data.detach()), fake)
                 d_loss = (real_loss + fake_loss) / 2
@@ -127,12 +135,22 @@ class Trainer(ITrainer):
                 # self.train_deembeder(deembedder=deembedder, embedder=embedder, epochs=1, device=self.device)
 
                 if n_batch % 500 == 0:
-                    self.show_deemb_quality(torch.tensor(particle_idxs()), embedder, deembedder)
+                    self.print_deemb_quality(torch.tensor(particle_idxs(), device=self.device), embedder, deembedder)
 
-                    show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
-                    self.show_img_comparison(emb_data[:30, :], gen_data[:30, :], save=True)
+                    #show_quality(emb_data, gen_data, feature_range=self.show_feat_rng, save=True)
+                    self.show_heatmaps(emb_data[:30, :], gen_data[:30, :], reprod=False, save=True, epoch=epoch, batch=n_batch)
+                    self.gen_show_comp_hists(
+                        generator,
+                        _data,
+                        attr_idxs=[FEATURES-8, FEATURES-7, FEATURES-6, FEATURES-5],
+                        embedders=[embedder],
+                        emb=False,
+                        deembedder=deembedder,
 
-                    #self.show_real_gen_data_comparison(generator, real_data, [embedder], emb=False, deembedder=deembedder, save=True)
+                        save=True,
+                        epoch=epoch,
+                        batch=n_batch
+                    )
 
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
@@ -157,7 +175,7 @@ class Trainer(ITrainer):
 
     def gen_autoenc_data(self, sample_cnt, generator):
 
-        np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, PRTCL_LATENT_SPACE_SIZE))
+        np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, self.PRTCL_LATENT_SPACE_SIZE))
         rand_input = torch.from_numpy(np_input).float().to(device=self.device)
         generated_data = generator(rand_input).detach()
         return generated_data
