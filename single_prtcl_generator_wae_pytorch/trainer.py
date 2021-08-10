@@ -1,29 +1,34 @@
+import pickle
+
+import numpy as np
 import torch
 from torch.autograd import Variable
 from torch.nn import MSELoss
-import numpy as np
 
-from common.consts import PRTCL_LATENT_SPACE_SIZE, EMB_FEATURES, PDG_EMB_DIM, parent_path, PDG_EMB_CNT, \
-    PARTICLE_DIM
-from common.prtcl_vae import PrtclVAE
-from common.sample_norm import sample_norm
+from common.consts import EMB_FEATURES, parent_path, PARTICLE_DIM, FEATURES
 
-from common.show_quality import show_lat_histograms, show_quality
 from i_trainer.i_trainer import ITrainer
 from i_trainer.load_data import load_data, particle_idxs
-from single_prtcl_generator_vae_pytorch.models.pdg_deembedder import PDGDeembedder
-from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
 from single_prtcl_generator_wae_pytorch.models.prtcl_wae_decoder import PrtclWAEDecoder
 from single_prtcl_generator_wae_pytorch.models.prtcl_wae_discriminator import PrtclWAEDiscriminator
 from single_prtcl_generator_wae_pytorch.models.prtcl_wae_encoder import PrtclWAEEncoder
 
 
 class Trainer(ITrainer):
-    BATCH_SIZE = 128
+    BATCH_SIZE = 128*8
 
-    pdg_emb_cnt = PDG_EMB_CNT
-    pdg_emb_dim = PDG_EMB_DIM
-    show_feat_rng = -7, -4
+    PRTCL_LATENT_SPACE_SIZE = 12
+    LR = 1e-5
+
+    errs_kld = []
+    errs_wass = []
+
+    ENCODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_encoder.model'
+    DECODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_decoder.model'
+    DISCRIMINATOR_SAVE_PATH = parent_path() + 'data/single_prtc_wae_discriminator.model'
+    PDG_DEEMBED_SAVE_PATH = parent_path() + 'data/pdg_deembed.model'
+    PDG_EMBED_SAVE_PATH = parent_path() + 'data/pdg_embed.model'
+    ERRS_SAVE_PATH = parent_path() + 'data/errs_gan.model'
 
     def load_trans_data(self):
         return load_data()
@@ -41,30 +46,24 @@ class Trainer(ITrainer):
 
         return torch.cat([prtc_pdg, prtc_stat_code, cont_data], dim=1)
 
-    ENCODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_encoder.model'
-    DECODER_SAVE_PATH = parent_path() + 'data/single_prtc_wae_decoder.model'
-    DISCRIMINATOR_SAVE_PATH = parent_path() + 'data/single_prtc_wae_discriminator.model'
-    PDG_DEEMBED_SAVE_PATH = parent_path() + 'data/pdg_deembed.model'
-    PDG_EMBED_SAVE_PATH = parent_path() + 'data/pdg_embed.model'
-
     def loss(self, input_x, output_x) -> (Variable):
         return MSELoss()(input_x, output_x)
 
     def create_model(self) -> (PrtclWAEEncoder, PrtclWAEDecoder, PrtclWAEDiscriminator):
         encoder = PrtclWAEEncoder(
             emb_features=EMB_FEATURES,
-            latent_size=PRTCL_LATENT_SPACE_SIZE,
+            latent_size=self.PRTCL_LATENT_SPACE_SIZE,
             device=self.device
         )
 
         decoder = PrtclWAEDecoder(
             emb_features=EMB_FEATURES,
-            latent_size=PRTCL_LATENT_SPACE_SIZE,
+            latent_size=self.PRTCL_LATENT_SPACE_SIZE,
             device=self.device
         )
 
         discriminator = PrtclWAEDiscriminator(
-            latent_size=PRTCL_LATENT_SPACE_SIZE,
+            latent_size=self.PRTCL_LATENT_SPACE_SIZE,
             device=self.device
         )
 
@@ -75,16 +74,16 @@ class Trainer(ITrainer):
               ' BATCH_SIZE = ' + str(Trainer.BATCH_SIZE) +
               ', PARTICLE_DIM: ' + str(PARTICLE_DIM) +
               ', EPOCHS: ' + str(epochs) +
-              ', PRTCL_LATENT_SPACE_SIZE: ' + str(PRTCL_LATENT_SPACE_SIZE)
+              ', PRTCL_LATENT_SPACE_SIZE: ' + str(self.PRTCL_LATENT_SPACE_SIZE)
               )
 
         encoder, decoder, discriminator = self.create_model()
-        enc_optim = torch.optim.Adam(encoder.parameters(), lr=0.00001)
-        dec_optim = torch.optim.Adam(decoder.parameters(), lr=0.00001)
-        dis_optim = torch.optim.Adam(discriminator.parameters(), lr=0.00001)
+        enc_optim = torch.optim.Adam(encoder.parameters(), lr=self.LR)
+        dec_optim = torch.optim.Adam(decoder.parameters(), lr=self.LR)
+        dis_optim = torch.optim.Adam(discriminator.parameters(), lr=self.LR)
 
-        embedder = PDGEmbedder(num_embeddings=self.pdg_emb_cnt, embedding_dim=self.pdg_emb_dim, device=self.device)
-        deembedder: PDGDeembedder = PDGDeembedder(PDG_EMB_DIM, PDG_EMB_CNT, self.device)
+        embedder = self.create_embedder()
+        deembedder = self.create_deembedder()
 
         if load:
             print('LOADING MODEL STATES...')
@@ -106,6 +105,9 @@ class Trainer(ITrainer):
         _data = load_data()
         data_train, data_valid = self.prep_data(_data, batch_size=Trainer.BATCH_SIZE, valid=0.1)
 
+        particles = torch.tensor(particle_idxs(), device=self.device)
+        particles.requires_grad = False
+
         for epoch in range(epochs):
 
             for n_batch, batch in enumerate(data_train):
@@ -126,7 +128,7 @@ class Trainer(ITrainer):
                 encoder.freeze(True)
                 discriminator.freeze(False)
 
-                lat_fake = torch.randn(batch_size, PRTCL_LATENT_SPACE_SIZE, device=self.device)
+                lat_fake = torch.randn(batch_size, self.PRTCL_LATENT_SPACE_SIZE, device=self.device)
                 disc_fake = discriminator(lat_fake)
 
                 lat_real = encoder(emb_data)
@@ -158,33 +160,42 @@ class Trainer(ITrainer):
                 enc_optim.step()
                 dec_optim.step()
 
-                # self.train_deembeder(deembedder=deembedder, embedder=embedder, epochs=1, device=self.device)
+                self.train_deembeders([
+                    (particles, embedder, deembedder),
+                ], epochs=2)
 
-                if n_batch % 500 == 0:
-                    self.print_deemb_quality(torch.tensor(particle_idxs(), device=self.device), embedder, deembedder)
-                    valid_loss = self._valid_loss(encoder, decoder, embedder, data_valid)
+                if n_batch % 100 == 0:
+                    self.print_deemb_quality(particles, embedder, deembedder)
 
-                    show_quality(real_data, recon_data, feature_range=self.show_feat_rng, save=True)
-                    self.show_heatmaps(emb_data[:30, :], recon_data[:30, :])
-
-                    '''
-                    self.show_real_gen_data_comparison(
-                        decoder, 
-                        real_data, 
-                        [embedder], 
-                        emb=False, 
+                    self.show_heatmaps(emb_data[:30, :], recon_data[:30, :], reprod=False, save=True, epoch=epoch, batch=n_batch)
+                    err_kld, err_wass = self.gen_show_comp_hists(
+                        decoder,
+                        _data,
+                        attr_idxs=[FEATURES - 8, FEATURES - 7, FEATURES - 6, FEATURES - 5],
+                        embedders=[embedder],
+                        emb=False,
                         deembedder=deembedder,
-                        save=True)
-                    '''
+
+                        save=True,
+                        epoch=epoch,
+                        batch=n_batch
+                    )
+
+                    valid_loss = self._valid_loss(encoder, decoder, embedder, data_valid)
 
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '
                         f'Batch: {str(n_batch)}/{str(len(data_train))} :: '
                         f'train loss: {"{:.6f}".format(round(recon_loss.item(), 6))} :: '
-                        f'valid loss: {"{:.6f}".format(round(valid_loss, 6))}'
+                        f'valid loss: {"{:.6f}".format(round(valid_loss, 6))} :: '
+                        f'err kld: {"{:.6f}".format(round(err_kld, 6))} :: '
+                        f'err wass: {"{:.6f}".format(round(err_wass, 6))}'
                     )
 
             self._save_models(encoder, decoder, discriminator, embedder, deembedder)
+
+            with open(self.ERRS_SAVE_PATH, 'wb') as handle:
+                pickle.dump((self.errs_kld, self.errs_wass), handle, protocol=pickle.HIGHEST_PROTOCOL)
 
         return encoder, decoder, discriminator, embedder, deembedder
 
@@ -217,7 +228,7 @@ class Trainer(ITrainer):
 
     def gen_autoenc_data(self, sample_cnt, decoder):
 
-        np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, PRTCL_LATENT_SPACE_SIZE))
+        np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, self.PRTCL_LATENT_SPACE_SIZE))
         rand_input = torch.from_numpy(np_input).float().to(device=self.device)
         generated_data = decoder(rand_input).detach()
         return generated_data

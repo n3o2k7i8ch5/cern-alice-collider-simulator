@@ -12,22 +12,32 @@ import numpy as np
 from torch.utils.data import DataLoader
 
 import torch.nn.functional as func
+from scipy import stats
 
-from common.show_quality import show_quality
-from single_prtcl_generator_vae_pytorch.models.pdg_deembedder import PDGDeembedder
-from single_prtcl_generator_vae_pytorch.models.pdg_embedder import PDGEmbedder
+from common.consts import FEATURES, PDG_EMB_CNT, PDG_EMB_DIM
 
 import config
+from common.models.pdg_deembedder import PDGDeembedder
+from common.models.pdg_embedder import PDGEmbedder
+
+
+class RealGenDataSizeException(Exception):
+    def __init__(self, real_data_size: int, gen_data_size: int):
+        super(RealGenDataSizeException, self).__init__(
+            f'Real data size: {real_data_size}, gen data size: {gen_data_size}.')
 
 
 class ITrainer(ABC):
 
-    '''
-    @property
     @abstractmethod
-    def show_feat_rng(self) -> (int, int):
-        pass
-    '''
+    @property
+    def pdg_emb_cnt(self) -> int:
+        return PDG_EMB_CNT
+
+    @abstractmethod
+    @property
+    def pdg_emb_dim(self) -> int:
+        return PDG_EMB_DIM
 
     @property
     def model_save_path(self) -> str:
@@ -66,7 +76,14 @@ class ITrainer(ABC):
     def embed_data(self, data, embedders: List[PDGEmbedder]):
         return data
 
-    def train_deembeders(self, tuples: List[Tuple[torch.Tensor, PDGEmbedder, PDGDeembedder]], epochs: int) -> List[float]:
+    def create_embedder(self):
+        return PDGEmbedder(pdg_count=self.pdg_emb_cnt, pdg_embed_dim=self.pdg_emb_dim, device=self.device)
+
+    def create_deembedder(self) -> PDGDeembedder:
+        return PDGDeembedder(self.pdg_emb_dim, self.pdg_emb_cnt, self.device)
+
+    def train_deembeders(self, tuples: List[Tuple[torch.Tensor, PDGEmbedder, PDGDeembedder]], epochs: int) -> List[
+        float]:
 
         acc_list = []
 
@@ -124,7 +141,7 @@ class ITrainer(ABC):
     def show_heatmaps(
             real_data,
             gen_data,
-            reprod: bool, 
+            reprod: bool,
             log: bool = False,
 
             save: bool = False,
@@ -138,7 +155,7 @@ class ITrainer(ABC):
             real_data = real_data.log()
             gen_data = gen_data.log()
 
-        data = torch.cat([real_data, -2*torch.ones((5, gen_data.size()[1])), gen_data], dim=0)
+        data = torch.cat([real_data, -2 * torch.ones((5, gen_data.size()[1])), gen_data], dim=0)
 
         plt.title(f'{"reprod" if reprod else "gener"}\nup - real data :: down - fake data')
         plt.imshow(data, cmap='hot', interpolation='nearest', vmin=-1, vmax=5)
@@ -160,15 +177,16 @@ class ITrainer(ABC):
             attr_idxs: list,
             embedders: List,
             emb: True,
-            sample_cnt = 10_000,
-            range: Tuple = (-2, 2),
+            sample_cnt=10_000,
+            bin_cnt: int = 100,
+            hist_range: Tuple = (-2, 2),
             deembedder: PDGDeembedder = None,
             load_model: bool = False,
 
             save: bool = False,
             epoch: int = None,
             batch: int = None,
-    ):
+    ) -> [float, float]:
 
         if load_model:
             model.load_state_dict(torch.load(self.model_save_path))
@@ -183,22 +201,50 @@ class ITrainer(ABC):
         else:
             gen_data = deembedder.deemb(gen_data)
 
-        fig, subplots = plt.subplots(nrows=ceil(len(attr_idxs)/2), ncols=2)
+        fig, subplots = plt.subplots(nrows=ceil(len(attr_idxs) / 2), ncols=2)
+
+        err_kld = 0
+        err_wass = 0
 
         for i, attr_idx in enumerate(attr_idxs):
             _real_data = real_data[:, attr_idx].flatten().cpu()
             _gen_data = gen_data[:, attr_idx].flatten().cpu()
 
-            subplots[floor(i/2)][i%2].set_title(f'attr: {attr_idx}')
-            subplots[floor(i/2)][i%2].hist([_real_data, _gen_data],
-                     range=range,
-                     stacked=False,
-                     bins=100,
-                     histtype='stepfilled',
-                     label=['real data', 'synthetic data'],
-                     color=['blue', 'red'],
-                     alpha=0.5
-                    )
+            subplots[floor(i / 2)][i % 2].set_title(f'attr: {attr_idx}')
+            subplots[floor(i / 2)][i % 2].hist([_real_data, _gen_data],
+                                               range=hist_range,
+                                               stacked=False,
+                                               bins=bin_cnt,
+                                               histtype='stepfilled',
+                                               label=['real data', 'synthetic data'],
+                                               color=['blue', 'red'],
+                                               alpha=0.5
+                                               )
+
+            # KL_DIV
+            min_val = min(min(_real_data), min(_gen_data))
+            max_val = max(max(_real_data), max(_gen_data))
+
+            steps = np.linspace(start=min_val, stop=max_val, num=bin_cnt)
+
+            real_data_hist, _ = np.histogram(
+                _real_data,
+                bins=steps)
+
+            gen_data_hist, _ = np.histogram(
+                _gen_data,
+                bins=steps)
+
+            real_log = np.log(real_data_hist + 1)
+
+            gen_log = np.log(gen_data_hist + 1)
+
+            diff_log = abs(real_log - gen_log)
+
+            err_kld += sum(real_data_hist * diff_log + gen_data_hist * diff_log)
+
+            dists = [i for i in range(len(real_data_hist))]
+            err_wass += stats.wasserstein_distance(dists, dists, real_data_hist, gen_data_hist)
 
         if save:
             if not os.path.isdir(config.plot_folder):
@@ -209,6 +255,8 @@ class ITrainer(ABC):
 
         fig.show()
 
+        return err_kld / len(attr_idxs), err_wass
+
     @staticmethod
     def show_comp_hists(
             real_data: np.ndarray,
@@ -217,6 +265,7 @@ class ITrainer(ABC):
             reprod: bool,
             xlabel='',
             ylabel='',
+            bin_cnt: int = 100,
             range: Tuple = None,
             save: bool = None,
             epoch: int = None,
@@ -232,7 +281,7 @@ class ITrainer(ABC):
         plt.hist([real_data, fake_data],
                  range=range,
                  stacked=False,
-                 bins=100,
+                 bins=bin_cnt,
                  histtype='stepfilled',
                  label=['real data', 'synthetic data'],
                  color=['blue', 'red'],
@@ -252,3 +301,50 @@ class ITrainer(ABC):
             plt.savefig(f'{config.plot_folder}/hists_{attr_idx}_{epoch}_{batch}_{title}.png')
 
         plt.show()
+
+    @staticmethod
+    def evaluate_gen_model(real_data_batch: torch.Tensor, gen_data_batch: torch.Tensor, bin_cnt: int = 100) -> float:
+
+        err = 0
+
+        attr_cnt = real_data_batch.size()[1]
+        for i in range(attr_cnt):
+
+            if FEATURES - 6 != i:
+                continue
+
+            real_data = real_data_batch[:, i].flatten()
+            gen_data = gen_data_batch[:, i].flatten()
+
+            if len(real_data) != len(gen_data):
+                raise RealGenDataSizeException(len(real_data), len(gen_data))
+
+            real_data = (real_data/len(real_data)).detach().numpy()
+            gen_data = (gen_data/len(gen_data)).detach().numpy()
+
+            min_val = min(min(real_data), min(gen_data))
+            max_val = max(max(real_data), max(gen_data))
+
+            steps = np.linspace(start=min_val, stop=max_val, num=bin_cnt)
+
+            real_data_hist, _ = np.histogram(
+                real_data,
+                bins=steps)
+
+            gen_data_hist, _ = np.histogram(
+                gen_data,
+                bins=steps)
+
+            real_log = np.log(real_data_hist + 1)
+            print(f'real_log\n{real_data_hist}\n\n')
+
+            gen_log = np.log(gen_data_hist + 1)
+            #print(f'gen_log\n{gen_log}\n\n')
+
+            diff_log = abs(real_log - gen_log)
+            #print(f'diff_log\n{diff_log}\n\n')
+
+
+            err += sum(real_data_hist*diff_log + gen_data_hist*diff_log)
+
+        return err/attr_cnt

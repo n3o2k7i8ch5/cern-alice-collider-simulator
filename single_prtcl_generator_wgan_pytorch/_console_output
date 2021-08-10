@@ -1,0 +1,269 @@
+GPU not available, CPU used
+TRAINING MODEL: BATCH_SIZE = 1024, PARTICLE_DIM: 48, EPOCHS: 7, PRTCL_LATENT_SPACE_SIZE: 22
+GENERATOR
+PrtclWGANGenerator(
+  (_PrtclWGANGenerator__net): Sequential(
+    (0): Linear(in_features=22, out_features=128, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=128, out_features=256, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=512, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=512, out_features=1024, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=1024, out_features=118, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=118, out_features=59, bias=True)
+  )
+)
+DISCRIMINATOR
+PrtclWGANDiscriminator(
+  (_PrtclWGANDiscriminator__net): Sequential(
+    (0): Linear(in_features=59, out_features=1024, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=1024, out_features=512, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=256, out_features=128, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=128, out_features=16, bias=True)
+    (13): Tanh()
+    (14): Linear(in_features=16, out_features=1, bias=True)
+  )
+)
+EMBEDDER
+PDGEmbedder(
+  (net): Sequential(
+    (0): Linear(in_features=870, out_features=1024, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=256, bias=True)
+    (7): Tanh()
+    (8): Linear(in_features=256, out_features=48, bias=True)
+    (9): Tanh()
+  )
+)
+DEEMBEDDER
+PDGDeembedder(
+  (net): Sequential(
+    (0): Linear(in_features=48, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=1024, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=1024, out_features=2048, bias=True)
+    (7): Tanh()
+    (8): Linear(in_features=2048, out_features=870, bias=True)
+    (9): Tanh()
+  )
+)
+Deembeder acc: 2/870
+Epoch: 0/7 :: Batch: 0/1112 :: generator loss: -0.017098 :: critic loss: 0.878239 :: err kld: 79112.477052 :: err wass: 60.768600
+Deembeder acc: 129/870
+Epoch: 0/7 :: Batch: 100/1112 :: generator loss: 0.124905 :: critic loss: -0.092887 :: err kld: 48642.893635 :: err wass: 40.670800
+Deembeder acc: 671/870
+Epoch: 0/7 :: Batch: 200/1112 :: generator loss: 0.560771 :: critic loss: -0.074604 :: err kld: 47144.678646 :: err wass: 41.998500
+Deembeder acc: 817/870
+Epoch: 0/7 :: Batch: 300/1112 :: generator loss: 0.478724 :: critic loss: -0.068480 :: err kld: 42764.097305 :: err wass: 37.605200
+Deembeder acc: 829/870
+Epoch: 0/7 :: Batch: 400/1112 :: generator loss: -0.357775 :: critic loss: -0.052361 :: err kld: 43594.109674 :: err wass: 39.160400
+Deembeder acc: 809/870
+Epoch: 0/7 :: Batch: 500/1112 :: generator loss: 0.613678 :: critic loss: -0.115630 :: err kld: 33778.606975 :: err wass: 31.583800
+Deembeder acc: 804/870
+Epoch: 0/7 :: Batch: 600/1112 :: generator loss: -0.631729 :: critic loss: -0.141207 :: err kld: 30234.976706 :: err wass: 29.225700
+Deembeder acc: 834/870
+Epoch: 0/7 :: Batch: 700/1112 :: generator loss: -0.597306 :: critic loss: -0.186238 :: err kld: 27429.588748 :: err wass: 24.572200
+Deembeder acc: 852/870
+Epoch: 0/7 :: Batch: 800/1112 :: generator loss: -0.250339 :: critic loss: -0.213915 :: err kld: 27554.499295 :: err wass: 23.499600
+Deembeder acc: 845/870
+Epoch: 0/7 :: Batch: 900/1112 :: generator loss: -0.296568 :: critic loss: -0.199438 :: err kld: 25176.408610 :: err wass: 17.937000
+Deembeder acc: 847/870
+Epoch: 0/7 :: Batch: 1000/1112 :: generator loss: -0.306047 :: critic loss: -0.177287 :: err kld: 25839.549207 :: err wass: 14.355300
+Deembeder acc: 858/870
+Epoch: 0/7 :: Batch: 1100/1112 :: generator loss: -0.310278 :: critic loss: -0.254253 :: err kld: 24576.745021 :: err wass: 15.484100
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 859/870
+Epoch: 1/7 :: Batch: 0/1112 :: generator loss: -0.218350 :: critic loss: -0.252417 :: err kld: 23847.343556 :: err wass: 17.238700
+Deembeder acc: 865/870
+Epoch: 1/7 :: Batch: 100/1112 :: generator loss: -0.033594 :: critic loss: -0.251322 :: err kld: 23702.177039 :: err wass: 15.370600
+Deembeder acc: 862/870
+Epoch: 1/7 :: Batch: 200/1112 :: generator loss: -0.012516 :: critic loss: -0.251245 :: err kld: 23453.574085 :: err wass: 12.015800
+Deembeder acc: 866/870
+Epoch: 1/7 :: Batch: 300/1112 :: generator loss: -0.005714 :: critic loss: -0.227532 :: err kld: 22722.904924 :: err wass: 11.084100
+Deembeder acc: 867/870
+Epoch: 1/7 :: Batch: 400/1112 :: generator loss: 0.093316 :: critic loss: -0.236405 :: err kld: 23470.115393 :: err wass: 12.954100
+Deembeder acc: 869/870
+Epoch: 1/7 :: Batch: 500/1112 :: generator loss: 0.143622 :: critic loss: -0.268390 :: err kld: 23564.170824 :: err wass: 12.774900
+Deembeder acc: 866/870
+Epoch: 1/7 :: Batch: 600/1112 :: generator loss: 0.064690 :: critic loss: -0.214533 :: err kld: 22417.150876 :: err wass: 12.522400
+Deembeder acc: 868/870
+Epoch: 1/7 :: Batch: 700/1112 :: generator loss: 0.022641 :: critic loss: -0.257802 :: err kld: 22540.935625 :: err wass: 9.504100
+Deembeder acc: 869/870
+Epoch: 1/7 :: Batch: 800/1112 :: generator loss: 0.055586 :: critic loss: -0.186586 :: err kld: 22402.626863 :: err wass: 12.159700
+Deembeder acc: 868/870
+Epoch: 1/7 :: Batch: 900/1112 :: generator loss: 0.050855 :: critic loss: -0.168240 :: err kld: 22177.073194 :: err wass: 10.132100
+Deembeder acc: 869/870
+Epoch: 1/7 :: Batch: 1000/1112 :: generator loss: 0.060568 :: critic loss: -0.169066 :: err kld: 21899.278372 :: err wass: 7.848400
+Deembeder acc: 869/870
+Epoch: 1/7 :: Batch: 1100/1112 :: generator loss: -0.061209 :: critic loss: -0.168493 :: err kld: 22035.132461 :: err wass: 8.823000
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 0/1112 :: generator loss: -0.021745 :: critic loss: -0.190227 :: err kld: 22397.123746 :: err wass: 10.689200
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 100/1112 :: generator loss: -0.034203 :: critic loss: -0.183244 :: err kld: 22401.631558 :: err wass: 9.492800
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 200/1112 :: generator loss: -0.014110 :: critic loss: -0.216342 :: err kld: 22402.374662 :: err wass: 9.689500
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 300/1112 :: generator loss: -0.136248 :: critic loss: -0.171074 :: err kld: 21548.005517 :: err wass: 9.285600
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 400/1112 :: generator loss: 0.086907 :: critic loss: -0.189030 :: err kld: 21731.980659 :: err wass: 10.206000
+Deembeder acc: 870/870
+Epoch: 2/7 :: Batch: 500/1112 :: generator loss: -0.165060 :: critic loss: -0.104699 :: err kld: 22677.811684 :: err wass: 10.179900
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 600/1112 :: generator loss: -0.132748 :: critic loss: -0.195064 :: err kld: 23248.665695 :: err wass: 12.191800
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 700/1112 :: generator loss: -0.159222 :: critic loss: -0.096512 :: err kld: 21245.974269 :: err wass: 8.175600
+Deembeder acc: 870/870
+Epoch: 2/7 :: Batch: 800/1112 :: generator loss: 0.028615 :: critic loss: -0.116249 :: err kld: 20935.780035 :: err wass: 8.904200
+Deembeder acc: 869/870
+Epoch: 2/7 :: Batch: 900/1112 :: generator loss: -0.141397 :: critic loss: -0.105841 :: err kld: 20955.378504 :: err wass: 9.313900
+Deembeder acc: 870/870
+Epoch: 2/7 :: Batch: 1000/1112 :: generator loss: -0.054248 :: critic loss: -0.083248 :: err kld: 21939.743701 :: err wass: 9.439100
+Deembeder acc: 870/870
+Epoch: 2/7 :: Batch: 1100/1112 :: generator loss: -0.053053 :: critic loss: -0.129483 :: err kld: 21549.748035 :: err wass: 10.008400
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 0/1112 :: generator loss: -0.060203 :: critic loss: -0.087826 :: err kld: 21994.767449 :: err wass: 8.651300
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 100/1112 :: generator loss: -0.184300 :: critic loss: -0.174505 :: err kld: 23475.886713 :: err wass: 11.513300
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 200/1112 :: generator loss: -0.054944 :: critic loss: -0.170007 :: err kld: 21662.694774 :: err wass: 8.715700
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 300/1112 :: generator loss: 0.098418 :: critic loss: -0.154371 :: err kld: 20847.402220 :: err wass: 7.609300
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 400/1112 :: generator loss: -0.067442 :: critic loss: -0.154196 :: err kld: 22244.904189 :: err wass: 11.569800
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 500/1112 :: generator loss: 0.032284 :: critic loss: -0.147503 :: err kld: 22379.108332 :: err wass: 9.245100
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 600/1112 :: generator loss: -0.037368 :: critic loss: -0.093716 :: err kld: 22635.907960 :: err wass: 9.877100
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 700/1112 :: generator loss: 0.059122 :: critic loss: -0.086103 :: err kld: 22363.599697 :: err wass: 12.240400
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 800/1112 :: generator loss: 0.049049 :: critic loss: -0.216474 :: err kld: 21116.677333 :: err wass: 9.062500
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 900/1112 :: generator loss: -0.122533 :: critic loss: -0.005107 :: err kld: 21698.273359 :: err wass: 8.619600
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 1000/1112 :: generator loss: -0.045470 :: critic loss: -0.098295 :: err kld: 19780.944399 :: err wass: 5.720100
+Deembeder acc: 870/870
+Epoch: 3/7 :: Batch: 1100/1112 :: generator loss: -0.131297 :: critic loss: -0.039132 :: err kld: 20645.312688 :: err wass: 7.293500
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 0/1112 :: generator loss: -0.232740 :: critic loss: -0.062723 :: err kld: 21516.776998 :: err wass: 9.315700
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 100/1112 :: generator loss: -0.034963 :: critic loss: -0.098013 :: err kld: 24218.128356 :: err wass: 11.626700
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 200/1112 :: generator loss: 0.119359 :: critic loss: -0.208864 :: err kld: 21639.894663 :: err wass: 9.015700
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 300/1112 :: generator loss: -0.177530 :: critic loss: -0.112252 :: err kld: 21697.421973 :: err wass: 9.747000
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 400/1112 :: generator loss: 0.024459 :: critic loss: -0.125582 :: err kld: 23785.291440 :: err wass: 10.535400
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 500/1112 :: generator loss: 0.034482 :: critic loss: -0.161617 :: err kld: 22360.782283 :: err wass: 12.205400
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 600/1112 :: generator loss: -0.067858 :: critic loss: -0.115190 :: err kld: 23101.309393 :: err wass: 9.072300
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 700/1112 :: generator loss: -0.121111 :: critic loss: -0.163119 :: err kld: 22582.497836 :: err wass: 12.405000
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 800/1112 :: generator loss: -0.032344 :: critic loss: -0.115898 :: err kld: 20592.348853 :: err wass: 9.680900
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 900/1112 :: generator loss: -0.039434 :: critic loss: -0.119852 :: err kld: 21600.947081 :: err wass: 9.429300
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 1000/1112 :: generator loss: -0.043228 :: critic loss: -0.084388 :: err kld: 23452.443186 :: err wass: 13.919200
+Deembeder acc: 870/870
+Epoch: 4/7 :: Batch: 1100/1112 :: generator loss: -0.064730 :: critic loss: -0.184186 :: err kld: 21008.184281 :: err wass: 8.181200
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 0/1112 :: generator loss: -0.078049 :: critic loss: -0.166497 :: err kld: 20902.831877 :: err wass: 8.345000
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 100/1112 :: generator loss: -0.025781 :: critic loss: -0.138428 :: err kld: 20074.961741 :: err wass: 7.840800
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 200/1112 :: generator loss: 0.070865 :: critic loss: -0.171803 :: err kld: 20944.168889 :: err wass: 8.717100
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 300/1112 :: generator loss: 0.118208 :: critic loss: -0.100160 :: err kld: 20929.760579 :: err wass: 9.338900
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 400/1112 :: generator loss: -0.058901 :: critic loss: -0.082827 :: err kld: 22846.410624 :: err wass: 11.676600
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 500/1112 :: generator loss: 0.041967 :: critic loss: -0.107334 :: err kld: 21907.487946 :: err wass: 8.291600
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 600/1112 :: generator loss: -0.009108 :: critic loss: -0.083619 :: err kld: 23748.945055 :: err wass: 14.710500
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 700/1112 :: generator loss: 0.064015 :: critic loss: -0.144873 :: err kld: 21693.661586 :: err wass: 13.252500
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 800/1112 :: generator loss: 0.036105 :: critic loss: -0.084390 :: err kld: 21911.474224 :: err wass: 11.008200
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 900/1112 :: generator loss: -0.013347 :: critic loss: -0.075786 :: err kld: 22447.417020 :: err wass: 13.606900
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 1000/1112 :: generator loss: -0.114469 :: critic loss: -0.167509 :: err kld: 23018.935167 :: err wass: 15.837400
+Deembeder acc: 870/870
+Epoch: 5/7 :: Batch: 1100/1112 :: generator loss: 0.023060 :: critic loss: -0.098366 :: err kld: 19669.434692 :: err wass: 6.952300
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 0/1112 :: generator loss: 0.109471 :: critic loss: -0.152642 :: err kld: 20368.307253 :: err wass: 9.763000
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 100/1112 :: generator loss: -0.250332 :: critic loss: -0.045319 :: err kld: 21337.111284 :: err wass: 11.640600
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 200/1112 :: generator loss: -0.070715 :: critic loss: -0.086645 :: err kld: 20529.004914 :: err wass: 9.844900
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 300/1112 :: generator loss: 0.078098 :: critic loss: -0.127257 :: err kld: 23569.215882 :: err wass: 14.293900
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 400/1112 :: generator loss: 0.149630 :: critic loss: -0.091257 :: err kld: 20262.634769 :: err wass: 9.106800
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 500/1112 :: generator loss: 0.043464 :: critic loss: -0.106669 :: err kld: 22325.917226 :: err wass: 10.648200
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 600/1112 :: generator loss: -0.123618 :: critic loss: -0.212168 :: err kld: 21929.201266 :: err wass: 9.807400
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 700/1112 :: generator loss: 0.106610 :: critic loss: -0.142176 :: err kld: 21553.003250 :: err wass: 13.811000
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 800/1112 :: generator loss: -0.064754 :: critic loss: -0.050923 :: err kld: 20576.536248 :: err wass: 7.473400
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 900/1112 :: generator loss: 0.009345 :: critic loss: -0.092957 :: err kld: 20101.961935 :: err wass: 7.399100
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 1000/1112 :: generator loss: 0.058055 :: critic loss: -0.110685 :: err kld: 21398.002826 :: err wass: 8.664100
+Deembeder acc: 870/870
+Epoch: 6/7 :: Batch: 1100/1112 :: generator loss: -0.078648 :: critic loss: -0.083511 :: err kld: 21901.587933 :: err wass: 9.943000
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model

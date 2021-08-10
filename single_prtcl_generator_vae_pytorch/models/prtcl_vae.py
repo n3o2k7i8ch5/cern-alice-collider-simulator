@@ -28,45 +28,80 @@ class PrtclVAE(nn.Module):
         self.latent_size = latent_size
 
         self.mean = nn.Sequential(
-            nn.Linear(emb_features, 2048),
+
+            nn.Linear(emb_features, 512),
+            nn.Dropout(.1),
             nn.Tanh(),
-            nn.Linear(2048, 1024),
+
+            nn.Linear(512, 1024),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(1024, 512),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(512, 256),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(256, 128),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(128, latent_size),
+
         ).to(device=device)
 
         self.logvar = nn.Sequential(
-            nn.Linear(emb_features, 2048),
+
+            nn.Linear(emb_features, 512),
+            nn.Dropout(.1),
             nn.Tanh(),
-            nn.Linear(2048, 1024),
+
+            nn.Linear(512, 1024),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(1024, 512),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(512, 256),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(256, 128),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(128, latent_size),
+
         ).to(device=device)
 
         self.deembeder = nn.Sequential(
+
             nn.Linear(latent_size, 128),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(128, 256),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(256, 512),
+            nn.Dropout(.1),
             nn.Tanh(),
+
             nn.Linear(512, 1024),
+            nn.Dropout(.1),
             nn.Tanh(),
-            nn.Linear(1024, 2048),
+
+            nn.Linear(1024, 512),
             nn.Tanh(),
-            nn.Linear(2048, emb_features),
+
+            nn.Linear(512, emb_features),
+
         ).to(device=device)
 
     def encode(self, x: torch.Tensor):

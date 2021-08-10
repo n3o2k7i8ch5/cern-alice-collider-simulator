@@ -7,7 +7,6 @@ from torch.utils.data import DataLoader, TensorDataset
 import numpy as np
 import torch.nn.functional as func
 
-import matplotlib.pyplot as plt
 from torchsummary import summary
 
 from common.consts import *

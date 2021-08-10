@@ -9,15 +9,16 @@ class PrtclGANDiscriminator(nn.Module):
         self.emb_features = emb_features
 
         self.__net = nn.Sequential(
-            nn.Linear(emb_features, 2*emb_features),
+
+            nn.Linear(emb_features, 512),
             nn.Dropout(.1),
             nn.Tanh(),
 
-            nn.Linear(2*emb_features, 512),
-            #nn.Dropout(.1),
-            #nn.Tanh(),
+            nn.Linear(512, 1024),
+            nn.Dropout(.1),
+            nn.Tanh(),
 
-            nn.Linear(512, 512),
+            nn.Linear(1024, 512),
             nn.Dropout(.1),
             nn.Tanh(),
 
@@ -30,6 +31,7 @@ class PrtclGANDiscriminator(nn.Module):
             nn.Tanh(),
 
             nn.Linear(128, 32),
+            nn.Dropout(.1),
             nn.Tanh(),
 
             nn.Linear(32, 1),

@@ -17,9 +17,7 @@ class PDGDeembedder(nn.Module):
             nn.Tanh(),
             nn.Linear(512, 1024),
             nn.Tanh(),
-            nn.Linear(1024, 2048),
-            nn.Tanh(),
-            nn.Linear(2048, pdg_count),
+            nn.Linear(1024, pdg_count),
             nn.Tanh()
         ).to(device)
 
