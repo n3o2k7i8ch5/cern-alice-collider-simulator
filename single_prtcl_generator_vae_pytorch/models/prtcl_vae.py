@@ -33,7 +33,11 @@ class PrtclVAE(nn.Module):
             nn.Dropout(.1),
             nn.Tanh(),
 
-            nn.Linear(512, 1024),
+            nn.Linear(512, 2048),
+            nn.Dropout(.1),
+            nn.Tanh(),
+
+            nn.Linear(2048, 1024),
             nn.Dropout(.1),
             nn.Tanh(),
 
@@ -59,7 +63,11 @@ class PrtclVAE(nn.Module):
             nn.Dropout(.1),
             nn.Tanh(),
 
-            nn.Linear(512, 1024),
+            nn.Linear(512, 2048),
+            nn.Dropout(.1),
+            nn.Tanh(),
+
+            nn.Linear(2048, 1024),
             nn.Dropout(.1),
             nn.Tanh(),
 
@@ -97,7 +105,11 @@ class PrtclVAE(nn.Module):
             nn.Dropout(.1),
             nn.Tanh(),
 
-            nn.Linear(1024, 512),
+            nn.Linear(1024, 2048),
+            nn.Dropout(.1),
+            nn.Tanh(),
+
+            nn.Linear(2048, 512),
             nn.Tanh(),
 
             nn.Linear(512, emb_features),

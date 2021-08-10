@@ -26,7 +26,11 @@ class PrtclGANGenerator(nn.Module):
             nn.Dropout(.1),
             nn.Tanh(),
 
-            nn.Linear(1024, 512),
+            nn.Linear(1024, 2048),
+            nn.Dropout(.1),
+            nn.Tanh(),
+
+            nn.Linear(2048, 512),
             nn.Dropout(.1),
             nn.Tanh(),
 

@@ -1,0 +1,500 @@
+GPU is available
+TRAINING MODEL: BATCH_SIZE = 1024, PARTICLE_DIM: 48, EPOCHS: 15, PRTCL_LATENT_SPACE_SIZE: 12
+GENERATOR
+PrtclGANGenerator(
+  (_PrtclGANGenerator__net): Sequential(
+    (0): Linear(in_features=12, out_features=128, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=128, out_features=256, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=512, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=512, out_features=1024, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=1024, out_features=2048, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=2048, out_features=512, bias=True)
+    (16): Dropout(p=0.1, inplace=False)
+    (17): Tanh()
+    (18): Linear(in_features=512, out_features=59, bias=True)
+  )
+)
+DISCRIMINATOR
+PrtclGANDiscriminator(
+  (_PrtclGANDiscriminator__net): Sequential(
+    (0): Linear(in_features=59, out_features=512, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=512, out_features=2048, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=2048, out_features=1024, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=1024, out_features=512, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=512, out_features=256, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=256, out_features=128, bias=True)
+    (16): Dropout(p=0.1, inplace=False)
+    (17): Tanh()
+    (18): Linear(in_features=128, out_features=32, bias=True)
+    (19): Dropout(p=0.1, inplace=False)
+    (20): Tanh()
+    (21): Linear(in_features=32, out_features=1, bias=True)
+    (22): Sigmoid()
+  )
+)
+EMBEDDER
+PDGEmbedder(
+  (net): Sequential(
+    (0): Linear(in_features=870, out_features=1024, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=48, bias=True)
+    (7): Tanh()
+  )
+)
+DEEMBEDDER
+PDGDeembedder(
+  (net): Sequential(
+    (0): Linear(in_features=48, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=1024, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=1024, out_features=870, bias=True)
+    (7): Tanh()
+  )
+)
+Deembeder acc: 1/870
+Epoch: 0/15 :: Batch: 0/1112 :: generator loss: 0.286080 :: discriminator loss: 0.252084 :: err kld: 73080.490670 :: err wass: 56.688900
+Deembeder acc: 45/870
+Epoch: 0/15 :: Batch: 100/1112 :: generator loss: 0.248353 :: discriminator loss: 0.243174 :: err kld: 56404.405018 :: err wass: 42.351200
+Deembeder acc: 555/870
+Epoch: 0/15 :: Batch: 200/1112 :: generator loss: 0.258936 :: discriminator loss: 0.244901 :: err kld: 57942.842237 :: err wass: 42.332600
+Deembeder acc: 820/870
+Epoch: 0/15 :: Batch: 300/1112 :: generator loss: 0.251598 :: discriminator loss: 0.248693 :: err kld: 61351.318420 :: err wass: 47.559100
+Deembeder acc: 862/870
+Epoch: 0/15 :: Batch: 400/1112 :: generator loss: 0.226799 :: discriminator loss: 0.260372 :: err kld: 64833.907956 :: err wass: 51.448900
+Deembeder acc: 866/870
+Epoch: 0/15 :: Batch: 500/1112 :: generator loss: 0.230929 :: discriminator loss: 0.257552 :: err kld: 72083.063855 :: err wass: 59.772500
+Deembeder acc: 868/870
+Epoch: 0/15 :: Batch: 600/1112 :: generator loss: 0.239988 :: discriminator loss: 0.247098 :: err kld: 58620.983793 :: err wass: 42.574700
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 700/1112 :: generator loss: 0.266833 :: discriminator loss: 0.241163 :: err kld: 66422.979391 :: err wass: 47.448300
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 800/1112 :: generator loss: 0.252758 :: discriminator loss: 0.242317 :: err kld: 58018.284036 :: err wass: 42.171700
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 900/1112 :: generator loss: 0.244762 :: discriminator loss: 0.250932 :: err kld: 58850.855450 :: err wass: 43.359800
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 1000/1112 :: generator loss: 0.250600 :: discriminator loss: 0.253441 :: err kld: 78925.524677 :: err wass: 67.412600
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 1100/1112 :: generator loss: 0.251609 :: discriminator loss: 0.253189 :: err kld: 73848.030803 :: err wass: 65.039100
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 0/1112 :: generator loss: 0.249519 :: discriminator loss: 0.249190 :: err kld: 58394.211882 :: err wass: 43.122200
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 100/1112 :: generator loss: 0.247550 :: discriminator loss: 0.251793 :: err kld: 74921.824307 :: err wass: 52.105000
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 200/1112 :: generator loss: 0.253577 :: discriminator loss: 0.244852 :: err kld: 69257.008366 :: err wass: 49.252600
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 300/1112 :: generator loss: 0.249166 :: discriminator loss: 0.252401 :: err kld: 58168.891384 :: err wass: 45.141500
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 400/1112 :: generator loss: 0.258221 :: discriminator loss: 0.249094 :: err kld: 74458.157601 :: err wass: 59.376700
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 500/1112 :: generator loss: 0.255536 :: discriminator loss: 0.247149 :: err kld: 62270.892933 :: err wass: 45.933300
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 600/1112 :: generator loss: 0.253668 :: discriminator loss: 0.248265 :: err kld: 67903.874561 :: err wass: 49.760700
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 700/1112 :: generator loss: 0.255538 :: discriminator loss: 0.248929 :: err kld: 67860.954228 :: err wass: 50.538900
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 800/1112 :: generator loss: 0.252932 :: discriminator loss: 0.251815 :: err kld: 58330.948438 :: err wass: 44.485400
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 900/1112 :: generator loss: 0.245770 :: discriminator loss: 0.250680 :: err kld: 60444.433069 :: err wass: 43.513900
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 1000/1112 :: generator loss: 0.263202 :: discriminator loss: 0.251655 :: err kld: 64225.075633 :: err wass: 46.921200
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 1100/1112 :: generator loss: 0.243911 :: discriminator loss: 0.255525 :: err kld: 72020.236201 :: err wass: 55.265200
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 0/1112 :: generator loss: 0.245363 :: discriminator loss: 0.250151 :: err kld: 60640.733736 :: err wass: 44.746400
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 100/1112 :: generator loss: 0.260288 :: discriminator loss: 0.244485 :: err kld: 66175.354112 :: err wass: 47.035200
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 200/1112 :: generator loss: 0.244248 :: discriminator loss: 0.249340 :: err kld: 60011.310203 :: err wass: 44.345300
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 300/1112 :: generator loss: 0.254061 :: discriminator loss: 0.250759 :: err kld: 71370.609484 :: err wass: 51.379600
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 400/1112 :: generator loss: 0.248473 :: discriminator loss: 0.251209 :: err kld: 55496.600239 :: err wass: 41.933700
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 500/1112 :: generator loss: 0.251953 :: discriminator loss: 0.248388 :: err kld: 60730.345995 :: err wass: 47.724600
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 600/1112 :: generator loss: 0.251986 :: discriminator loss: 0.250750 :: err kld: 56836.588381 :: err wass: 42.412200
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 700/1112 :: generator loss: 0.253659 :: discriminator loss: 0.246279 :: err kld: 56506.966161 :: err wass: 41.965800
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 800/1112 :: generator loss: 0.244657 :: discriminator loss: 0.253824 :: err kld: 56764.470747 :: err wass: 42.387700
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 900/1112 :: generator loss: 0.249743 :: discriminator loss: 0.248643 :: err kld: 57631.947671 :: err wass: 42.723800
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 1000/1112 :: generator loss: 0.248863 :: discriminator loss: 0.250656 :: err kld: 56003.309264 :: err wass: 41.560200
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 1100/1112 :: generator loss: 0.255038 :: discriminator loss: 0.245103 :: err kld: 43503.162497 :: err wass: 36.408700
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 0/1112 :: generator loss: 0.248926 :: discriminator loss: 0.246731 :: err kld: 47127.624493 :: err wass: 37.480700
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 100/1112 :: generator loss: 0.252115 :: discriminator loss: 0.247637 :: err kld: 58436.702550 :: err wass: 42.973200
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 200/1112 :: generator loss: 0.248789 :: discriminator loss: 0.250093 :: err kld: 55945.091811 :: err wass: 42.499200
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 300/1112 :: generator loss: 0.248906 :: discriminator loss: 0.250205 :: err kld: 54864.397541 :: err wass: 41.525300
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 400/1112 :: generator loss: 0.244887 :: discriminator loss: 0.247236 :: err kld: 49924.749573 :: err wass: 38.571400
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 500/1112 :: generator loss: 0.243405 :: discriminator loss: 0.248580 :: err kld: 48417.569419 :: err wass: 37.243300
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 600/1112 :: generator loss: 0.242870 :: discriminator loss: 0.247214 :: err kld: 49678.456307 :: err wass: 36.443600
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 700/1112 :: generator loss: 0.257953 :: discriminator loss: 0.249877 :: err kld: 47286.196222 :: err wass: 34.973500
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 800/1112 :: generator loss: 0.252035 :: discriminator loss: 0.242471 :: err kld: 45414.429304 :: err wass: 34.304500
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 900/1112 :: generator loss: 0.258647 :: discriminator loss: 0.242292 :: err kld: 47276.611017 :: err wass: 35.083100
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 1000/1112 :: generator loss: 0.260341 :: discriminator loss: 0.236847 :: err kld: 44948.736482 :: err wass: 34.676700
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 1100/1112 :: generator loss: 0.273193 :: discriminator loss: 0.230377 :: err kld: 48406.674025 :: err wass: 36.689200
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 0/1112 :: generator loss: 0.270928 :: discriminator loss: 0.235605 :: err kld: 47664.864669 :: err wass: 36.619600
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 100/1112 :: generator loss: 0.245415 :: discriminator loss: 0.245465 :: err kld: 49792.626111 :: err wass: 37.575600
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 200/1112 :: generator loss: 0.301052 :: discriminator loss: 0.221971 :: err kld: 49314.980119 :: err wass: 36.957800
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 300/1112 :: generator loss: 0.246634 :: discriminator loss: 0.254203 :: err kld: 51969.270716 :: err wass: 39.024400
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 400/1112 :: generator loss: 0.308163 :: discriminator loss: 0.218760 :: err kld: 52583.713407 :: err wass: 39.429600
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 500/1112 :: generator loss: 0.330811 :: discriminator loss: 0.208604 :: err kld: 37352.551594 :: err wass: 32.611800
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 600/1112 :: generator loss: 0.383363 :: discriminator loss: 0.183710 :: err kld: 34758.590641 :: err wass: 27.295200
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 700/1112 :: generator loss: 0.413414 :: discriminator loss: 0.169963 :: err kld: 30760.756180 :: err wass: 24.030900
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 800/1112 :: generator loss: 0.588722 :: discriminator loss: 0.134760 :: err kld: 26929.568597 :: err wass: 14.305900
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 900/1112 :: generator loss: 0.524483 :: discriminator loss: 0.148760 :: err kld: 34405.698786 :: err wass: 29.889200
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 1000/1112 :: generator loss: 0.487805 :: discriminator loss: 0.147601 :: err kld: 35980.827367 :: err wass: 30.090100
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 1100/1112 :: generator loss: 0.630592 :: discriminator loss: 0.128336 :: err kld: 34511.188717 :: err wass: 31.760600
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 0/1112 :: generator loss: 0.448062 :: discriminator loss: 0.158162 :: err kld: 37006.007383 :: err wass: 32.153800
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 100/1112 :: generator loss: 0.569415 :: discriminator loss: 0.133324 :: err kld: 38011.306351 :: err wass: 34.907300
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 200/1112 :: generator loss: 0.530936 :: discriminator loss: 0.141000 :: err kld: 38147.844825 :: err wass: 35.365800
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 300/1112 :: generator loss: 0.524148 :: discriminator loss: 0.134627 :: err kld: 34316.448258 :: err wass: 31.597500
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 400/1112 :: generator loss: 0.567634 :: discriminator loss: 0.141174 :: err kld: 30039.848319 :: err wass: 24.863000
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 500/1112 :: generator loss: 0.452858 :: discriminator loss: 0.154583 :: err kld: 26977.278442 :: err wass: 21.272500
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 600/1112 :: generator loss: 0.461541 :: discriminator loss: 0.160547 :: err kld: 33577.833497 :: err wass: 31.047200
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 700/1112 :: generator loss: 0.466281 :: discriminator loss: 0.150364 :: err kld: 23512.054128 :: err wass: 13.172800
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 800/1112 :: generator loss: 0.521479 :: discriminator loss: 0.147722 :: err kld: 26885.165450 :: err wass: 22.306900
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 900/1112 :: generator loss: 0.522833 :: discriminator loss: 0.135175 :: err kld: 32451.011025 :: err wass: 28.869900
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 1000/1112 :: generator loss: 0.594332 :: discriminator loss: 0.130109 :: err kld: 30543.382054 :: err wass: 25.792100
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 1100/1112 :: generator loss: 0.533870 :: discriminator loss: 0.129286 :: err kld: 23541.475070 :: err wass: 12.824000
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 0/1112 :: generator loss: 0.570688 :: discriminator loss: 0.119719 :: err kld: 24442.917191 :: err wass: 14.357400
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 100/1112 :: generator loss: 0.523691 :: discriminator loss: 0.146563 :: err kld: 22259.951747 :: err wass: 11.592600
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 200/1112 :: generator loss: 0.516277 :: discriminator loss: 0.155766 :: err kld: 21833.137313 :: err wass: 9.722600
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 300/1112 :: generator loss: 0.555124 :: discriminator loss: 0.146753 :: err kld: 22872.717307 :: err wass: 12.966500
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 400/1112 :: generator loss: 0.540274 :: discriminator loss: 0.135331 :: err kld: 21964.844784 :: err wass: 11.489100
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 500/1112 :: generator loss: 0.571701 :: discriminator loss: 0.126660 :: err kld: 21669.036440 :: err wass: 8.541400
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 600/1112 :: generator loss: 0.542747 :: discriminator loss: 0.139291 :: err kld: 22746.738105 :: err wass: 12.533500
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 700/1112 :: generator loss: 0.584854 :: discriminator loss: 0.121550 :: err kld: 23872.370318 :: err wass: 11.563600
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 800/1112 :: generator loss: 0.623340 :: discriminator loss: 0.122584 :: err kld: 22655.796998 :: err wass: 10.498400
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 900/1112 :: generator loss: 0.586940 :: discriminator loss: 0.118306 :: err kld: 21980.427112 :: err wass: 11.781900
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 1000/1112 :: generator loss: 0.577474 :: discriminator loss: 0.134640 :: err kld: 22505.127953 :: err wass: 11.189500
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 1100/1112 :: generator loss: 0.599685 :: discriminator loss: 0.132495 :: err kld: 21405.901500 :: err wass: 10.312600
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 0/1112 :: generator loss: 0.574953 :: discriminator loss: 0.126341 :: err kld: 21825.060858 :: err wass: 10.170500
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 100/1112 :: generator loss: 0.624757 :: discriminator loss: 0.113346 :: err kld: 22307.232365 :: err wass: 12.994600
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 200/1112 :: generator loss: 0.575620 :: discriminator loss: 0.130492 :: err kld: 22547.987920 :: err wass: 13.815900
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 300/1112 :: generator loss: 0.608900 :: discriminator loss: 0.113863 :: err kld: 22184.993921 :: err wass: 11.320200
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 400/1112 :: generator loss: 0.601952 :: discriminator loss: 0.121282 :: err kld: 23495.949577 :: err wass: 12.281200
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 500/1112 :: generator loss: 0.634287 :: discriminator loss: 0.109717 :: err kld: 22179.791754 :: err wass: 13.445000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 600/1112 :: generator loss: 0.653308 :: discriminator loss: 0.105645 :: err kld: 24068.837654 :: err wass: 12.092300
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 700/1112 :: generator loss: 0.721326 :: discriminator loss: 0.085185 :: err kld: 23910.482866 :: err wass: 17.338300
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 800/1112 :: generator loss: 0.659234 :: discriminator loss: 0.096292 :: err kld: 25975.323140 :: err wass: 22.511000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 900/1112 :: generator loss: 0.639642 :: discriminator loss: 0.091559 :: err kld: 24872.513469 :: err wass: 25.638600
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 1000/1112 :: generator loss: 0.699702 :: discriminator loss: 0.084853 :: err kld: 24311.865624 :: err wass: 22.467000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 1100/1112 :: generator loss: 0.720666 :: discriminator loss: 0.089114 :: err kld: 24693.334704 :: err wass: 24.855200
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 0/1112 :: generator loss: 0.748476 :: discriminator loss: 0.078246 :: err kld: 25297.904412 :: err wass: 25.291100
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 100/1112 :: generator loss: 0.681700 :: discriminator loss: 0.090649 :: err kld: 24339.100226 :: err wass: 27.083700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 200/1112 :: generator loss: 0.700662 :: discriminator loss: 0.086511 :: err kld: 26676.246406 :: err wass: 27.603300
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 300/1112 :: generator loss: 0.755095 :: discriminator loss: 0.070445 :: err kld: 26479.175459 :: err wass: 28.480000
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 400/1112 :: generator loss: 0.740372 :: discriminator loss: 0.080048 :: err kld: 26265.514488 :: err wass: 27.035800
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 500/1112 :: generator loss: 0.742915 :: discriminator loss: 0.078646 :: err kld: 24655.184474 :: err wass: 25.893400
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 600/1112 :: generator loss: 0.672598 :: discriminator loss: 0.083548 :: err kld: 26416.221778 :: err wass: 30.576900
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 700/1112 :: generator loss: 0.743718 :: discriminator loss: 0.076922 :: err kld: 26002.497875 :: err wass: 30.319800
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 800/1112 :: generator loss: 0.742943 :: discriminator loss: 0.073295 :: err kld: 25886.706825 :: err wass: 30.701700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 900/1112 :: generator loss: 0.729246 :: discriminator loss: 0.077039 :: err kld: 25049.829220 :: err wass: 27.513700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 1000/1112 :: generator loss: 0.765639 :: discriminator loss: 0.078713 :: err kld: 25938.915849 :: err wass: 27.566100
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 1100/1112 :: generator loss: 0.744681 :: discriminator loss: 0.078556 :: err kld: 25617.710671 :: err wass: 27.887700
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 0/1112 :: generator loss: 0.785792 :: discriminator loss: 0.064927 :: err kld: 25429.775915 :: err wass: 28.277600
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 100/1112 :: generator loss: 0.732724 :: discriminator loss: 0.074804 :: err kld: 25910.168819 :: err wass: 27.954500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 200/1112 :: generator loss: 0.751145 :: discriminator loss: 0.063048 :: err kld: 25552.635718 :: err wass: 26.376800
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 300/1112 :: generator loss: 0.847344 :: discriminator loss: 0.056429 :: err kld: 27089.614984 :: err wass: 30.563200
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 400/1112 :: generator loss: 0.763102 :: discriminator loss: 0.064858 :: err kld: 27382.733710 :: err wass: 30.911300
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 500/1112 :: generator loss: 0.771197 :: discriminator loss: 0.064126 :: err kld: 24545.321219 :: err wass: 28.948700
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 600/1112 :: generator loss: 0.731197 :: discriminator loss: 0.073326 :: err kld: 25682.972381 :: err wass: 29.519500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 700/1112 :: generator loss: 0.764760 :: discriminator loss: 0.058384 :: err kld: 27146.280082 :: err wass: 30.510800
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 800/1112 :: generator loss: 0.723656 :: discriminator loss: 0.070412 :: err kld: 25243.391677 :: err wass: 31.138800
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 900/1112 :: generator loss: 0.762097 :: discriminator loss: 0.070499 :: err kld: 25431.021600 :: err wass: 32.536200
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 1000/1112 :: generator loss: 0.772243 :: discriminator loss: 0.069065 :: err kld: 25187.685719 :: err wass: 30.373700
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 1100/1112 :: generator loss: 0.773792 :: discriminator loss: 0.075283 :: err kld: 26082.524032 :: err wass: 31.158300
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 0/1112 :: generator loss: 0.771322 :: discriminator loss: 0.062942 :: err kld: 25194.701016 :: err wass: 30.409400
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 100/1112 :: generator loss: 0.794805 :: discriminator loss: 0.061282 :: err kld: 26831.898792 :: err wass: 29.530700
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 200/1112 :: generator loss: 0.827429 :: discriminator loss: 0.050268 :: err kld: 25730.231217 :: err wass: 31.333000
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 300/1112 :: generator loss: 0.811449 :: discriminator loss: 0.060971 :: err kld: 25856.235321 :: err wass: 31.767300
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 400/1112 :: generator loss: 0.819890 :: discriminator loss: 0.051960 :: err kld: 26457.643917 :: err wass: 33.823700
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 500/1112 :: generator loss: 0.777074 :: discriminator loss: 0.065243 :: err kld: 24576.263432 :: err wass: 29.756500
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 600/1112 :: generator loss: 0.829560 :: discriminator loss: 0.058397 :: err kld: 27934.510767 :: err wass: 30.956400
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 700/1112 :: generator loss: 0.779172 :: discriminator loss: 0.056691 :: err kld: 26493.712222 :: err wass: 30.487300
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 800/1112 :: generator loss: 0.874843 :: discriminator loss: 0.046080 :: err kld: 25272.257038 :: err wass: 30.363000
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 900/1112 :: generator loss: 0.830150 :: discriminator loss: 0.049796 :: err kld: 27653.975679 :: err wass: 32.887800
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 1000/1112 :: generator loss: 0.764932 :: discriminator loss: 0.064545 :: err kld: 28892.372757 :: err wass: 32.962900
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 1100/1112 :: generator loss: 0.770345 :: discriminator loss: 0.062141 :: err kld: 26025.800877 :: err wass: 29.284900
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 0/1112 :: generator loss: 0.808724 :: discriminator loss: 0.060369 :: err kld: 26193.838420 :: err wass: 32.688800
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 100/1112 :: generator loss: 0.777885 :: discriminator loss: 0.063169 :: err kld: 25553.094256 :: err wass: 31.269100
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 200/1112 :: generator loss: 0.838705 :: discriminator loss: 0.056341 :: err kld: 27718.493837 :: err wass: 31.481700
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 300/1112 :: generator loss: 0.814774 :: discriminator loss: 0.049039 :: err kld: 26638.095038 :: err wass: 33.279200
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 400/1112 :: generator loss: 0.870377 :: discriminator loss: 0.044647 :: err kld: 27055.349922 :: err wass: 32.909500
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 500/1112 :: generator loss: 0.846115 :: discriminator loss: 0.041999 :: err kld: 27893.270530 :: err wass: 36.897000
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 600/1112 :: generator loss: 0.820235 :: discriminator loss: 0.049286 :: err kld: 26333.795193 :: err wass: 29.852800
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 700/1112 :: generator loss: 0.859760 :: discriminator loss: 0.042094 :: err kld: 26130.013651 :: err wass: 32.698900
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 800/1112 :: generator loss: 0.831899 :: discriminator loss: 0.044318 :: err kld: 25883.110403 :: err wass: 30.116000
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 900/1112 :: generator loss: 0.800700 :: discriminator loss: 0.057307 :: err kld: 25815.277385 :: err wass: 33.207800
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 1000/1112 :: generator loss: 0.839450 :: discriminator loss: 0.052592 :: err kld: 30616.752443 :: err wass: 32.319300
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 1100/1112 :: generator loss: 0.826099 :: discriminator loss: 0.047889 :: err kld: 25767.203258 :: err wass: 29.162900
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 0/1112 :: generator loss: 0.851242 :: discriminator loss: 0.043835 :: err kld: 25398.206154 :: err wass: 29.630300
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 100/1112 :: generator loss: 0.843557 :: discriminator loss: 0.044012 :: err kld: 24638.026352 :: err wass: 30.762600
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 200/1112 :: generator loss: 0.816962 :: discriminator loss: 0.048157 :: err kld: 25146.338611 :: err wass: 27.980200
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 300/1112 :: generator loss: 0.897075 :: discriminator loss: 0.041548 :: err kld: 27533.036608 :: err wass: 32.630800
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 400/1112 :: generator loss: 0.852370 :: discriminator loss: 0.041967 :: err kld: 26151.799937 :: err wass: 35.283500
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 500/1112 :: generator loss: 0.873418 :: discriminator loss: 0.039623 :: err kld: 26854.972774 :: err wass: 33.489700
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 600/1112 :: generator loss: 0.837509 :: discriminator loss: 0.041769 :: err kld: 25031.200380 :: err wass: 28.676300
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 700/1112 :: generator loss: 0.852288 :: discriminator loss: 0.045095 :: err kld: 26942.529983 :: err wass: 33.797400
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 800/1112 :: generator loss: 0.861685 :: discriminator loss: 0.040780 :: err kld: 27720.882153 :: err wass: 34.204900
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 900/1112 :: generator loss: 0.850845 :: discriminator loss: 0.040149 :: err kld: 27319.867127 :: err wass: 36.590300
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 1000/1112 :: generator loss: 0.839478 :: discriminator loss: 0.051668 :: err kld: 27566.774792 :: err wass: 34.584900
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 1100/1112 :: generator loss: 0.898621 :: discriminator loss: 0.037147 :: err kld: 27256.879013 :: err wass: 32.025800
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 0/1112 :: generator loss: 0.880175 :: discriminator loss: 0.034569 :: err kld: 26644.239919 :: err wass: 31.931600
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 100/1112 :: generator loss: 0.877445 :: discriminator loss: 0.047759 :: err kld: 26713.610431 :: err wass: 34.346500
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 200/1112 :: generator loss: 0.872907 :: discriminator loss: 0.033706 :: err kld: 27425.518555 :: err wass: 32.829200
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 300/1112 :: generator loss: 0.841434 :: discriminator loss: 0.044691 :: err kld: 25691.710604 :: err wass: 30.718400
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 400/1112 :: generator loss: 0.921749 :: discriminator loss: 0.025646 :: err kld: 26543.562665 :: err wass: 31.297600
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 500/1112 :: generator loss: 0.864909 :: discriminator loss: 0.044947 :: err kld: 30286.630149 :: err wass: 34.177100
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 600/1112 :: generator loss: 0.848443 :: discriminator loss: 0.043561 :: err kld: 26040.278540 :: err wass: 32.151300
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 700/1112 :: generator loss: 0.902842 :: discriminator loss: 0.025830 :: err kld: 26788.460374 :: err wass: 33.167700
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 800/1112 :: generator loss: 0.858426 :: discriminator loss: 0.035224 :: err kld: 26066.694748 :: err wass: 33.640200
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 900/1112 :: generator loss: 0.852712 :: discriminator loss: 0.033995 :: err kld: 26972.568624 :: err wass: 34.285600
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 1000/1112 :: generator loss: 0.871414 :: discriminator loss: 0.030120 :: err kld: 26807.230458 :: err wass: 32.492200
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 1100/1112 :: generator loss: 0.858441 :: discriminator loss: 0.041675 :: err kld: 25636.296010 :: err wass: 31.120900
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 0/1112 :: generator loss: 0.907296 :: discriminator loss: 0.027326 :: err kld: 26146.306580 :: err wass: 32.718700
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 100/1112 :: generator loss: 0.904847 :: discriminator loss: 0.033926 :: err kld: 26330.067824 :: err wass: 32.414700
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 200/1112 :: generator loss: 0.870739 :: discriminator loss: 0.036528 :: err kld: 27541.063284 :: err wass: 34.134800
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 300/1112 :: generator loss: 0.864603 :: discriminator loss: 0.032631 :: err kld: 27417.118333 :: err wass: 32.969000
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 400/1112 :: generator loss: 0.871933 :: discriminator loss: 0.045358 :: err kld: 25946.957249 :: err wass: 33.141700
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 500/1112 :: generator loss: 0.918457 :: discriminator loss: 0.020903 :: err kld: 26992.203516 :: err wass: 34.207500
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 600/1112 :: generator loss: 0.909214 :: discriminator loss: 0.024933 :: err kld: 28963.489475 :: err wass: 35.148600
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 700/1112 :: generator loss: 0.914098 :: discriminator loss: 0.027795 :: err kld: 24610.856003 :: err wass: 29.748200
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 800/1112 :: generator loss: 0.943356 :: discriminator loss: 0.024490 :: err kld: 27972.580358 :: err wass: 31.423000
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 900/1112 :: generator loss: 0.914561 :: discriminator loss: 0.022912 :: err kld: 26959.332973 :: err wass: 31.924600
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 1000/1112 :: generator loss: 0.878920 :: discriminator loss: 0.031540 :: err kld: 25429.959482 :: err wass: 32.769800
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 1100/1112 :: generator loss: 0.930954 :: discriminator loss: 0.021255 :: err kld: 25343.306570 :: err wass: 27.805200
+Saving generator model
+Saving discriminator model
+Saving embed model
+Saving deembedder model

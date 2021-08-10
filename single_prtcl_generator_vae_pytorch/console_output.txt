@@ -1,0 +1,498 @@
+GPU is available
+TRAINING MODEL: BATCH_SIZE = 1024, PARTICLE_DIM: 48, EPOCHS: 15, PRTCL_LATENT_SPACE_SIZE: 12
+AUTOENCODER
+PrtclVAE(
+  (mean): Sequential(
+    (0): Linear(in_features=59, out_features=512, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=512, out_features=2048, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=2048, out_features=1024, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=1024, out_features=512, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=512, out_features=256, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=256, out_features=128, bias=True)
+    (16): Dropout(p=0.1, inplace=False)
+    (17): Tanh()
+    (18): Linear(in_features=128, out_features=12, bias=True)
+  )
+  (logvar): Sequential(
+    (0): Linear(in_features=59, out_features=512, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=512, out_features=2048, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=2048, out_features=1024, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=1024, out_features=512, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=512, out_features=256, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=256, out_features=128, bias=True)
+    (16): Dropout(p=0.1, inplace=False)
+    (17): Tanh()
+    (18): Linear(in_features=128, out_features=12, bias=True)
+  )
+  (deembeder): Sequential(
+    (0): Linear(in_features=12, out_features=128, bias=True)
+    (1): Dropout(p=0.1, inplace=False)
+    (2): Tanh()
+    (3): Linear(in_features=128, out_features=256, bias=True)
+    (4): Dropout(p=0.1, inplace=False)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=512, bias=True)
+    (7): Dropout(p=0.1, inplace=False)
+    (8): Tanh()
+    (9): Linear(in_features=512, out_features=1024, bias=True)
+    (10): Dropout(p=0.1, inplace=False)
+    (11): Tanh()
+    (12): Linear(in_features=1024, out_features=2048, bias=True)
+    (13): Dropout(p=0.1, inplace=False)
+    (14): Tanh()
+    (15): Linear(in_features=2048, out_features=512, bias=True)
+    (16): Tanh()
+    (17): Linear(in_features=512, out_features=59, bias=True)
+  )
+)
+EMBEDDER
+PDGEmbedder(
+  (net): Sequential(
+    (0): Linear(in_features=870, out_features=1024, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=256, out_features=48, bias=True)
+    (7): Tanh()
+  )
+)
+DEEMBEDDER
+PDGDeembedder(
+  (net): Sequential(
+    (0): Linear(in_features=48, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=512, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=512, out_features=1024, bias=True)
+    (5): Tanh()
+    (6): Linear(in_features=1024, out_features=870, bias=True)
+    (7): Tanh()
+  )
+)
+Deembeder acc: 1/870
+Epoch: 0/15 :: Batch: 0/1112 :: train loss: 0.037919 :: kld loss: 0.018038 :: mse loss: 0.037901 :: valid loss: 0.036048 :: err kld: 70356.810643 :: err wass: 56.202500
+Deembeder acc: 54/870
+Epoch: 0/15 :: Batch: 100/1112 :: train loss: 0.010883 :: kld loss: 1.047756 :: mse loss: 0.009835 :: valid loss: 0.010614 :: err kld: 51854.361983 :: err wass: 40.769800
+Deembeder acc: 509/870
+Epoch: 0/15 :: Batch: 200/1112 :: train loss: 0.009458 :: kld loss: 2.325615 :: mse loss: 0.007132 :: valid loss: 0.007123 :: err kld: 30690.516921 :: err wass: 28.442400
+Deembeder acc: 797/870
+Epoch: 0/15 :: Batch: 300/1112 :: train loss: 0.007890 :: kld loss: 3.250145 :: mse loss: 0.004640 :: valid loss: 0.004592 :: err kld: 29639.140420 :: err wass: 24.436100
+Deembeder acc: 848/870
+Epoch: 0/15 :: Batch: 400/1112 :: train loss: 0.007698 :: kld loss: 3.319035 :: mse loss: 0.004379 :: valid loss: 0.004278 :: err kld: 28894.829759 :: err wass: 22.849200
+Deembeder acc: 851/870
+Epoch: 0/15 :: Batch: 500/1112 :: train loss: 0.007541 :: kld loss: 3.409980 :: mse loss: 0.004131 :: valid loss: 0.004085 :: err kld: 27565.826772 :: err wass: 21.907800
+Deembeder acc: 859/870
+Epoch: 0/15 :: Batch: 600/1112 :: train loss: 0.007623 :: kld loss: 3.315719 :: mse loss: 0.004307 :: valid loss: 0.004082 :: err kld: 27817.182469 :: err wass: 21.773100
+Deembeder acc: 868/870
+Epoch: 0/15 :: Batch: 700/1112 :: train loss: 0.007413 :: kld loss: 3.344094 :: mse loss: 0.004069 :: valid loss: 0.004011 :: err kld: 27118.402763 :: err wass: 21.880000
+Deembeder acc: 868/870
+Epoch: 0/15 :: Batch: 800/1112 :: train loss: 0.007008 :: kld loss: 3.262871 :: mse loss: 0.003745 :: valid loss: 0.003899 :: err kld: 26565.587066 :: err wass: 21.869000
+Deembeder acc: 869/870
+Epoch: 0/15 :: Batch: 900/1112 :: train loss: 0.006846 :: kld loss: 3.293779 :: mse loss: 0.003552 :: valid loss: 0.003706 :: err kld: 24503.053723 :: err wass: 20.757300
+Deembeder acc: 869/870
+Epoch: 0/15 :: Batch: 1000/1112 :: train loss: 0.007001 :: kld loss: 3.280926 :: mse loss: 0.003720 :: valid loss: 0.003531 :: err kld: 24063.558243 :: err wass: 19.097600
+Deembeder acc: 870/870
+Epoch: 0/15 :: Batch: 1100/1112 :: train loss: 0.006436 :: kld loss: 3.330954 :: mse loss: 0.003105 :: valid loss: 0.003302 :: err kld: 20493.783988 :: err wass: 14.764600
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 0/1112 :: train loss: 0.006638 :: kld loss: 3.418602 :: mse loss: 0.003219 :: valid loss: 0.003253 :: err kld: 19137.575518 :: err wass: 14.443900
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 100/1112 :: train loss: 0.006499 :: kld loss: 3.482273 :: mse loss: 0.003017 :: valid loss: 0.002992 :: err kld: 20409.417625 :: err wass: 11.392900
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 200/1112 :: train loss: 0.006399 :: kld loss: 3.487290 :: mse loss: 0.002912 :: valid loss: 0.002986 :: err kld: 21856.930444 :: err wass: 11.355900
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 300/1112 :: train loss: 0.006478 :: kld loss: 3.411213 :: mse loss: 0.003067 :: valid loss: 0.003031 :: err kld: 20532.218616 :: err wass: 10.241400
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 400/1112 :: train loss: 0.006529 :: kld loss: 3.473649 :: mse loss: 0.003055 :: valid loss: 0.002867 :: err kld: 20037.299662 :: err wass: 9.820700
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 500/1112 :: train loss: 0.006257 :: kld loss: 3.289390 :: mse loss: 0.002967 :: valid loss: 0.002916 :: err kld: 20369.481253 :: err wass: 9.971500
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 600/1112 :: train loss: 0.006068 :: kld loss: 3.381343 :: mse loss: 0.002687 :: valid loss: 0.002856 :: err kld: 22535.427225 :: err wass: 9.846300
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 700/1112 :: train loss: 0.006125 :: kld loss: 3.425035 :: mse loss: 0.002700 :: valid loss: 0.002748 :: err kld: 18223.511188 :: err wass: 9.182100
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 800/1112 :: train loss: 0.006187 :: kld loss: 3.256081 :: mse loss: 0.002931 :: valid loss: 0.002847 :: err kld: 18193.759800 :: err wass: 8.703800
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 900/1112 :: train loss: 0.006332 :: kld loss: 3.189201 :: mse loss: 0.003143 :: valid loss: 0.002867 :: err kld: 17937.928077 :: err wass: 8.995400
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 1000/1112 :: train loss: 0.006075 :: kld loss: 3.333823 :: mse loss: 0.002742 :: valid loss: 0.002694 :: err kld: 18226.792058 :: err wass: 9.182000
+Deembeder acc: 870/870
+Epoch: 1/15 :: Batch: 1100/1112 :: train loss: 0.006197 :: kld loss: 3.347897 :: mse loss: 0.002849 :: valid loss: 0.002751 :: err kld: 16388.496698 :: err wass: 8.656900
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 0/1112 :: train loss: 0.006252 :: kld loss: 3.239845 :: mse loss: 0.003012 :: valid loss: 0.002866 :: err kld: 20281.600565 :: err wass: 9.298500
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 100/1112 :: train loss: 0.006170 :: kld loss: 3.306975 :: mse loss: 0.002863 :: valid loss: 0.002723 :: err kld: 17675.817168 :: err wass: 9.074600
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 200/1112 :: train loss: 0.006079 :: kld loss: 3.281404 :: mse loss: 0.002797 :: valid loss: 0.002821 :: err kld: 16757.260258 :: err wass: 9.815400
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 300/1112 :: train loss: 0.006019 :: kld loss: 3.328068 :: mse loss: 0.002691 :: valid loss: 0.002707 :: err kld: 17730.948129 :: err wass: 8.601500
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 400/1112 :: train loss: 0.005935 :: kld loss: 3.282032 :: mse loss: 0.002653 :: valid loss: 0.002770 :: err kld: 16540.828616 :: err wass: 8.408500
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 500/1112 :: train loss: 0.006023 :: kld loss: 3.382275 :: mse loss: 0.002641 :: valid loss: 0.002645 :: err kld: 16418.401205 :: err wass: 9.178400
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 600/1112 :: train loss: 0.006013 :: kld loss: 3.469893 :: mse loss: 0.002543 :: valid loss: 0.002596 :: err kld: 15784.591320 :: err wass: 7.917900
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 700/1112 :: train loss: 0.006089 :: kld loss: 3.294077 :: mse loss: 0.002794 :: valid loss: 0.002700 :: err kld: 15925.095052 :: err wass: 9.256000
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 800/1112 :: train loss: 0.006087 :: kld loss: 3.357548 :: mse loss: 0.002730 :: valid loss: 0.002640 :: err kld: 16597.904855 :: err wass: 9.088800
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 900/1112 :: train loss: 0.005865 :: kld loss: 3.362243 :: mse loss: 0.002503 :: valid loss: 0.002582 :: err kld: 16227.401294 :: err wass: 8.939700
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 1000/1112 :: train loss: 0.006035 :: kld loss: 3.351649 :: mse loss: 0.002683 :: valid loss: 0.002625 :: err kld: 21315.581636 :: err wass: 8.627100
+Deembeder acc: 870/870
+Epoch: 2/15 :: Batch: 1100/1112 :: train loss: 0.005835 :: kld loss: 3.235946 :: mse loss: 0.002599 :: valid loss: 0.002709 :: err kld: 18007.947245 :: err wass: 8.988800
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 0/1112 :: train loss: 0.006226 :: kld loss: 3.363375 :: mse loss: 0.002862 :: valid loss: 0.002646 :: err kld: 16687.995746 :: err wass: 9.117900
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 100/1112 :: train loss: 0.005882 :: kld loss: 3.465712 :: mse loss: 0.002417 :: valid loss: 0.002501 :: err kld: 21098.265794 :: err wass: 8.026900
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 200/1112 :: train loss: 0.005760 :: kld loss: 3.346027 :: mse loss: 0.002414 :: valid loss: 0.002582 :: err kld: 18848.113043 :: err wass: 8.776100
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 300/1112 :: train loss: 0.005795 :: kld loss: 3.138568 :: mse loss: 0.002656 :: valid loss: 0.002700 :: err kld: 14287.042654 :: err wass: 9.691700
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 400/1112 :: train loss: 0.005955 :: kld loss: 3.173713 :: mse loss: 0.002781 :: valid loss: 0.002705 :: err kld: 22967.112026 :: err wass: 8.775500
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 500/1112 :: train loss: 0.005793 :: kld loss: 3.244354 :: mse loss: 0.002549 :: valid loss: 0.002653 :: err kld: 20551.515537 :: err wass: 9.459700
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 600/1112 :: train loss: 0.005863 :: kld loss: 3.304791 :: mse loss: 0.002558 :: valid loss: 0.002539 :: err kld: 23322.388312 :: err wass: 9.543000
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 700/1112 :: train loss: 0.005818 :: kld loss: 3.273555 :: mse loss: 0.002545 :: valid loss: 0.002591 :: err kld: 19979.890852 :: err wass: 9.823200
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 800/1112 :: train loss: 0.006033 :: kld loss: 3.374732 :: mse loss: 0.002658 :: valid loss: 0.002503 :: err kld: 15340.056246 :: err wass: 8.829300
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 900/1112 :: train loss: 0.005919 :: kld loss: 3.414915 :: mse loss: 0.002504 :: valid loss: 0.002541 :: err kld: 15830.926155 :: err wass: 9.063000
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 1000/1112 :: train loss: 0.005708 :: kld loss: 3.353835 :: mse loss: 0.002354 :: valid loss: 0.002476 :: err kld: 15579.743430 :: err wass: 9.399800
+Deembeder acc: 870/870
+Epoch: 3/15 :: Batch: 1100/1112 :: train loss: 0.005882 :: kld loss: 3.375219 :: mse loss: 0.002507 :: valid loss: 0.002448 :: err kld: 19382.167313 :: err wass: 8.717500
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 0/1112 :: train loss: 0.005755 :: kld loss: 3.184044 :: mse loss: 0.002571 :: valid loss: 0.002648 :: err kld: 17268.604902 :: err wass: 9.324800
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 100/1112 :: train loss: 0.006114 :: kld loss: 3.355033 :: mse loss: 0.002758 :: valid loss: 0.002521 :: err kld: 22015.153631 :: err wass: 8.922900
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 200/1112 :: train loss: 0.005621 :: kld loss: 3.313625 :: mse loss: 0.002307 :: valid loss: 0.002512 :: err kld: 16320.376509 :: err wass: 8.016600
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 300/1112 :: train loss: 0.006021 :: kld loss: 3.359569 :: mse loss: 0.002661 :: valid loss: 0.002536 :: err kld: 15684.380957 :: err wass: 9.024900
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 400/1112 :: train loss: 0.005966 :: kld loss: 3.284617 :: mse loss: 0.002682 :: valid loss: 0.002515 :: err kld: 20159.194877 :: err wass: 9.272700
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 500/1112 :: train loss: 0.005756 :: kld loss: 3.271033 :: mse loss: 0.002485 :: valid loss: 0.002593 :: err kld: 14913.248162 :: err wass: 8.321700
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 600/1112 :: train loss: 0.005690 :: kld loss: 3.235281 :: mse loss: 0.002455 :: valid loss: 0.002519 :: err kld: 14194.102771 :: err wass: 9.134500
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 700/1112 :: train loss: 0.005949 :: kld loss: 3.365213 :: mse loss: 0.002584 :: valid loss: 0.002455 :: err kld: 20959.222793 :: err wass: 9.102400
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 800/1112 :: train loss: 0.005853 :: kld loss: 3.260760 :: mse loss: 0.002592 :: valid loss: 0.002552 :: err kld: 17828.801600 :: err wass: 8.726700
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 900/1112 :: train loss: 0.005910 :: kld loss: 3.307802 :: mse loss: 0.002602 :: valid loss: 0.002522 :: err kld: 17949.257508 :: err wass: 8.532200
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 1000/1112 :: train loss: 0.005895 :: kld loss: 3.246302 :: mse loss: 0.002649 :: valid loss: 0.002614 :: err kld: 15712.001888 :: err wass: 8.278800
+Deembeder acc: 870/870
+Epoch: 4/15 :: Batch: 1100/1112 :: train loss: 0.005735 :: kld loss: 3.243468 :: mse loss: 0.002491 :: valid loss: 0.002515 :: err kld: 14086.754237 :: err wass: 9.218100
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 0/1112 :: train loss: 0.006013 :: kld loss: 3.329064 :: mse loss: 0.002684 :: valid loss: 0.002440 :: err kld: 16336.413407 :: err wass: 7.741700
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 100/1112 :: train loss: 0.005906 :: kld loss: 3.172265 :: mse loss: 0.002734 :: valid loss: 0.002601 :: err kld: 14637.238633 :: err wass: 8.948700
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 200/1112 :: train loss: 0.005630 :: kld loss: 3.328405 :: mse loss: 0.002302 :: valid loss: 0.002464 :: err kld: 14144.660239 :: err wass: 8.589700
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 300/1112 :: train loss: 0.005883 :: kld loss: 3.296553 :: mse loss: 0.002587 :: valid loss: 0.002547 :: err kld: 20182.426855 :: err wass: 9.196400
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 400/1112 :: train loss: 0.006046 :: kld loss: 3.330947 :: mse loss: 0.002715 :: valid loss: 0.002523 :: err kld: 22946.596797 :: err wass: 9.756600
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 500/1112 :: train loss: 0.005796 :: kld loss: 3.168717 :: mse loss: 0.002627 :: valid loss: 0.002515 :: err kld: 17691.233265 :: err wass: 8.767400
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 600/1112 :: train loss: 0.005809 :: kld loss: 3.260649 :: mse loss: 0.002549 :: valid loss: 0.002521 :: err kld: 13976.751858 :: err wass: 8.605200
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 700/1112 :: train loss: 0.005831 :: kld loss: 3.272985 :: mse loss: 0.002558 :: valid loss: 0.002515 :: err kld: 13476.126032 :: err wass: 8.855100
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 800/1112 :: train loss: 0.005901 :: kld loss: 3.291091 :: mse loss: 0.002610 :: valid loss: 0.002526 :: err kld: 18882.733158 :: err wass: 9.492400
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 900/1112 :: train loss: 0.005672 :: kld loss: 3.323248 :: mse loss: 0.002348 :: valid loss: 0.002481 :: err kld: 17723.029344 :: err wass: 8.816300
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 1000/1112 :: train loss: 0.005898 :: kld loss: 3.360713 :: mse loss: 0.002538 :: valid loss: 0.002497 :: err kld: 22458.652433 :: err wass: 9.011900
+Deembeder acc: 870/870
+Epoch: 5/15 :: Batch: 1100/1112 :: train loss: 0.005661 :: kld loss: 3.285441 :: mse loss: 0.002375 :: valid loss: 0.002505 :: err kld: 13861.985813 :: err wass: 8.144700
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 0/1112 :: train loss: 0.005795 :: kld loss: 3.357269 :: mse loss: 0.002437 :: valid loss: 0.002432 :: err kld: 23363.557189 :: err wass: 8.728500
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 100/1112 :: train loss: 0.005932 :: kld loss: 3.253855 :: mse loss: 0.002678 :: valid loss: 0.002519 :: err kld: 19229.910861 :: err wass: 9.103400
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 200/1112 :: train loss: 0.005809 :: kld loss: 3.224990 :: mse loss: 0.002584 :: valid loss: 0.002483 :: err kld: 16499.021056 :: err wass: 8.695100
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 300/1112 :: train loss: 0.005815 :: kld loss: 3.360413 :: mse loss: 0.002454 :: valid loss: 0.002425 :: err kld: 17414.310619 :: err wass: 8.465800
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 400/1112 :: train loss: 0.005661 :: kld loss: 3.211534 :: mse loss: 0.002449 :: valid loss: 0.002515 :: err kld: 14744.818418 :: err wass: 8.028600
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 500/1112 :: train loss: 0.005652 :: kld loss: 3.273456 :: mse loss: 0.002379 :: valid loss: 0.002540 :: err kld: 19701.678092 :: err wass: 10.000500
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 600/1112 :: train loss: 0.005721 :: kld loss: 3.251854 :: mse loss: 0.002470 :: valid loss: 0.002455 :: err kld: 20866.218208 :: err wass: 8.287400
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 700/1112 :: train loss: 0.005946 :: kld loss: 3.336195 :: mse loss: 0.002609 :: valid loss: 0.002504 :: err kld: 19121.900228 :: err wass: 10.636200
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 800/1112 :: train loss: 0.005811 :: kld loss: 3.266381 :: mse loss: 0.002545 :: valid loss: 0.002491 :: err kld: 11790.086909 :: err wass: 8.572900
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 900/1112 :: train loss: 0.005988 :: kld loss: 3.416245 :: mse loss: 0.002572 :: valid loss: 0.002439 :: err kld: 18391.804085 :: err wass: 8.382900
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 1000/1112 :: train loss: 0.005951 :: kld loss: 3.407682 :: mse loss: 0.002543 :: valid loss: 0.002419 :: err kld: 19557.939877 :: err wass: 8.533100
+Deembeder acc: 870/870
+Epoch: 6/15 :: Batch: 1100/1112 :: train loss: 0.005855 :: kld loss: 3.300259 :: mse loss: 0.002555 :: valid loss: 0.002465 :: err kld: 16872.233116 :: err wass: 8.962700
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 0/1112 :: train loss: 0.005850 :: kld loss: 3.362984 :: mse loss: 0.002487 :: valid loss: 0.002478 :: err kld: 21542.283816 :: err wass: 9.382000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 100/1112 :: train loss: 0.005861 :: kld loss: 3.329135 :: mse loss: 0.002532 :: valid loss: 0.002469 :: err kld: 14715.706561 :: err wass: 8.661600
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 200/1112 :: train loss: 0.006070 :: kld loss: 3.303035 :: mse loss: 0.002767 :: valid loss: 0.002470 :: err kld: 16895.813956 :: err wass: 9.161000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 300/1112 :: train loss: 0.005816 :: kld loss: 3.282468 :: mse loss: 0.002533 :: valid loss: 0.002406 :: err kld: 15813.229374 :: err wass: 8.383500
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 400/1112 :: train loss: 0.005654 :: kld loss: 3.238356 :: mse loss: 0.002416 :: valid loss: 0.002491 :: err kld: 16810.140410 :: err wass: 9.029900
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 500/1112 :: train loss: 0.005534 :: kld loss: 3.242148 :: mse loss: 0.002292 :: valid loss: 0.002521 :: err kld: 29015.474919 :: err wass: 9.175100
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 600/1112 :: train loss: 0.005885 :: kld loss: 3.371290 :: mse loss: 0.002514 :: valid loss: 0.002490 :: err kld: 13738.112132 :: err wass: 8.112900
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 700/1112 :: train loss: 0.005643 :: kld loss: 3.306783 :: mse loss: 0.002336 :: valid loss: 0.002460 :: err kld: 14938.621965 :: err wass: 8.604000
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 800/1112 :: train loss: 0.005712 :: kld loss: 3.238352 :: mse loss: 0.002473 :: valid loss: 0.002482 :: err kld: 16992.228429 :: err wass: 8.485500
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 900/1112 :: train loss: 0.005679 :: kld loss: 3.294898 :: mse loss: 0.002384 :: valid loss: 0.002510 :: err kld: 16688.976947 :: err wass: 7.839200
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 1000/1112 :: train loss: 0.005688 :: kld loss: 3.350564 :: mse loss: 0.002337 :: valid loss: 0.002423 :: err kld: 14617.407666 :: err wass: 8.636700
+Deembeder acc: 870/870
+Epoch: 7/15 :: Batch: 1100/1112 :: train loss: 0.005466 :: kld loss: 3.254689 :: mse loss: 0.002211 :: valid loss: 0.002482 :: err kld: 29180.437656 :: err wass: 9.427300
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 0/1112 :: train loss: 0.005692 :: kld loss: 3.392814 :: mse loss: 0.002299 :: valid loss: 0.002425 :: err kld: 18155.449567 :: err wass: 9.044400
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 100/1112 :: train loss: 0.005623 :: kld loss: 3.383636 :: mse loss: 0.002239 :: valid loss: 0.002366 :: err kld: 14305.285642 :: err wass: 8.483500
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 200/1112 :: train loss: 0.005711 :: kld loss: 3.253018 :: mse loss: 0.002458 :: valid loss: 0.002480 :: err kld: 21846.892458 :: err wass: 9.476900
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 300/1112 :: train loss: 0.005700 :: kld loss: 3.228098 :: mse loss: 0.002471 :: valid loss: 0.002467 :: err kld: 17428.523393 :: err wass: 8.339700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 400/1112 :: train loss: 0.005681 :: kld loss: 3.330859 :: mse loss: 0.002350 :: valid loss: 0.002412 :: err kld: 20781.656120 :: err wass: 8.376000
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 500/1112 :: train loss: 0.005547 :: kld loss: 3.296489 :: mse loss: 0.002251 :: valid loss: 0.002414 :: err kld: 14207.424372 :: err wass: 8.076700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 600/1112 :: train loss: 0.005712 :: kld loss: 3.354744 :: mse loss: 0.002357 :: valid loss: 0.002432 :: err kld: 13855.893266 :: err wass: 7.925400
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 700/1112 :: train loss: 0.005604 :: kld loss: 3.251812 :: mse loss: 0.002352 :: valid loss: 0.002433 :: err kld: 12908.751862 :: err wass: 7.792700
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 800/1112 :: train loss: 0.005818 :: kld loss: 3.270159 :: mse loss: 0.002548 :: valid loss: 0.002531 :: err kld: 18255.974682 :: err wass: 8.839200
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 900/1112 :: train loss: 0.005797 :: kld loss: 3.332496 :: mse loss: 0.002464 :: valid loss: 0.002484 :: err kld: 21470.779028 :: err wass: 8.849800
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 1000/1112 :: train loss: 0.005818 :: kld loss: 3.285900 :: mse loss: 0.002532 :: valid loss: 0.002452 :: err kld: 20439.319891 :: err wass: 8.782500
+Deembeder acc: 870/870
+Epoch: 8/15 :: Batch: 1100/1112 :: train loss: 0.005824 :: kld loss: 3.296995 :: mse loss: 0.002527 :: valid loss: 0.002420 :: err kld: 16181.454188 :: err wass: 8.380600
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 0/1112 :: train loss: 0.005897 :: kld loss: 3.316450 :: mse loss: 0.002580 :: valid loss: 0.002454 :: err kld: 13376.493987 :: err wass: 8.426600
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 100/1112 :: train loss: 0.005683 :: kld loss: 3.389083 :: mse loss: 0.002294 :: valid loss: 0.002476 :: err kld: 14548.287274 :: err wass: 7.815000
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 200/1112 :: train loss: 0.005633 :: kld loss: 3.231685 :: mse loss: 0.002401 :: valid loss: 0.002465 :: err kld: 17364.011219 :: err wass: 8.364200
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 300/1112 :: train loss: 0.005550 :: kld loss: 3.243080 :: mse loss: 0.002306 :: valid loss: 0.002463 :: err kld: 16165.535390 :: err wass: 8.035500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 400/1112 :: train loss: 0.005924 :: kld loss: 3.344938 :: mse loss: 0.002579 :: valid loss: 0.002445 :: err kld: 14955.218036 :: err wass: 9.401800
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 500/1112 :: train loss: 0.005664 :: kld loss: 3.265429 :: mse loss: 0.002399 :: valid loss: 0.002470 :: err kld: 18373.920948 :: err wass: 8.301900
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 600/1112 :: train loss: 0.005719 :: kld loss: 3.221586 :: mse loss: 0.002497 :: valid loss: 0.002451 :: err kld: 15047.073581 :: err wass: 8.755500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 700/1112 :: train loss: 0.005609 :: kld loss: 3.171133 :: mse loss: 0.002438 :: valid loss: 0.002478 :: err kld: 27801.664103 :: err wass: 9.187500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 800/1112 :: train loss: 0.005698 :: kld loss: 3.265445 :: mse loss: 0.002432 :: valid loss: 0.002440 :: err kld: 18071.272628 :: err wass: 8.650100
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 900/1112 :: train loss: 0.005756 :: kld loss: 3.363687 :: mse loss: 0.002393 :: valid loss: 0.002393 :: err kld: 15815.022666 :: err wass: 8.377200
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 1000/1112 :: train loss: 0.005854 :: kld loss: 3.354394 :: mse loss: 0.002500 :: valid loss: 0.002418 :: err kld: 13471.936751 :: err wass: 8.655500
+Deembeder acc: 870/870
+Epoch: 9/15 :: Batch: 1100/1112 :: train loss: 0.005758 :: kld loss: 3.401717 :: mse loss: 0.002356 :: valid loss: 0.002467 :: err kld: 22156.256996 :: err wass: 9.214200
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 0/1112 :: train loss: 0.005834 :: kld loss: 3.216549 :: mse loss: 0.002617 :: valid loss: 0.002515 :: err kld: 16884.778195 :: err wass: 8.720100
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 100/1112 :: train loss: 0.005649 :: kld loss: 3.285225 :: mse loss: 0.002364 :: valid loss: 0.002444 :: err kld: 13755.725517 :: err wass: 8.710600
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 200/1112 :: train loss: 0.005892 :: kld loss: 3.299210 :: mse loss: 0.002593 :: valid loss: 0.002509 :: err kld: 12830.881913 :: err wass: 9.066300
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 300/1112 :: train loss: 0.005882 :: kld loss: 3.339209 :: mse loss: 0.002543 :: valid loss: 0.002370 :: err kld: 18593.535577 :: err wass: 8.376800
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 400/1112 :: train loss: 0.005773 :: kld loss: 3.218707 :: mse loss: 0.002554 :: valid loss: 0.002475 :: err kld: 14459.741935 :: err wass: 8.388500
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 500/1112 :: train loss: 0.005630 :: kld loss: 3.195074 :: mse loss: 0.002435 :: valid loss: 0.002430 :: err kld: 26699.880138 :: err wass: 9.616100
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 600/1112 :: train loss: 0.005837 :: kld loss: 3.163952 :: mse loss: 0.002673 :: valid loss: 0.002424 :: err kld: 18903.135567 :: err wass: 8.981900
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 700/1112 :: train loss: 0.005852 :: kld loss: 3.222510 :: mse loss: 0.002630 :: valid loss: 0.002449 :: err kld: 14649.905384 :: err wass: 8.622500
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 800/1112 :: train loss: 0.005917 :: kld loss: 3.239974 :: mse loss: 0.002677 :: valid loss: 0.002487 :: err kld: 22672.174682 :: err wass: 8.424600
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 900/1112 :: train loss: 0.005759 :: kld loss: 3.244179 :: mse loss: 0.002515 :: valid loss: 0.002477 :: err kld: 21393.635673 :: err wass: 9.282500
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 1000/1112 :: train loss: 0.005741 :: kld loss: 3.177942 :: mse loss: 0.002563 :: valid loss: 0.002501 :: err kld: 27901.677468 :: err wass: 9.435500
+Deembeder acc: 870/870
+Epoch: 10/15 :: Batch: 1100/1112 :: train loss: 0.005872 :: kld loss: 3.317060 :: mse loss: 0.002555 :: valid loss: 0.002409 :: err kld: 17159.961650 :: err wass: 8.550700
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 0/1112 :: train loss: 0.005629 :: kld loss: 3.199086 :: mse loss: 0.002430 :: valid loss: 0.002483 :: err kld: 24808.708404 :: err wass: 9.081300
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 100/1112 :: train loss: 0.005742 :: kld loss: 3.266832 :: mse loss: 0.002475 :: valid loss: 0.002514 :: err kld: 15706.851832 :: err wass: 8.474000
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 200/1112 :: train loss: 0.005947 :: kld loss: 3.355940 :: mse loss: 0.002591 :: valid loss: 0.002400 :: err kld: 22703.581520 :: err wass: 8.312200
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 300/1112 :: train loss: 0.005671 :: kld loss: 3.266980 :: mse loss: 0.002404 :: valid loss: 0.002465 :: err kld: 15795.048356 :: err wass: 9.279600
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 400/1112 :: train loss: 0.005682 :: kld loss: 3.236680 :: mse loss: 0.002446 :: valid loss: 0.002412 :: err kld: 16858.646933 :: err wass: 8.658900
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 500/1112 :: train loss: 0.005514 :: kld loss: 3.266719 :: mse loss: 0.002247 :: valid loss: 0.002455 :: err kld: 13996.095687 :: err wass: 8.073900
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 600/1112 :: train loss: 0.005633 :: kld loss: 3.231040 :: mse loss: 0.002402 :: valid loss: 0.002460 :: err kld: 16133.659070 :: err wass: 7.747300
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 700/1112 :: train loss: 0.005766 :: kld loss: 3.266197 :: mse loss: 0.002500 :: valid loss: 0.002454 :: err kld: 19898.820985 :: err wass: 7.838300
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 800/1112 :: train loss: 0.005777 :: kld loss: 3.315256 :: mse loss: 0.002462 :: valid loss: 0.002417 :: err kld: 22646.290732 :: err wass: 8.390800
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 900/1112 :: train loss: 0.005742 :: kld loss: 3.228265 :: mse loss: 0.002514 :: valid loss: 0.002457 :: err kld: 21061.195644 :: err wass: 8.385200
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 1000/1112 :: train loss: 0.005644 :: kld loss: 3.316357 :: mse loss: 0.002328 :: valid loss: 0.002425 :: err kld: 21937.408033 :: err wass: 8.679400
+Deembeder acc: 870/870
+Epoch: 11/15 :: Batch: 1100/1112 :: train loss: 0.005761 :: kld loss: 3.257071 :: mse loss: 0.002504 :: valid loss: 0.002413 :: err kld: 17722.026907 :: err wass: 8.414500
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 0/1112 :: train loss: 0.005634 :: kld loss: 3.269052 :: mse loss: 0.002365 :: valid loss: 0.002405 :: err kld: 12794.919632 :: err wass: 8.908400
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 100/1112 :: train loss: 0.005475 :: kld loss: 3.175210 :: mse loss: 0.002300 :: valid loss: 0.002471 :: err kld: 24846.709313 :: err wass: 9.343300
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 200/1112 :: train loss: 0.005740 :: kld loss: 3.282705 :: mse loss: 0.002458 :: valid loss: 0.002396 :: err kld: 18380.591061 :: err wass: 8.962200
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 300/1112 :: train loss: 0.005716 :: kld loss: 3.306880 :: mse loss: 0.002409 :: valid loss: 0.002420 :: err kld: 18892.649589 :: err wass: 8.121400
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 400/1112 :: train loss: 0.005741 :: kld loss: 3.324250 :: mse loss: 0.002417 :: valid loss: 0.002417 :: err kld: 14798.566806 :: err wass: 8.575900
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 500/1112 :: train loss: 0.005655 :: kld loss: 3.330265 :: mse loss: 0.002325 :: valid loss: 0.002453 :: err kld: 13023.126378 :: err wass: 7.646400
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 600/1112 :: train loss: 0.005765 :: kld loss: 3.339054 :: mse loss: 0.002426 :: valid loss: 0.002370 :: err kld: 24760.765502 :: err wass: 9.259100
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 700/1112 :: train loss: 0.005606 :: kld loss: 3.289849 :: mse loss: 0.002316 :: valid loss: 0.002352 :: err kld: 13104.763629 :: err wass: 8.612300
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 800/1112 :: train loss: 0.005803 :: kld loss: 3.289420 :: mse loss: 0.002514 :: valid loss: 0.002391 :: err kld: 14661.179206 :: err wass: 8.004000
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 900/1112 :: train loss: 0.005654 :: kld loss: 3.404524 :: mse loss: 0.002250 :: valid loss: 0.002408 :: err kld: 22514.454184 :: err wass: 9.562900
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 1000/1112 :: train loss: 0.005815 :: kld loss: 3.265647 :: mse loss: 0.002549 :: valid loss: 0.002428 :: err kld: 12819.506957 :: err wass: 7.737200
+Deembeder acc: 870/870
+Epoch: 12/15 :: Batch: 1100/1112 :: train loss: 0.005844 :: kld loss: 3.242824 :: mse loss: 0.002601 :: valid loss: 0.002442 :: err kld: 19553.236547 :: err wass: 8.369600
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 0/1112 :: train loss: 0.005722 :: kld loss: 3.240374 :: mse loss: 0.002481 :: valid loss: 0.002428 :: err kld: 14370.033716 :: err wass: 8.651500
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 100/1112 :: train loss: 0.005774 :: kld loss: 3.301509 :: mse loss: 0.002472 :: valid loss: 0.002370 :: err kld: 17578.542043 :: err wass: 9.268200
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 200/1112 :: train loss: 0.005827 :: kld loss: 3.296219 :: mse loss: 0.002531 :: valid loss: 0.002376 :: err kld: 14105.426115 :: err wass: 8.216000
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 300/1112 :: train loss: 0.005681 :: kld6 loss: 3.214733 :: mse loss: 0.002467 :: valid loss: 0.002443 :: err kld: 21054.769447 :: err wass: 7.997200
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 400/1112 :: train loss: 0.005780 :: kld loss: 3.306421 :: mse loss: 0.002474 :: valid loss: 0.002386 :: err kld: 16565.034924 :: err wass: 8.281100
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 500/1112 :: train loss: 0.005845 :: kld loss: 3.341007 :: mse loss: 0.002504 :: valid loss: 0.002409 :: err kld: 14286.883392 :: err wass: 7.924500
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 600/1112 :: train loss: 0.005707 :: kld loss: 3.317456 :: mse loss: 0.002390 :: valid loss: 0.002413 :: err kld: 13315.257031 :: err wass: 7.703700
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 700/1112 :: train loss: 0.005816 :: kld loss: 3.358970 :: mse loss: 0.002457 :: valid loss: 0.002384 :: err kld: 21979.834893 :: err wass: 8.685300
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 800/1112 :: train loss: 0.005966 :: kld loss: 3.295808 :: mse loss: 0.002670 :: valid loss: 0.002419 :: err kld: 13992.637561 :: err wass: 7.839300
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 900/1112 :: train loss: 0.005996 :: kld loss: 3.335615 :: mse loss: 0.002661 :: valid loss: 0.002470 :: err kld: 24843.803717 :: err wass: 8.725600
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 1000/1112 :: train loss: 0.005467 :: kld loss: 3.321291 :: mse loss: 0.002146 :: valid loss: 0.002456 :: err kld: 14888.249364 :: err wass: 8.944300
+Deembeder acc: 870/870
+Epoch: 13/15 :: Batch: 1100/1112 :: train loss: 0.005770 :: kld loss: 3.220838 :: mse loss: 0.002550 :: valid loss: 0.002477 :: err kld: 15519.959210 :: err wass: 7.855300
+Saving autoencoder model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 0/1112 :: train loss: 0.005670 :: kld loss: 3.212658 :: mse loss: 0.002458 :: valid loss: 0.002381 :: err kld: 15225.303496 :: err wass: 7.420500
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 100/1112 :: train loss: 0.005598 :: kld loss: 3.303885 :: mse loss: 0.002295 :: valid loss: 0.002397 :: err kld: 11473.294030 :: err wass: 7.566800
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 200/1112 :: train loss: 0.005678 :: kld loss: 3.369570 :: mse loss: 0.002308 :: valid loss: 0.002337 :: err kld: 19815.790728 :: err wass: 8.447000
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 300/1112 :: train loss: 0.005675 :: kld loss: 3.305952 :: mse loss: 0.002369 :: valid loss: 0.002352 :: err kld: 15062.727545 :: err wass: 8.228900
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 400/1112 :: train loss: 0.005772 :: kld loss: 3.331095 :: mse loss: 0.002441 :: valid loss: 0.002449 :: err kld: 13535.580621 :: err wass: 8.147400
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 500/1112 :: train loss: 0.005671 :: kld loss: 3.260645 :: mse loss: 0.002410 :: valid loss: 0.002485 :: err kld: 15318.779269 :: err wass: 8.420700
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 600/1112 :: train loss: 0.005931 :: kld loss: 3.369380 :: mse loss: 0.002561 :: valid loss: 0.002377 :: err kld: 23876.458177 :: err wass: 8.456900
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 700/1112 :: train loss: 0.005671 :: kld loss: 3.346565 :: mse loss: 0.002324 :: valid loss: 0.002401 :: err kld: 23357.792147 :: err wass: 8.834100
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 800/1112 :: train loss: 0.005557 :: kld loss: 3.157318 :: mse loss: 0.002400 :: valid loss: 0.002481 :: err kld: 12742.497202 :: err wass: 8.442500
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 900/1112 :: train loss: 0.005660 :: kld loss: 3.235654 :: mse loss: 0.002424 :: valid loss: 0.002457 :: err kld: 16432.344578 :: err wass: 8.927000
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 1000/1112 :: train loss: 0.005594 :: kld loss: 3.223129 :: mse loss: 0.002371 :: valid loss: 0.002404 :: err kld: 23512.205329 :: err wass: 8.826000
+Deembeder acc: 870/870
+Epoch: 14/15 :: Batch: 1100/1112 :: train loss: 0.005912 :: kld loss: 3.401314 :: mse loss: 0.002510 :: valid loss: 0.002409 :: err kld: 23920.860156 :: err wass: 8.301900
+Saving autoencoder model
+Saving embed model
+Saving deembedder model

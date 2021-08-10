@@ -17,7 +17,7 @@ class Trainer(ITrainer):
     BATCH_SIZE = 128*8
     CRITIC_ITERATIONS = 2#10
     PRTCL_LATENT_SPACE_SIZE = 12
-    LR = 1e-5
+    LR = 5e-5
 
     errs_kld = []
     errs_wass = []

@@ -29,12 +29,10 @@ class RealGenDataSizeException(Exception):
 
 class ITrainer(ABC):
 
-    @abstractmethod
     @property
     def pdg_emb_cnt(self) -> int:
         return PDG_EMB_CNT
 
-    @abstractmethod
     @property
     def pdg_emb_dim(self) -> int:
         return PDG_EMB_DIM
