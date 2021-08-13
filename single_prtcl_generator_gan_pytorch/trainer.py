@@ -157,6 +157,7 @@ class Trainer(ITrainer):
                     )
 
                     self.errs_kld.append(err_kld)
+                    self.errs_wass.append(err_wass)
 
                     print(
                         f'Epoch: {str(epoch)}/{epochs} :: '

@@ -181,6 +181,9 @@ class Trainer(ITrainer):
                         batch=n_batch
                     )
 
+                    self.errs_kld.append(err_kld)
+                    self.errs_wass.append(err_wass)
+
                     valid_loss = self._valid_loss(encoder, decoder, embedder, data_valid)
 
                     print(
