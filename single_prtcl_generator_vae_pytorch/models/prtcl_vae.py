@@ -61,27 +61,27 @@ class PrtclVAE(nn.Module):
 
             nn.Linear(emb_features, 512),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(512, 2048),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(2048, 1024),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(1024, 512),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(512, 256),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(256, 128),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(128, latent_size),
 
@@ -91,26 +91,26 @@ class PrtclVAE(nn.Module):
 
             nn.Linear(latent_size, 128),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(128, 256),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(256, 512),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(512, 1024),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(1024, 2048),
             nn.Dropout(.1),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(2048, 512),
-            nn.Tanh(),
+            nn.LeakyReLU(.1),
 
             nn.Linear(512, emb_features),
 
