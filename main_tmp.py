@@ -22,22 +22,46 @@ def read_from_pickle(path):
 
 _win = 10
 
-errs_gan = read_from_pickle('data/errs_gan_lrelu.model')
-errs_wgan = read_from_pickle('data/errs_wgan_lrelu.model')
-errs_vae = read_from_pickle('data/errs_vae_lrelu.model')
+errs_gan_tanh = read_from_pickle('data/errs_gan_tanh.model')
+errs_wgan_tanh = read_from_pickle('data/errs_wgan_tanh.model')
+errs_vae_tanh = read_from_pickle('data/errs_vae_tanh.model')
 
-_errs_gan = mean_window(errs_gan[1], win_size=_win)
-_errs_gan = [_errs_gan[i] for i in range(11*15)]
+errs_gan_lrelu = read_from_pickle('data/errs_gan_lrelu.model')
+errs_wgan_lrelu = read_from_pickle('data/errs_wgan_lrelu.model')
+errs_vae_lrelu = read_from_pickle('data/errs_vae_lrelu.model')
 
-_errs_wgan = mean_window(errs_wgan[1], win_size=_win)
-_errs_wgan = [_errs_wgan[i] for i in range(11*15)]
+#GAN
+_errs_gan_tanh = mean_window(errs_gan_tanh[1], win_size=_win)
+_errs_gan_tanh = [_errs_gan_tanh[i] for i in range(11*15)]
 
-_errs_vae = mean_window(errs_vae[1], win_size=_win)
-_errs_vae = [_errs_vae[i] for i in range(11*15)]
+_errs_gan_lrelu = mean_window(errs_gan_lrelu[1], win_size=_win)
+_errs_gan_lrelu = [_errs_gan_lrelu[i] for i in range(11*15)]
 
+#WGAN
+_errs_wgan_lrelu = mean_window(errs_wgan_lrelu[1], win_size=_win)
+_errs_wgan_lrelu = [_errs_wgan_lrelu[i] for i in range(11*15)]
+
+_errs_wgan_tanh = mean_window(errs_wgan_tanh[1], win_size=_win)
+_errs_wgan_tanh = [_errs_wgan_tanh[i] for i in range(11*15)]
+
+#VAE
+_errs_vae_tanh = mean_window(errs_vae_tanh[1], win_size=_win)
+_errs_vae_tanh = [_errs_vae_tanh[i] for i in range(11*15)]
+
+_errs_vae_lrelu = mean_window(errs_vae_lrelu[1], win_size=_win)
+_errs_vae_lrelu = [_errs_vae_lrelu[i] for i in range(11*15)]
+
+plt.plot(_errs_gan_lrelu)
+plt.plot(_errs_gan_tanh)
+plt.legend(['tanh', 'leaky ReLU'])
+plt.show()
+
+'''
 plt.plot(_errs_gan)
 plt.plot(_errs_wgan)
 plt.plot(_errs_vae)
 plt.legend(['gan', 'wgan', 'vae'])
 
 plt.show()
+
+'''
