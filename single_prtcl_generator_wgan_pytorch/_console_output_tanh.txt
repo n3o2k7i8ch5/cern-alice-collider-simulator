@@ -1,5 +1,12 @@
+dan/MEGA/_Uni/praca_mgr/current/neural_networks/venv/bin/python /snap/pycharm-professional/254/plugins/python/helpers/pydev/pydevconsole.py --mode=client --port=41399
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks'])
+PyDev console: starting.
+Python 3.9.5 (default, May 11 2021, 08:20:37) 
+[GCC 10.3.0] on linux
+runfile('/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/single_prtcl_generator_wgan_pytorch/main.py', wdir='/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/single_prtcl_generator_wgan_pytorch')
 GPU is available
-TRAINING MODEL: BATCH_SIZE = 1024, PARTICLE_DIM: 48, EPOCHS: 20, PRTCL_LATENT_SPACE_SIZE: 12
+TRAINING MODEL: BATCH_SIZE = 1024, PARTICLE_DIM: 48, EPOCHS: 15, PRTCL_LATENT_SPACE_SIZE: 12
 GENERATOR
 PrtclGANGenerator(
   (_PrtclGANGenerator__net): Sequential(
@@ -78,562 +85,782 @@ PDGDeembedder(
     (7): Tanh()
   )
 )
-Deembeder acc: 0/870
-Epoch: 0/20 :: Batch: 0/1112 :: generator loss: -0.456451 :: critic loss: 0.987025 :: err kld: 71272.435928 :: err wass: 56.112300
-Deembeder acc: 64/870
-Epoch: 0/20 :: Batch: 100/1112 :: generator loss: -0.511219 :: critic loss: -0.120108 :: err kld: 56968.508108 :: err wass: 42.942900
-Deembeder acc: 533/870
-Epoch: 0/20 :: Batch: 200/1112 :: generator loss: -0.457119 :: critic loss: -0.161700 :: err kld: 60291.818265 :: err wass: 43.646100
-Deembeder acc: 782/870
-Epoch: 0/20 :: Batch: 300/1112 :: generator loss: -0.492563 :: critic loss: -0.128414 :: err kld: 65504.777169 :: err wass: 45.563900
-Deembeder acc: 834/870
-Epoch: 0/20 :: Batch: 400/1112 :: generator loss: -0.415763 :: critic loss: -0.163041 :: err kld: 58722.705027 :: err wass: 45.011100
-Deembeder acc: 850/870
-Epoch: 0/20 :: Batch: 500/1112 :: generator loss: -0.383567 :: critic loss: -0.099644 :: err kld: 57730.224705 :: err wass: 45.179200
-Deembeder acc: 857/870
-Epoch: 0/20 :: Batch: 600/1112 :: generator loss: -0.463194 :: critic loss: -0.080900 :: err kld: 62911.229455 :: err wass: 45.210900
-Deembeder acc: 864/870
-Epoch: 0/20 :: Batch: 700/1112 :: generator loss: -0.453681 :: critic loss: -0.069660 :: err kld: 56123.944474 :: err wass: 41.927200
-Deembeder acc: 867/870
-Epoch: 0/20 :: Batch: 800/1112 :: generator loss: -0.467339 :: critic loss: -0.036197 :: err kld: 59290.022549 :: err wass: 44.178900
+Deembeder acc: 1/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 0/1112 :: generator loss: -0.456396 :: critic loss: 0.984982 :: err kld: 67801.658814 :: err wass: 55.747100
+Deembeder acc: 74/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 100/1112 :: generator loss: -0.442561 :: critic loss: -0.298217 :: err kld: 66913.003278 :: err wass: 47.673200
+Deembeder acc: 560/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 200/1112 :: generator loss: -0.537499 :: critic loss: -0.118375 :: err kld: 56851.678761 :: err wass: 41.687400
+Deembeder acc: 802/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 300/1112 :: generator loss: -0.469138 :: critic loss: 0.026930 :: err kld: 62505.016867 :: err wass: 56.619400
+Deembeder acc: 845/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 400/1112 :: generator loss: -0.506584 :: critic loss: -0.035410 :: err kld: 59900.015982 :: err wass: 43.935500
+Deembeder acc: 856/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 500/1112 :: generator loss: -0.522678 :: critic loss: -0.002612 :: err kld: 57147.005960 :: err wass: 42.503200
+Deembeder acc: 860/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 600/1112 :: generator loss: -0.484930 :: critic loss: -0.094766 :: err kld: 61480.311581 :: err wass: 44.767800
+Deembeder acc: 862/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 700/1112 :: generator loss: -0.499688 :: critic loss: -0.015653 :: err kld: 58655.481673 :: err wass: 42.979900
+Deembeder acc: 866/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 800/1112 :: generator loss: -0.510708 :: critic loss: -0.023027 :: err kld: 63190.599768 :: err wass: 46.126000
 Deembeder acc: 868/870
-Epoch: 0/20 :: Batch: 900/1112 :: generator loss: -0.454422 :: critic loss: -0.066522 :: err kld: 55100.063911 :: err wass: 41.563500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 900/1112 :: generator loss: -0.483945 :: critic loss: -0.044276 :: err kld: 56632.491869 :: err wass: 42.091000
+Deembeder acc: 868/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 1000/1112 :: generator loss: -0.490265 :: critic loss: -0.067790 :: err kld: 59235.620367 :: err wass: 44.844400
 Deembeder acc: 869/870
-Epoch: 0/20 :: Batch: 1000/1112 :: generator loss: -0.502005 :: critic loss: -0.038390 :: err kld: 54182.928907 :: err wass: 40.605200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 0/15 :: Batch: 1100/1112 :: generator loss: -0.489810 :: critic loss: -0.033506 :: err kld: 43969.537853 :: err wass: 30.104600
+Saving generator model
+Saving critic model
+Saving embed model
+Saving deembedder model
+Deembeder acc: 869/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 0/1112 :: generator loss: -0.484358 :: critic loss: -0.093160 :: err kld: 39554.810255 :: err wass: 27.982600
+Deembeder acc: 869/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 100/1112 :: generator loss: -0.487908 :: critic loss: -0.051496 :: err kld: 34610.527732 :: err wass: 28.833500
+Deembeder acc: 869/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 200/1112 :: generator loss: -0.482733 :: critic loss: -0.037752 :: err kld: 53527.030773 :: err wass: 49.306000
 Deembeder acc: 870/870
-Epoch: 0/20 :: Batch: 1100/1112 :: generator loss: -0.534879 :: critic loss: -0.050865 :: err kld: 40660.660673 :: err wass: 26.413000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 300/1112 :: generator loss: -0.518985 :: critic loss: -0.072738 :: err kld: 47428.161019 :: err wass: 41.670000
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 400/1112 :: generator loss: -0.459754 :: critic loss: -0.067539 :: err kld: 26834.007557 :: err wass: 20.805300
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 500/1112 :: generator loss: -0.488903 :: critic loss: -0.072719 :: err kld: 37497.358059 :: err wass: 32.999100
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 600/1112 :: generator loss: -0.495471 :: critic loss: -0.007045 :: err kld: 29391.501182 :: err wass: 24.624500
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 700/1112 :: generator loss: -0.507371 :: critic loss: -0.020522 :: err kld: 32981.993761 :: err wass: 30.913100
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 800/1112 :: generator loss: -0.456157 :: critic loss: -0.054019 :: err kld: 29029.333627 :: err wass: 22.314200
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 900/1112 :: generator loss: -0.498600 :: critic loss: -0.054113 :: err kld: 27290.045093 :: err wass: 17.382400
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 1000/1112 :: generator loss: -0.532266 :: critic loss: -0.029596 :: err kld: 27403.150217 :: err wass: 20.733800
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 1/15 :: Batch: 1100/1112 :: generator loss: -0.463370 :: critic loss: -0.065805 :: err kld: 26566.075115 :: err wass: 17.873400
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 0/1112 :: generator loss: -0.542448 :: critic loss: -0.029607 :: err kld: 39510.390788 :: err wass: 26.601700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 0/1112 :: generator loss: -0.480748 :: critic loss: -0.045143 :: err kld: 29870.452837 :: err wass: 26.163700
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 100/1112 :: generator loss: -0.516630 :: critic loss: -0.028490 :: err kld: 43366.261154 :: err wass: 27.914300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 100/1112 :: generator loss: -0.518543 :: critic loss: -0.071591 :: err kld: 27908.369552 :: err wass: 27.217500
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 200/1112 :: generator loss: -0.479291 :: critic loss: -0.052416 :: err kld: 40564.372463 :: err wass: 35.046400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 200/1112 :: generator loss: -0.436471 :: critic loss: -0.061264 :: err kld: 34851.087112 :: err wass: 31.345100
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 300/1112 :: generator loss: -0.490993 :: critic loss: -0.019352 :: err kld: 36352.056958 :: err wass: 32.096500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 300/1112 :: generator loss: -0.448274 :: critic loss: -0.059719 :: err kld: 24546.921942 :: err wass: 16.304400
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 400/1112 :: generator loss: -0.516456 :: critic loss: -0.000465 :: err kld: 36281.191389 :: err wass: 28.377200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 400/1112 :: generator loss: -0.518753 :: critic loss: -0.113313 :: err kld: 27281.567398 :: err wass: 23.752800
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 500/1112 :: generator loss: -0.494630 :: critic loss: -0.089497 :: err kld: 33260.872752 :: err wass: 28.192300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 500/1112 :: generator loss: -0.560158 :: critic loss: -0.084414 :: err kld: 31132.794034 :: err wass: 26.272300
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 600/1112 :: generator loss: -0.512138 :: critic loss: -0.032955 :: err kld: 27060.629981 :: err wass: 22.050900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 600/1112 :: generator loss: -0.433166 :: critic loss: -0.111038 :: err kld: 31554.353010 :: err wass: 27.737300
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 700/1112 :: generator loss: -0.481091 :: critic loss: -0.030267 :: err kld: 35466.472528 :: err wass: 28.823700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 700/1112 :: generator loss: -0.441126 :: critic loss: -0.129982 :: err kld: 27609.040339 :: err wass: 20.997400
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 800/1112 :: generator loss: -0.474545 :: critic loss: -0.074612 :: err kld: 32731.164827 :: err wass: 25.375200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 800/1112 :: generator loss: -0.431001 :: critic loss: -0.126143 :: err kld: 24767.601060 :: err wass: 15.958200
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 900/1112 :: generator loss: -0.497196 :: critic loss: -0.035085 :: err kld: 31102.094252 :: err wass: 27.571900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 900/1112 :: generator loss: -0.518817 :: critic loss: -0.114403 :: err kld: 30131.171990 :: err wass: 26.247100
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 1000/1112 :: generator loss: -0.507285 :: critic loss: -0.083406 :: err kld: 30078.394703 :: err wass: 22.568000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 1000/1112 :: generator loss: -0.452194 :: critic loss: -0.097314 :: err kld: 29894.542535 :: err wass: 23.538000
 Deembeder acc: 870/870
-Epoch: 1/20 :: Batch: 1100/1112 :: generator loss: -0.510281 :: critic loss: -0.026937 :: err kld: 25287.461854 :: err wass: 17.528900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 2/15 :: Batch: 1100/1112 :: generator loss: -0.480176 :: critic loss: -0.143883 :: err kld: 26797.641003 :: err wass: 21.236400
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 0/1112 :: generator loss: -0.493003 :: critic loss: -0.074061 :: err kld: 25621.516248 :: err wass: 18.212900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 0/1112 :: generator loss: -0.399173 :: critic loss: -0.103788 :: err kld: 26619.678725 :: err wass: 21.906800
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 100/1112 :: generator loss: -0.500063 :: critic loss: -0.047661 :: err kld: 36073.568612 :: err wass: 30.860400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 100/1112 :: generator loss: -0.409841 :: critic loss: -0.125862 :: err kld: 24833.730538 :: err wass: 17.417200
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 200/1112 :: generator loss: -0.515364 :: critic loss: -0.051117 :: err kld: 25468.945285 :: err wass: 21.097400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 200/1112 :: generator loss: -0.562871 :: critic loss: -0.131526 :: err kld: 27575.921983 :: err wass: 22.108900
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 300/1112 :: generator loss: -0.521090 :: critic loss: -0.104780 :: err kld: 24886.040490 :: err wass: 15.804900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 300/1112 :: generator loss: -0.445335 :: critic loss: -0.110162 :: err kld: 28548.404250 :: err wass: 15.592600
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 400/1112 :: generator loss: -0.449047 :: critic loss: -0.116863 :: err kld: 26127.193408 :: err wass: 18.913400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 400/1112 :: generator loss: -0.429773 :: critic loss: -0.162445 :: err kld: 24705.182993 :: err wass: 15.762200
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 500/1112 :: generator loss: -0.415670 :: critic loss: -0.172784 :: err kld: 23881.291063 :: err wass: 15.799900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 500/1112 :: generator loss: -0.420679 :: critic loss: -0.140650 :: err kld: 23540.184655 :: err wass: 13.375700
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 600/1112 :: generator loss: -0.454312 :: critic loss: -0.196458 :: err kld: 23727.175156 :: err wass: 13.180200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 600/1112 :: generator loss: -0.355308 :: critic loss: -0.202521 :: err kld: 23993.120802 :: err wass: 15.022600
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 700/1112 :: generator loss: -0.423172 :: critic loss: -0.197711 :: err kld: 23674.947449 :: err wass: 17.266700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 700/1112 :: generator loss: -0.446878 :: critic loss: -0.170312 :: err kld: 23562.894103 :: err wass: 13.651300
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 800/1112 :: generator loss: -0.390230 :: critic loss: -0.195844 :: err kld: 24694.187042 :: err wass: 14.789900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 800/1112 :: generator loss: -0.363978 :: critic loss: -0.199711 :: err kld: 22980.679019 :: err wass: 13.644500
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 900/1112 :: generator loss: -0.419043 :: critic loss: -0.231454 :: err kld: 23286.105477 :: err wass: 11.128100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 900/1112 :: generator loss: -0.408029 :: critic loss: -0.204097 :: err kld: 23106.075534 :: err wass: 11.209200
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 1000/1112 :: generator loss: -0.427903 :: critic loss: -0.196271 :: err kld: 23278.693220 :: err wass: 12.800600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 1000/1112 :: generator loss: -0.373969 :: critic loss: -0.181248 :: err kld: 24744.200173 :: err wass: 16.140100
 Deembeder acc: 870/870
-Epoch: 2/20 :: Batch: 1100/1112 :: generator loss: -0.375989 :: critic loss: -0.199122 :: err kld: 23606.449567 :: err wass: 11.810200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 3/15 :: Batch: 1100/1112 :: generator loss: -0.388366 :: critic loss: -0.163330 :: err kld: 25251.986663 :: err wass: 15.429600
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 0/1112 :: generator loss: -0.364856 :: critic loss: -0.183194 :: err kld: 22887.018405 :: err wass: 11.004200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 0/1112 :: generator loss: -0.400223 :: critic loss: -0.178401 :: err kld: 24935.532970 :: err wass: 14.095600
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 100/1112 :: generator loss: -0.400526 :: critic loss: -0.203072 :: err kld: 22904.180114 :: err wass: 9.620000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 100/1112 :: generator loss: -0.369616 :: critic loss: -0.204977 :: err kld: 23955.829260 :: err wass: 11.925400
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 200/1112 :: generator loss: -0.433245 :: critic loss: -0.162023 :: err kld: 22894.703181 :: err wass: 9.799800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 200/1112 :: generator loss: -0.354853 :: critic loss: -0.164158 :: err kld: 24049.017345 :: err wass: 13.507500
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 300/1112 :: generator loss: -0.403604 :: critic loss: -0.175693 :: err kld: 22587.464522 :: err wass: 9.650400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 300/1112 :: generator loss: -0.384763 :: critic loss: -0.160677 :: err kld: 22117.181617 :: err wass: 10.515100
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 400/1112 :: generator loss: -0.396672 :: critic loss: -0.165862 :: err kld: 22486.749408 :: err wass: 8.446000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 400/1112 :: generator loss: -0.403649 :: critic loss: -0.159966 :: err kld: 22587.169906 :: err wass: 9.749300
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 500/1112 :: generator loss: -0.383976 :: critic loss: -0.171054 :: err kld: 23668.121027 :: err wass: 9.799300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 500/1112 :: generator loss: -0.422657 :: critic loss: -0.170604 :: err kld: 21829.894739 :: err wass: 8.480900
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 600/1112 :: generator loss: -0.409595 :: critic loss: -0.124748 :: err kld: 23138.220431 :: err wass: 10.919400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 600/1112 :: generator loss: -0.422858 :: critic loss: -0.148067 :: err kld: 23412.599457 :: err wass: 9.870200
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 700/1112 :: generator loss: -0.435028 :: critic loss: -0.124628 :: err kld: 24133.831891 :: err wass: 11.654400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 700/1112 :: generator loss: -0.437105 :: critic loss: -0.133957 :: err kld: 23024.692548 :: err wass: 9.389100
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 800/1112 :: generator loss: -0.417119 :: critic loss: -0.131916 :: err kld: 24320.146292 :: err wass: 10.751100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 800/1112 :: generator loss: -0.422935 :: critic loss: -0.131623 :: err kld: 21157.016144 :: err wass: 7.606800
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 900/1112 :: generator loss: -0.414341 :: critic loss: -0.111354 :: err kld: 22242.166925 :: err wass: 8.402900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 900/1112 :: generator loss: -0.429322 :: critic loss: -0.130198 :: err kld: 22367.519530 :: err wass: 9.218800
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 1000/1112 :: generator loss: -0.432908 :: critic loss: -0.143378 :: err kld: 22791.119133 :: err wass: 10.244300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 1000/1112 :: generator loss: -0.451082 :: critic loss: -0.110560 :: err kld: 22830.371773 :: err wass: 11.129000
 Deembeder acc: 870/870
-Epoch: 3/20 :: Batch: 1100/1112 :: generator loss: -0.372740 :: critic loss: -0.126006 :: err kld: 22046.212972 :: err wass: 8.971100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 4/15 :: Batch: 1100/1112 :: generator loss: -0.410848 :: critic loss: -0.112857 :: err kld: 22588.657461 :: err wass: 8.579200
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 0/1112 :: generator loss: -0.444826 :: critic loss: -0.107687 :: err kld: 23114.180482 :: err wass: 9.396000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 0/1112 :: generator loss: -0.425301 :: critic loss: -0.102096 :: err kld: 21040.357567 :: err wass: 7.136100
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 100/1112 :: generator loss: -0.428823 :: critic loss: -0.111512 :: err kld: 22730.504160 :: err wass: 9.929900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 100/1112 :: generator loss: -0.474229 :: critic loss: -0.117002 :: err kld: 22310.607838 :: err wass: 8.979500
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 200/1112 :: generator loss: -0.415346 :: critic loss: -0.118380 :: err kld: 22247.705133 :: err wass: 8.697500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 200/1112 :: generator loss: -0.462845 :: critic loss: -0.105822 :: err kld: 21545.505903 :: err wass: 8.689600
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 300/1112 :: generator loss: -0.397376 :: critic loss: -0.105376 :: err kld: 26506.151234 :: err wass: 12.296500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 300/1112 :: generator loss: -0.470578 :: critic loss: -0.085901 :: err kld: 21502.065605 :: err wass: 8.392200
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 400/1112 :: generator loss: -0.399385 :: critic loss: -0.116767 :: err kld: 24165.531796 :: err wass: 10.734800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 400/1112 :: generator loss: -0.446299 :: critic loss: -0.109591 :: err kld: 21484.674490 :: err wass: 8.841300
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 500/1112 :: generator loss: -0.466148 :: critic loss: -0.098788 :: err kld: 23585.770492 :: err wass: 13.275200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 500/1112 :: generator loss: -0.446085 :: critic loss: -0.082702 :: err kld: 21330.262178 :: err wass: 7.555300
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 600/1112 :: generator loss: -0.458196 :: critic loss: -0.069525 :: err kld: 25433.575644 :: err wass: 11.861000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 600/1112 :: generator loss: -0.484486 :: critic loss: -0.086156 :: err kld: 21550.646073 :: err wass: 8.758700
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 700/1112 :: generator loss: -0.380323 :: critic loss: -0.124271 :: err kld: 21949.602280 :: err wass: 9.033500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 700/1112 :: generator loss: -0.528159 :: critic loss: -0.070065 :: err kld: 21559.911471 :: err wass: 7.697900
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 800/1112 :: generator loss: -0.421416 :: critic loss: -0.093216 :: err kld: 22437.833245 :: err wass: 8.901800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 800/1112 :: generator loss: -0.491058 :: critic loss: -0.112776 :: err kld: 21225.885293 :: err wass: 8.674800
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 900/1112 :: generator loss: -0.542938 :: critic loss: -0.068950 :: err kld: 21373.306225 :: err wass: 9.290300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 900/1112 :: generator loss: -0.475910 :: critic loss: -0.099680 :: err kld: 20995.019666 :: err wass: 7.269700
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 1000/1112 :: generator loss: -0.439189 :: critic loss: -0.086657 :: err kld: 22273.183557 :: err wass: 9.439500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 1000/1112 :: generator loss: -0.466607 :: critic loss: -0.103628 :: err kld: 22020.156421 :: err wass: 12.091700
 Deembeder acc: 870/870
-Epoch: 4/20 :: Batch: 1100/1112 :: generator loss: -0.426722 :: critic loss: -0.082981 :: err kld: 21064.054928 :: err wass: 7.574600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 5/15 :: Batch: 1100/1112 :: generator loss: -0.423363 :: critic loss: -0.130387 :: err kld: 21551.955726 :: err wass: 8.696300
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 0/1112 :: generator loss: -0.462618 :: critic loss: -0.093916 :: err kld: 22322.386808 :: err wass: 11.289700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 0/1112 :: generator loss: -0.503055 :: critic loss: -0.075888 :: err kld: 21121.810282 :: err wass: 8.764100
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 100/1112 :: generator loss: -0.367765 :: critic loss: -0.123929 :: err kld: 21463.784016 :: err wass: 9.266000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 100/1112 :: generator loss: -0.513045 :: critic loss: -0.092876 :: err kld: 21322.509975 :: err wass: 9.448600
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 200/1112 :: generator loss: -0.431649 :: critic loss: -0.139076 :: err kld: 21540.243256 :: err wass: 9.864200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 200/1112 :: generator loss: -0.477994 :: critic loss: -0.093813 :: err kld: 21644.436904 :: err wass: 7.954800
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 300/1112 :: generator loss: -0.499819 :: critic loss: -0.061380 :: err kld: 22480.114588 :: err wass: 9.219100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 300/1112 :: generator loss: -0.520495 :: critic loss: -0.077337 :: err kld: 21658.939473 :: err wass: 7.166400
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 400/1112 :: generator loss: -0.382570 :: critic loss: -0.101922 :: err kld: 23986.325271 :: err wass: 12.361200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 400/1112 :: generator loss: -0.484838 :: critic loss: -0.092613 :: err kld: 21942.614750 :: err wass: 8.717400
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 500/1112 :: generator loss: -0.490790 :: critic loss: -0.048654 :: err kld: 22196.201432 :: err wass: 8.795400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 500/1112 :: generator loss: -0.493753 :: critic loss: -0.066834 :: err kld: 21802.283449 :: err wass: 8.150900
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 600/1112 :: generator loss: -0.373604 :: critic loss: -0.140829 :: err kld: 23129.059094 :: err wass: 12.467200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 600/1112 :: generator loss: -0.473984 :: critic loss: -0.097071 :: err kld: 21040.239226 :: err wass: 8.089600
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 700/1112 :: generator loss: -0.430690 :: critic loss: -0.083294 :: err kld: 23042.701489 :: err wass: 9.462900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 700/1112 :: generator loss: -0.439927 :: critic loss: -0.092164 :: err kld: 20377.875776 :: err wass: 7.894500
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 800/1112 :: generator loss: -0.432169 :: critic loss: -0.087623 :: err kld: 20567.356652 :: err wass: 7.429100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 800/1112 :: generator loss: -0.488235 :: critic loss: -0.093104 :: err kld: 22108.870873 :: err wass: 9.574200
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 900/1112 :: generator loss: -0.461717 :: critic loss: -0.085889 :: err kld: 21750.041852 :: err wass: 8.695600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 900/1112 :: generator loss: -0.541501 :: critic loss: -0.038750 :: err kld: 21170.906554 :: err wass: 7.967700
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 1000/1112 :: generator loss: -0.495307 :: critic loss: -0.058850 :: err kld: 26229.024786 :: err wass: 13.306800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 1000/1112 :: generator loss: -0.474059 :: critic loss: -0.082311 :: err kld: 19812.032239 :: err wass: 6.427700
 Deembeder acc: 870/870
-Epoch: 5/20 :: Batch: 1100/1112 :: generator loss: -0.426712 :: critic loss: -0.102503 :: err kld: 22761.188884 :: err wass: 12.121700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 6/15 :: Batch: 1100/1112 :: generator loss: -0.523441 :: critic loss: -0.055836 :: err kld: 21480.296899 :: err wass: 7.278400
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 0/1112 :: generator loss: -0.455070 :: critic loss: -0.055262 :: err kld: 22154.640297 :: err wass: 8.981000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 0/1112 :: generator loss: -0.487820 :: critic loss: -0.091438 :: err kld: 21131.897428 :: err wass: 7.465200
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 100/1112 :: generator loss: -0.430943 :: critic loss: -0.090885 :: err kld: 21320.896519 :: err wass: 9.873300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 100/1112 :: generator loss: -0.490853 :: critic loss: -0.081530 :: err kld: 22155.351820 :: err wass: 8.069800
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 200/1112 :: generator loss: -0.429418 :: critic loss: -0.116478 :: err kld: 21949.537183 :: err wass: 10.041900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 200/1112 :: generator loss: -0.531372 :: critic loss: -0.074195 :: err kld: 22086.283898 :: err wass: 9.201000
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 300/1112 :: generator loss: -0.496280 :: critic loss: -0.079803 :: err kld: 20823.906970 :: err wass: 7.130000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 300/1112 :: generator loss: -0.488647 :: critic loss: -0.067974 :: err kld: 20785.027803 :: err wass: 7.410100
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 400/1112 :: generator loss: -0.492091 :: critic loss: -0.064710 :: err kld: 24150.809035 :: err wass: 11.456800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 400/1112 :: generator loss: -0.461640 :: critic loss: -0.084407 :: err kld: 20277.025542 :: err wass: 6.540600
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 500/1112 :: generator loss: -0.524463 :: critic loss: -0.078492 :: err kld: 21691.556897 :: err wass: 9.538000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 500/1112 :: generator loss: -0.499192 :: critic loss: -0.076908 :: err kld: 23386.992946 :: err wass: 9.687800
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 600/1112 :: generator loss: -0.470311 :: critic loss: -0.056593 :: err kld: 22103.209818 :: err wass: 9.213900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 600/1112 :: generator loss: -0.472098 :: critic loss: -0.091035 :: err kld: 20952.196229 :: err wass: 7.803800
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 700/1112 :: generator loss: -0.480762 :: critic loss: -0.098892 :: err kld: 21233.224893 :: err wass: 7.771800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 700/1112 :: generator loss: -0.523700 :: critic loss: -0.057584 :: err kld: 20795.287715 :: err wass: 7.926700
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 800/1112 :: generator loss: -0.481224 :: critic loss: -0.093812 :: err kld: 21696.853636 :: err wass: 8.400300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 800/1112 :: generator loss: -0.506609 :: critic loss: -0.082699 :: err kld: 22774.000626 :: err wass: 10.514300
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 900/1112 :: generator loss: -0.465724 :: critic loss: -0.065784 :: err kld: 22198.197932 :: err wass: 9.361800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 900/1112 :: generator loss: -0.541985 :: critic loss: -0.056366 :: err kld: 20930.267240 :: err wass: 7.654300
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 1000/1112 :: generator loss: -0.493342 :: critic loss: -0.081378 :: err kld: 21718.792634 :: err wass: 8.149800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 1000/1112 :: generator loss: -0.512029 :: critic loss: -0.096323 :: err kld: 20645.875068 :: err wass: 8.034700
 Deembeder acc: 870/870
-Epoch: 6/20 :: Batch: 1100/1112 :: generator loss: -0.501377 :: critic loss: -0.047826 :: err kld: 20483.923834 :: err wass: 7.646900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 7/15 :: Batch: 1100/1112 :: generator loss: -0.486696 :: critic loss: -0.110113 :: err kld: 21039.473036 :: err wass: 6.769700
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 0/1112 :: generator loss: -0.446103 :: critic loss: -0.081320 :: err kld: 20333.976707 :: err wass: 7.877100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 0/1112 :: generator loss: -0.568406 :: critic loss: -0.061689 :: err kld: 19834.180863 :: err wass: 5.556500
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 100/1112 :: generator loss: -0.454458 :: critic loss: -0.089187 :: err kld: 23542.083210 :: err wass: 13.993100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 100/1112 :: generator loss: -0.498091 :: critic loss: -0.101144 :: err kld: 21100.329031 :: err wass: 7.929200
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 200/1112 :: generator loss: -0.483990 :: critic loss: -0.063172 :: err kld: 22391.722669 :: err wass: 9.626100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 200/1112 :: generator loss: -0.546990 :: critic loss: -0.041211 :: err kld: 20465.235453 :: err wass: 8.423700
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 300/1112 :: generator loss: -0.508580 :: critic loss: -0.064434 :: err kld: 21561.622444 :: err wass: 9.108300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 300/1112 :: generator loss: -0.493904 :: critic loss: -0.077542 :: err kld: 21948.892696 :: err wass: 8.381500
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 400/1112 :: generator loss: -0.477370 :: critic loss: -0.088095 :: err kld: 20084.504873 :: err wass: 6.696900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 400/1112 :: generator loss: -0.464495 :: critic loss: -0.121315 :: err kld: 21435.758407 :: err wass: 8.492900
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 500/1112 :: generator loss: -0.568868 :: critic loss: -0.058957 :: err kld: 21568.174660 :: err wass: 8.913700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 500/1112 :: generator loss: -0.443382 :: critic loss: -0.077587 :: err kld: 20437.816452 :: err wass: 7.451400
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 600/1112 :: generator loss: -0.541023 :: critic loss: -0.045663 :: err kld: 20768.206836 :: err wass: 9.206000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 600/1112 :: generator loss: -0.452551 :: critic loss: -0.092411 :: err kld: 20264.143631 :: err wass: 7.435600
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 700/1112 :: generator loss: -0.461895 :: critic loss: -0.081108 :: err kld: 22458.841873 :: err wass: 10.630400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 700/1112 :: generator loss: -0.488238 :: critic loss: -0.061995 :: err kld: 21233.226501 :: err wass: 6.400600
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 800/1112 :: generator loss: -0.508647 :: critic loss: -0.067175 :: err kld: 20735.799110 :: err wass: 7.714600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 800/1112 :: generator loss: -0.453615 :: critic loss: -0.083132 :: err kld: 22481.624672 :: err wass: 13.331500
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 900/1112 :: generator loss: -0.467867 :: critic loss: -0.139663 :: err kld: 21833.177992 :: err wass: 8.377500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 900/1112 :: generator loss: -0.478524 :: critic loss: -0.073903 :: err kld: 20934.055081 :: err wass: 8.863300
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 1000/1112 :: generator loss: -0.486387 :: critic loss: -0.058778 :: err kld: 21173.872553 :: err wass: 8.757000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 1000/1112 :: generator loss: -0.415282 :: critic loss: -0.090170 :: err kld: 20949.659833 :: err wass: 7.687100
 Deembeder acc: 870/870
-Epoch: 7/20 :: Batch: 1100/1112 :: generator loss: -0.555827 :: critic loss: -0.035783 :: err kld: 21381.549046 :: err wass: 7.956000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 8/15 :: Batch: 1100/1112 :: generator loss: -0.469441 :: critic loss: -0.065826 :: err kld: 22047.181672 :: err wass: 9.227300
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 0/1112 :: generator loss: -0.467548 :: critic loss: -0.099501 :: err kld: 20473.050344 :: err wass: 8.457500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 0/1112 :: generator loss: -0.482808 :: critic loss: -0.087174 :: err kld: 20805.401651 :: err wass: 8.675400
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 100/1112 :: generator loss: -0.421149 :: critic loss: -0.114939 :: err kld: 20441.504825 :: err wass: 6.532500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 100/1112 :: generator loss: -0.438742 :: critic loss: -0.070647 :: err kld: 20726.820454 :: err wass: 7.848400
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 200/1112 :: generator loss: -0.530910 :: critic loss: -0.072661 :: err kld: 22861.601269 :: err wass: 9.652100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 200/1112 :: generator loss: -0.443759 :: critic loss: -0.089785 :: err kld: 20156.408762 :: err wass: 7.073500
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 300/1112 :: generator loss: -0.495227 :: critic loss: -0.071835 :: err kld: 20610.137928 :: err wass: 7.999300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 300/1112 :: generator loss: -0.428271 :: critic loss: -0.088459 :: err kld: 22153.089002 :: err wass: 11.467300
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 400/1112 :: generator loss: -0.507428 :: critic loss: -0.040777 :: err kld: 20522.996030 :: err wass: 8.415600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 400/1112 :: generator loss: -0.443238 :: critic loss: -0.071605 :: err kld: 20705.785319 :: err wass: 8.150000
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 500/1112 :: generator loss: -0.542545 :: critic loss: -0.058507 :: err kld: 20792.013121 :: err wass: 8.793000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 500/1112 :: generator loss: -0.403885 :: critic loss: -0.081365 :: err kld: 21651.134847 :: err wass: 7.595200
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 600/1112 :: generator loss: -0.524591 :: critic loss: -0.043412 :: err kld: 21297.514625 :: err wass: 8.409000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 600/1112 :: generator loss: -0.446305 :: critic loss: -0.069869 :: err kld: 21025.648499 :: err wass: 8.161300
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 700/1112 :: generator loss: -0.527570 :: critic loss: -0.075281 :: err kld: 23573.473561 :: err wass: 10.708100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 700/1112 :: generator loss: -0.483833 :: critic loss: -0.065445 :: err kld: 20282.055911 :: err wass: 7.503100
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 800/1112 :: generator loss: -0.443026 :: critic loss: -0.048006 :: err kld: 21800.027798 :: err wass: 8.280600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 800/1112 :: generator loss: -0.467179 :: critic loss: -0.055379 :: err kld: 19886.186892 :: err wass: 6.592000
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 900/1112 :: generator loss: -0.436960 :: critic loss: -0.100477 :: err kld: 20685.694168 :: err wass: 7.654700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 900/1112 :: generator loss: -0.407915 :: critic loss: -0.104367 :: err kld: 20683.948068 :: err wass: 9.270900
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 1000/1112 :: generator loss: -0.512009 :: critic loss: -0.083133 :: err kld: 21428.728331 :: err wass: 8.014100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 1000/1112 :: generator loss: -0.421641 :: critic loss: -0.115351 :: err kld: 20261.589495 :: err wass: 6.685500
 Deembeder acc: 870/870
-Epoch: 8/20 :: Batch: 1100/1112 :: generator loss: -0.507920 :: critic loss: -0.051755 :: err kld: 23535.924017 :: err wass: 11.547700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 9/15 :: Batch: 1100/1112 :: generator loss: -0.448732 :: critic loss: -0.067213 :: err kld: 21455.745814 :: err wass: 8.423700
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 0/1112 :: generator loss: -0.482139 :: critic loss: -0.077237 :: err kld: 23848.979029 :: err wass: 10.020600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 0/1112 :: generator loss: -0.428653 :: critic loss: -0.078503 :: err kld: 20463.777888 :: err wass: 6.589400
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 100/1112 :: generator loss: -0.500029 :: critic loss: -0.060257 :: err kld: 22227.847689 :: err wass: 11.460500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 100/1112 :: generator loss: -0.466943 :: critic loss: -0.058913 :: err kld: 21089.032923 :: err wass: 8.736900
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 200/1112 :: generator loss: -0.503525 :: critic loss: -0.081176 :: err kld: 21351.437512 :: err wass: 9.446900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 200/1112 :: generator loss: -0.452717 :: critic loss: -0.056960 :: err kld: 21867.914112 :: err wass: 7.519300
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 300/1112 :: generator loss: -0.477817 :: critic loss: -0.058999 :: err kld: 20712.214055 :: err wass: 8.891600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 300/1112 :: generator loss: -0.429555 :: critic loss: -0.064056 :: err kld: 20594.839567 :: err wass: 6.897600
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 400/1112 :: generator loss: -0.468011 :: critic loss: -0.071017 :: err kld: 20784.434007 :: err wass: 8.526300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 400/1112 :: generator loss: -0.432810 :: critic loss: -0.086439 :: err kld: 21013.554087 :: err wass: 8.941800
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 500/1112 :: generator loss: -0.509772 :: critic loss: -0.043915 :: err kld: 22908.681162 :: err wass: 8.808200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 500/1112 :: generator loss: -0.427167 :: critic loss: -0.086383 :: err kld: 21838.041800 :: err wass: 8.607800
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 600/1112 :: generator loss: -0.485189 :: critic loss: -0.062996 :: err kld: 23196.548335 :: err wass: 10.279000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 600/1112 :: generator loss: -0.477092 :: critic loss: -0.071496 :: err kld: 20242.034460 :: err wass: 7.417800
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 700/1112 :: generator loss: -0.403300 :: critic loss: -0.081630 :: err kld: 21340.848977 :: err wass: 8.384200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 700/1112 :: generator loss: -0.457925 :: critic loss: -0.085316 :: err kld: 22590.848096 :: err wass: 8.575500
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 800/1112 :: generator loss: -0.482072 :: critic loss: -0.096847 :: err kld: 20621.504236 :: err wass: 7.934100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 800/1112 :: generator loss: -0.459769 :: critic loss: -0.069052 :: err kld: 20240.078883 :: err wass: 7.030100
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 900/1112 :: generator loss: -0.466785 :: critic loss: -0.081702 :: err kld: 20424.287087 :: err wass: 8.642700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 900/1112 :: generator loss: -0.434295 :: critic loss: -0.084217 :: err kld: 20589.219329 :: err wass: 5.765700
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 1000/1112 :: generator loss: -0.512995 :: critic loss: -0.074145 :: err kld: 24183.249911 :: err wass: 9.888300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 1000/1112 :: generator loss: -0.445352 :: critic loss: -0.072917 :: err kld: 22270.014557 :: err wass: 8.879900
 Deembeder acc: 870/870
-Epoch: 9/20 :: Batch: 1100/1112 :: generator loss: -0.391941 :: critic loss: -0.064852 :: err kld: 23646.244172 :: err wass: 11.676300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 10/15 :: Batch: 1100/1112 :: generator loss: -0.445241 :: critic loss: -0.055351 :: err kld: 22158.102255 :: err wass: 8.696600
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 0/1112 :: generator loss: -0.438724 :: critic loss: -0.070158 :: err kld: 21572.061899 :: err wass: 8.693200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 0/1112 :: generator loss: -0.382949 :: critic loss: -0.069422 :: err kld: 20369.554543 :: err wass: 8.394300
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 100/1112 :: generator loss: -0.456634 :: critic loss: -0.044877 :: err kld: 20112.406183 :: err wass: 8.030700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 100/1112 :: generator loss: -0.386477 :: critic loss: -0.084108 :: err kld: 21041.138063 :: err wass: 8.418200
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 200/1112 :: generator loss: -0.366231 :: critic loss: -0.101479 :: err kld: 20353.957055 :: err wass: 6.732400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 200/1112 :: generator loss: -0.403108 :: critic loss: -0.065814 :: err kld: 19598.840037 :: err wass: 6.255900
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 300/1112 :: generator loss: -0.379901 :: critic loss: -0.087287 :: err kld: 20195.073507 :: err wass: 7.516000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 300/1112 :: generator loss: -0.441711 :: critic loss: -0.057322 :: err kld: 20212.018812 :: err wass: 6.609200
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 400/1112 :: generator loss: -0.384452 :: critic loss: -0.083595 :: err kld: 21363.268369 :: err wass: 8.043700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 400/1112 :: generator loss: -0.404505 :: critic loss: -0.082381 :: err kld: 22006.754887 :: err wass: 8.844600
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 500/1112 :: generator loss: -0.429672 :: critic loss: -0.119310 :: err kld: 22697.467132 :: err wass: 8.425800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 500/1112 :: generator loss: -0.387773 :: critic loss: -0.071937 :: err kld: 21862.766782 :: err wass: 7.075300
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 600/1112 :: generator loss: -0.371594 :: critic loss: -0.082759 :: err kld: 22094.202825 :: err wass: 11.203100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 600/1112 :: generator loss: -0.407080 :: critic loss: -0.073273 :: err kld: 21074.144847 :: err wass: 8.069000
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 700/1112 :: generator loss: -0.398961 :: critic loss: -0.068402 :: err kld: 19733.935762 :: err wass: 5.736700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 700/1112 :: generator loss: -0.393645 :: critic loss: -0.074559 :: err kld: 25974.607692 :: err wass: 11.784000
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 800/1112 :: generator loss: -0.446469 :: critic loss: -0.049988 :: err kld: 19403.957248 :: err wass: 6.396900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 800/1112 :: generator loss: -0.407412 :: critic loss: -0.078578 :: err kld: 20005.500081 :: err wass: 10.413900
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 900/1112 :: generator loss: -0.508251 :: critic loss: -0.045425 :: err kld: 19468.325265 :: err wass: 5.470200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 900/1112 :: generator loss: -0.406116 :: critic loss: -0.066773 :: err kld: 24969.259797 :: err wass: 9.261700
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 1000/1112 :: generator loss: -0.460757 :: critic loss: -0.022805 :: err kld: 20387.025714 :: err wass: 7.382500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 1000/1112 :: generator loss: -0.376783 :: critic loss: -0.079267 :: err kld: 23824.550999 :: err wass: 11.567600
 Deembeder acc: 870/870
-Epoch: 10/20 :: Batch: 1100/1112 :: generator loss: -0.389524 :: critic loss: -0.085402 :: err kld: 19777.010117 :: err wass: 6.676700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 11/15 :: Batch: 1100/1112 :: generator loss: -0.387252 :: critic loss: -0.063087 :: err kld: 21517.521529 :: err wass: 8.317800
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 0/1112 :: generator loss: -0.423331 :: critic loss: -0.072631 :: err kld: 20763.140404 :: err wass: 8.427800
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 0/1112 :: generator loss: -0.387652 :: critic loss: -0.060277 :: err kld: 23590.298342 :: err wass: 10.408000
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 100/1112 :: generator loss: -0.376750 :: critic loss: -0.107744 :: err kld: 20282.585345 :: err wass: 7.583500
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 100/1112 :: generator loss: -0.430534 :: critic loss: -0.057041 :: err kld: 19758.673905 :: err wass: 6.723000
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 200/1112 :: generator loss: -0.398868 :: critic loss: -0.149221 :: err kld: 21510.510083 :: err wass: 9.280400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 200/1112 :: generator loss: -0.400125 :: critic loss: -0.060349 :: err kld: 20228.853638 :: err wass: 8.745800
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 300/1112 :: generator loss: -0.381575 :: critic loss: -0.066223 :: err kld: 22426.734560 :: err wass: 8.493000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 300/1112 :: generator loss: -0.365707 :: critic loss: -0.123925 :: err kld: 20107.487236 :: err wass: 10.047000
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 400/1112 :: generator loss: -0.400768 :: critic loss: -0.119154 :: err kld: 20236.736862 :: err wass: 7.003600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 400/1112 :: generator loss: -0.363724 :: critic loss: -0.085635 :: err kld: 18689.935967 :: err wass: 5.572900
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 500/1112 :: generator loss: -0.387101 :: critic loss: -0.070564 :: err kld: 19908.977269 :: err wass: 6.300100
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 500/1112 :: generator loss: -0.371414 :: critic loss: -0.085687 :: err kld: 20458.625582 :: err wass: 8.740000
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 600/1112 :: generator loss: -0.386566 :: critic loss: -0.071528 :: err kld: 20323.354364 :: err wass: 6.338600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 600/1112 :: generator loss: -0.363559 :: critic loss: -0.071250 :: err kld: 23977.735882 :: err wass: 10.834000
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 700/1112 :: generator loss: -0.412190 :: critic loss: -0.028334 :: err kld: 23110.303564 :: err wass: 10.859900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 700/1112 :: generator loss: -0.432721 :: critic loss: -0.056627 :: err kld: 22142.328205 :: err wass: 10.083200
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 800/1112 :: generator loss: -0.427376 :: critic loss: -0.058140 :: err kld: 21614.084692 :: err wass: 7.925000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 800/1112 :: generator loss: -0.418182 :: critic loss: -0.060119 :: err kld: 20603.602060 :: err wass: 10.571900
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 900/1112 :: generator loss: -0.430855 :: critic loss: -0.071322 :: err kld: 20779.241091 :: err wass: 7.027400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 900/1112 :: generator loss: -0.392688 :: critic loss: -0.079530 :: err kld: 20535.979786 :: err wass: 8.331600
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 1000/1112 :: generator loss: -0.438083 :: critic loss: -0.063832 :: err kld: 19684.671716 :: err wass: 5.472000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 1000/1112 :: generator loss: -0.381869 :: critic loss: -0.068283 :: err kld: 20177.659028 :: err wass: 7.015100
 Deembeder acc: 870/870
-Epoch: 11/20 :: Batch: 1100/1112 :: generator loss: -0.375462 :: critic loss: -0.063152 :: err kld: 19062.647909 :: err wass: 5.465900
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 12/15 :: Batch: 1100/1112 :: generator loss: -0.402708 :: critic loss: -0.081216 :: err kld: 20808.630901 :: err wass: 11.344500
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 0/1112 :: generator loss: -0.395701 :: critic loss: -0.076438 :: err kld: 21645.860773 :: err wass: 6.838300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 0/1112 :: generator loss: -0.388107 :: critic loss: -0.068052 :: err kld: 20420.681648 :: err wass: 10.223400
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 100/1112 :: generator loss: -0.375583 :: critic loss: -0.093453 :: err kld: 24459.009413 :: err wass: 10.710200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 100/1112 :: generator loss: -0.344119 :: critic loss: -0.111283 :: err kld: 21091.361712 :: err wass: 8.527100
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 200/1112 :: generator loss: -0.403411 :: critic loss: -0.054033 :: err kld: 19079.824581 :: err wass: 5.910700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 200/1112 :: generator loss: -0.402625 :: critic loss: -0.082626 :: err kld: 21999.035177 :: err wass: 10.334900
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 300/1112 :: generator loss: -0.412341 :: critic loss: -0.093833 :: err kld: 18818.692813 :: err wass: 4.566300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 300/1112 :: generator loss: -0.424493 :: critic loss: -0.079704 :: err kld: 20568.950232 :: err wass: 10.222700
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 400/1112 :: generator loss: -0.455242 :: critic loss: -0.082955 :: err kld: 19249.993482 :: err wass: 7.374000
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 400/1112 :: generator loss: -0.439434 :: critic loss: -0.080469 :: err kld: 20652.306340 :: err wass: 9.235700
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 500/1112 :: generator loss: -0.367004 :: critic loss: -0.084060 :: err kld: 22059.126401 :: err wass: 8.132300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 500/1112 :: generator loss: -0.347094 :: critic loss: -0.107654 :: err kld: 20438.678449 :: err wass: 9.609200
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 600/1112 :: generator loss: -0.413250 :: critic loss: -0.080795 :: err kld: 19100.292561 :: err wass: 6.206400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 600/1112 :: generator loss: -0.362582 :: critic loss: -0.082157 :: err kld: 20516.781798 :: err wass: 10.115500
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 700/1112 :: generator loss: -0.367518 :: critic loss: -0.086772 :: err kld: 20143.843036 :: err wass: 8.764600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 700/1112 :: generator loss: -0.342788 :: critic loss: -0.093592 :: err kld: 19956.440187 :: err wass: 6.919600
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 800/1112 :: generator loss: -0.354417 :: critic loss: -0.059597 :: err kld: 23114.151566 :: err wass: 9.728700
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 800/1112 :: generator loss: -0.355063 :: critic loss: -0.060043 :: err kld: 19231.934218 :: err wass: 6.193200
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 900/1112 :: generator loss: -0.381868 :: critic loss: -0.070161 :: err kld: 18910.242609 :: err wass: 6.114400
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 900/1112 :: generator loss: -0.393440 :: critic loss: -0.064313 :: err kld: 22780.833084 :: err wass: 12.592100
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 1000/1112 :: generator loss: -0.414039 :: critic loss: -0.068789 :: err kld: 18627.735449 :: err wass: 5.728200
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 1000/1112 :: generator loss: -0.422821 :: critic loss: -0.052892 :: err kld: 20926.979763 :: err wass: 7.873600
 Deembeder acc: 870/870
-Epoch: 12/20 :: Batch: 1100/1112 :: generator loss: -0.350903 :: critic loss: -0.066489 :: err kld: 20255.888544 :: err wass: 7.446600
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 13/15 :: Batch: 1100/1112 :: generator loss: -0.395259 :: critic loss: -0.055088 :: err kld: 20214.349333 :: err wass: 9.965900
 Saving generator model
 Saving critic model
 Saving embed model
 Saving deembedder model
 Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 0/1112 :: generator loss: -0.378559 :: critic loss: -0.085347 :: err kld: 19929.852657 :: err wass: 7.250500
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 100/1112 :: generator loss: -0.450817 :: critic loss: -0.062905 :: err kld: 20444.723882 :: err wass: 8.369300
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 200/1112 :: generator loss: -0.368303 :: critic loss: -0.094551 :: err kld: 22474.694224 :: err wass: 8.899500
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 300/1112 :: generator loss: -0.400708 :: critic loss: -0.084112 :: err kld: 19716.414750 :: err wass: 4.813200
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 400/1112 :: generator loss: -0.387666 :: critic loss: -0.067117 :: err kld: 20340.654299 :: err wass: 6.683600
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 500/1112 :: generator loss: -0.383885 :: critic loss: -0.074684 :: err kld: 20684.349561 :: err wass: 8.952300
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 600/1112 :: generator loss: -0.353893 :: critic loss: -0.066997 :: err kld: 21163.726947 :: err wass: 7.776000
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 700/1112 :: generator loss: -0.416179 :: critic loss: -0.082662 :: err kld: 20080.755270 :: err wass: 6.530600
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 800/1112 :: generator loss: -0.420979 :: critic loss: -0.062679 :: err kld: 21218.070683 :: err wass: 7.229000
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 900/1112 :: generator loss: -0.355159 :: critic loss: -0.068424 :: err kld: 22118.055629 :: err wass: 8.223900
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 1000/1112 :: generator loss: -0.391759 :: critic loss: -0.048599 :: err kld: 22189.908260 :: err wass: 9.401800
-Deembeder acc: 870/870
-Epoch: 13/20 :: Batch: 1100/1112 :: generator loss: -0.427928 :: critic loss: -0.074574 :: err kld: 19359.506153 :: err wass: 7.312000
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 0/1112 :: generator loss: -0.397059 :: critic loss: -0.071822 :: err kld: 20481.784472 :: err wass: 8.360900
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 100/1112 :: generator loss: -0.400044 :: critic loss: -0.100799 :: err kld: 23542.547258 :: err wass: 11.580400
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 200/1112 :: generator loss: -0.400903 :: critic loss: -0.041277 :: err kld: 23790.935454 :: err wass: 9.743800
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 300/1112 :: generator loss: -0.408602 :: critic loss: -0.034400 :: err kld: 22231.928545 :: err wass: 8.891100
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 400/1112 :: generator loss: -0.361756 :: critic loss: -0.062649 :: err kld: 22088.031509 :: err wass: 8.695000
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 500/1112 :: generator loss: -0.345583 :: critic loss: -0.060148 :: err kld: 19389.200325 :: err wass: 7.448300
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 600/1112 :: generator loss: -0.346061 :: critic loss: -0.066049 :: err kld: 20939.785171 :: err wass: 9.127100
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 700/1112 :: generator loss: -0.413076 :: critic loss: -0.051886 :: err kld: 19781.207307 :: err wass: 6.065300
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 800/1112 :: generator loss: -0.409758 :: critic loss: -0.070751 :: err kld: 21936.347427 :: err wass: 7.389600
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 900/1112 :: generator loss: -0.361806 :: critic loss: -0.042506 :: err kld: 19057.349342 :: err wass: 6.851800
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 1000/1112 :: generator loss: -0.374625 :: critic loss: -0.063463 :: err kld: 18932.568374 :: err wass: 5.811400
-Deembeder acc: 870/870
-Epoch: 14/20 :: Batch: 1100/1112 :: generator loss: -0.317371 :: critic loss: -0.100985 :: err kld: 25013.066812 :: err wass: 12.450200
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 0/1112 :: generator loss: -0.372619 :: critic loss: -0.076192 :: err kld: 22966.514648 :: err wass: 10.072100
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 100/1112 :: generator loss: -0.369349 :: critic loss: -0.127407 :: err kld: 22409.683237 :: err wass: 9.738000
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 200/1112 :: generator loss: -0.374826 :: critic loss: -0.061579 :: err kld: 20805.533623 :: err wass: 6.805800
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 300/1112 :: generator loss: -0.366237 :: critic loss: -0.058464 :: err kld: 20454.203872 :: err wass: 6.370400
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 400/1112 :: generator loss: -0.421273 :: critic loss: -0.040477 :: err kld: 18850.279996 :: err wass: 6.791800
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 500/1112 :: generator loss: -0.404008 :: critic loss: -0.036883 :: err kld: 20568.828621 :: err wass: 7.693700
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 600/1112 :: generator loss: -0.388369 :: critic loss: -0.048691 :: err kld: 21290.265535 :: err wass: 8.195200
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 700/1112 :: generator loss: -0.406468 :: critic loss: -0.038727 :: err kld: 20049.742383 :: err wass: 6.678000
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 800/1112 :: generator loss: -0.355137 :: critic loss: -0.057585 :: err kld: 19115.736506 :: err wass: 6.766400
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 900/1112 :: generator loss: -0.359633 :: critic loss: -0.060225 :: err kld: 21139.896233 :: err wass: 6.450800
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 1000/1112 :: generator loss: -0.355466 :: critic loss: -0.078781 :: err kld: 22106.476703 :: err wass: 8.651200
-Deembeder acc: 870/870
-Epoch: 15/20 :: Batch: 1100/1112 :: generator loss: -0.391072 :: critic loss: -0.069763 :: err kld: 20784.858472 :: err wass: 7.251700
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 0/1112 :: generator loss: -0.409795 :: critic loss: -0.050866 :: err kld: 20642.988404 :: err wass: 8.221800
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 100/1112 :: generator loss: -0.341355 :: critic loss: -0.074606 :: err kld: 22818.161570 :: err wass: 10.134700
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 200/1112 :: generator loss: -0.390206 :: critic loss: -0.068347 :: err kld: 19078.482293 :: err wass: 5.334600
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 300/1112 :: generator loss: -0.333360 :: critic loss: -0.097425 :: err kld: 19877.622682 :: err wass: 6.327900
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 400/1112 :: generator loss: -0.368643 :: critic loss: -0.045783 :: err kld: 23819.087006 :: err wass: 9.163200
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 500/1112 :: generator loss: -0.352224 :: critic loss: -0.049593 :: err kld: 20454.271896 :: err wass: 7.776500
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 600/1112 :: generator loss: -0.367208 :: critic loss: -0.042438 :: err kld: 21509.834599 :: err wass: 6.762900
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 700/1112 :: generator loss: -0.387410 :: critic loss: -0.056243 :: err kld: 19865.207481 :: err wass: 7.708500
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 800/1112 :: generator loss: -0.365950 :: critic loss: -0.078600 :: err kld: 20972.772766 :: err wass: 9.375500
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 900/1112 :: generator loss: -0.370436 :: critic loss: -0.061585 :: err kld: 23069.657125 :: err wass: 9.346300
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 1000/1112 :: generator loss: -0.364953 :: critic loss: -0.060332 :: err kld: 22424.447994 :: err wass: 8.938400
-Deembeder acc: 870/870
-Epoch: 16/20 :: Batch: 1100/1112 :: generator loss: -0.350309 :: critic loss: -0.054537 :: err kld: 23689.873981 :: err wass: 10.458100
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 0/1112 :: generator loss: -0.353755 :: critic loss: -0.085814 :: err kld: 19920.014276 :: err wass: 6.502900
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 100/1112 :: generator loss: -0.349016 :: critic loss: -0.064052 :: err kld: 20879.515426 :: err wass: 7.495700
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 200/1112 :: generator loss: -0.363629 :: critic loss: -0.061846 :: err kld: 20611.619355 :: err wass: 7.435400
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 300/1112 :: generator loss: -0.334091 :: critic loss: -0.058178 :: err kld: 18687.048142 :: err wass: 6.643100
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 400/1112 :: generator loss: -0.326997 :: critic loss: -0.088378 :: err kld: 18957.776757 :: err wass: 6.369800
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 500/1112 :: generator loss: -0.312492 :: critic loss: -0.067905 :: err kld: 20516.110816 :: err wass: 9.792800
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 600/1112 :: generator loss: -0.365417 :: critic loss: -0.087324 :: err kld: 20675.892907 :: err wass: 8.793300
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 700/1112 :: generator loss: -0.342525 :: critic loss: -0.096739 :: err kld: 18697.898823 :: err wass: 7.178300
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 800/1112 :: generator loss: -0.359116 :: critic loss: -0.050819 :: err kld: 19261.765621 :: err wass: 6.950000
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 900/1112 :: generator loss: -0.374422 :: critic loss: -0.058984 :: err kld: 22640.059727 :: err wass: 11.278700
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 1000/1112 :: generator loss: -0.349767 :: critic loss: -0.069726 :: err kld: 22808.635157 :: err wass: 9.025700
-Deembeder acc: 870/870
-Epoch: 17/20 :: Batch: 1100/1112 :: generator loss: -0.362303 :: critic loss: -0.048580 :: err kld: 18723.808605 :: err wass: 6.124100
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 0/1112 :: generator loss: -0.335312 :: critic loss: -0.068755 :: err kld: 19030.788014 :: err wass: 6.906400
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 100/1112 :: generator loss: -0.352146 :: critic loss: -0.045516 :: err kld: 21433.845705 :: err wass: 7.922100
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 200/1112 :: generator loss: -0.318011 :: critic loss: -0.095908 :: err kld: 23064.535739 :: err wass: 8.978700
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 300/1112 :: generator loss: -0.340597 :: critic loss: -0.069068 :: err kld: 21517.909391 :: err wass: 10.531400
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 400/1112 :: generator loss: -0.362432 :: critic loss: -0.075737 :: err kld: 18807.901177 :: err wass: 7.767500
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 500/1112 :: generator loss: -0.406995 :: critic loss: -0.057265 :: err kld: 19342.576767 :: err wass: 7.379900
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 600/1112 :: generator loss: -0.347168 :: critic loss: -0.072599 :: err kld: 18560.423398 :: err wass: 5.843200
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 700/1112 :: generator loss: -0.337671 :: critic loss: -0.086770 :: err kld: 22476.627811 :: err wass: 8.633800
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 800/1112 :: generator loss: -0.304564 :: critic loss: -0.103980 :: err kld: 19416.495871 :: err wass: 8.533200
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 900/1112 :: generator loss: -0.372648 :: critic loss: -0.071214 :: err kld: 20498.855138 :: err wass: 6.399200
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 1000/1112 :: generator loss: -0.341029 :: critic loss: -0.054176 :: err kld: 20974.528204 :: err wass: 8.615100
-Deembeder acc: 870/870
-Epoch: 18/20 :: Batch: 1100/1112 :: generator loss: -0.388407 :: critic loss: -0.068765 :: err kld: 21232.746748 :: err wass: 7.939600
-Saving generator model
-Saving critic model
-Saving embed model
-Saving deembedder model
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 0/1112 :: generator loss: -0.342686 :: critic loss: -0.078658 :: err kld: 20117.645123 :: err wass: 8.272700
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 100/1112 :: generator loss: -0.330101 :: critic loss: -0.064209 :: err kld: 21478.190571 :: err wass: 7.888700
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 200/1112 :: generator loss: -0.349139 :: critic loss: -0.084857 :: err kld: 19512.978916 :: err wass: 8.287100
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 300/1112 :: generator loss: -0.389200 :: critic loss: -0.070648 :: err kld: 21517.343190 :: err wass: 8.930800
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 400/1112 :: generator loss: -0.359639 :: critic loss: -0.082336 :: err kld: 21641.168144 :: err wass: 6.723200
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 500/1112 :: generator loss: -0.346401 :: critic loss: -0.052402 :: err kld: 21220.967086 :: err wass: 7.685300
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 600/1112 :: generator loss: -0.356959 :: critic loss: -0.074111 :: err kld: 21065.597836 :: err wass: 8.185200
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 700/1112 :: generator loss: -0.319036 :: critic loss: -0.075535 :: err kld: 18280.062129 :: err wass: 7.052300
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 800/1112 :: generator loss: -0.341927 :: critic loss: -0.072206 :: err kld: 19197.364741 :: err wass: 7.607400
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 900/1112 :: generator loss: -0.363936 :: critic loss: -0.082260 :: err kld: 21877.635569 :: err wass: 9.829800
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 1000/1112 :: generator loss: -0.347038 :: critic loss: -0.099538 :: err kld: 23299.317999 :: err wass: 7.530100
-Deembeder acc: 870/870
-Epoch: 19/20 :: Batch: 1100/1112 :: generator loss: -0.330945 :: critic loss: -0.073595 :: err kld: 19855.476826 :: err wass: 7.548300
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 0/1112 :: generator loss: -0.368429 :: critic loss: -0.074077 :: err kld: 20338.234732 :: err wass: 8.700200
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 100/1112 :: generator loss: -0.372015 :: critic loss: -0.065851 :: err kld: 19601.016611 :: err wass: 7.946400
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 200/1112 :: generator loss: -0.362949 :: critic loss: -0.075081 :: err kld: 22857.384768 :: err wass: 11.323400
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 300/1112 :: generator loss: -0.373120 :: critic loss: -0.067260 :: err kld: 20576.727514 :: err wass: 9.247900
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 400/1112 :: generator loss: -0.413149 :: critic loss: -0.074412 :: err kld: 20159.965677 :: err wass: 9.375100
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 500/1112 :: generator loss: -0.322514 :: critic loss: -0.085979 :: err kld: 20783.137028 :: err wass: 9.258000
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 600/1112 :: generator loss: -0.401686 :: critic loss: -0.051943 :: err kld: 24070.961168 :: err wass: 9.926900
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 700/1112 :: generator loss: -0.474973 :: critic loss: -0.028523 :: err kld: 22077.847658 :: err wass: 11.409100
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 800/1112 :: generator loss: -0.371423 :: critic loss: -0.089004 :: err kld: 20800.390787 :: err wass: 11.031900
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 900/1112 :: generator loss: -0.387285 :: critic loss: -0.082622 :: err kld: 22879.655652 :: err wass: 10.268300
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 1000/1112 :: generator loss: -0.378483 :: critic loss: -0.049032 :: err kld: 21808.135031 :: err wass: 9.593600
+Deembeder acc: 870/870
+/home/dan/MEGA/_Uni/praca_mgr/current/neural_networks/i_trainer/i_trainer.py:254: UserWarning: You have mixed positional and keyword arguments, some input may be discarded.
+  fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
+Epoch: 14/15 :: Batch: 1100/1112 :: generator loss: -0.386692 :: critic loss: -0.051588 :: err kld: 19878.053751 :: err wass: 10.165600
 Saving generator model
 Saving critic model
 Saving embed model

@@ -199,25 +199,32 @@ class ITrainer(ABC):
         else:
             gen_data = deembedder.deemb(gen_data)
 
-        fig, subplots = plt.subplots(nrows=ceil(len(attr_idxs) / 2), ncols=2)
+        fig, subplots = plt.subplots(nrows=ceil(len(attr_idxs) / 2), ncols=2, sharex='all')
+
+        fig.subplots_adjust(wspace=.35, hspace=.35, top=.8, bottom=.17)
+        fig.suptitle('Porównanie histogramów wybranych atrybutów\ndanych rzeczywistych i syntetycznych.', size=14)
 
         err_kld = 0
         err_wass = 0
+
+        subplot_handlers = []
 
         for i, attr_idx in enumerate(attr_idxs):
             _real_data = real_data[:, attr_idx].flatten().cpu()
             _gen_data = gen_data[:, attr_idx].flatten().cpu()
 
-            subplots[floor(i / 2)][i % 2].set_title(f'attr: {attr_idx}')
-            subplots[floor(i / 2)][i % 2].hist([_real_data, _gen_data],
+            subplots[floor(i / 2)][i % 2].set_title(f'Atrybut: {attr_idx}')
+            handler = subplots[floor(i / 2)][i % 2].hist([_real_data, _gen_data],
                                                range=hist_range,
                                                stacked=False,
                                                bins=bin_cnt,
                                                histtype='stepfilled',
                                                label=['real data', 'synthetic data'],
                                                color=['blue', 'red'],
-                                               alpha=0.5
+                                               alpha=0.5,
                                                )
+
+            subplot_handlers.append(handler)
 
             # KL_DIV
             min_val = min(min(_real_data), min(_gen_data))
@@ -243,6 +250,8 @@ class ITrainer(ABC):
 
             dists = [i for i in range(len(real_data_hist))]
             err_wass += stats.wasserstein_distance(dists, dists, real_data_hist, gen_data_hist)
+
+        fig.legend(subplot_handlers, labels=['Dane syntetyczne', 'Dane rzeczywiste'], loc="lower right")
 
         if save:
             if not os.path.isdir(config.plot_folder):
@@ -288,9 +297,7 @@ class ITrainer(ABC):
 
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
-
         plt.legend()
-
         if save:
             if not os.path.isdir(config.plot_folder):
                 os.mkdir(config.plot_folder)
