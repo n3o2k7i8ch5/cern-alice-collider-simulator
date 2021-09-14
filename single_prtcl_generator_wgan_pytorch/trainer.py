@@ -225,7 +225,7 @@ class Trainer(ITrainer):
         print('Saving deembedder model')
         torch.save(deembedder.state_dict(), Trainer.PDG_DEEMBED_SAVE_PATH)
 
-    def gen_autoenc_data(self, sample_cnt, generator):
+    def gen_autoenc_data(self, sample_cnt, generator) -> torch.Tensor:
 
         np_input = np.random.normal(loc=0, scale=1, size=(sample_cnt, self.PRTCL_LATENT_SPACE_SIZE))
         rand_input = torch.from_numpy(np_input).float().to(device=self.device)

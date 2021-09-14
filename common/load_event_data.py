@@ -104,3 +104,8 @@ def sgnlog(val: float) -> float:
     sgn = 1 if val > 0 else -1
     logval = np.log((val * sgn) + 1)
     return float(logval * sgn)
+
+def sgnlog_rev(val: float) -> float:
+    sgn = 1 if val > 0 else -1
+    expval = np.exp(sgn*val)
+    return float(expval * sgn)
