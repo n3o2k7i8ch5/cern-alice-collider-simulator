@@ -1,3 +1,7 @@
-numpy~=1.21.1
-torch~=1.9.0
-matplotlib~=3.4.2
+jupyter
+matplotlib
+numpy
+pandas
+scipy
+scikit-learn
+torch
